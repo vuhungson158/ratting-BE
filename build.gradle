@@ -1,0 +1,58 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.3'
+	id 'io.spring.dependency-management' version '1.1.3'
+}
+
+group = 'kiis'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//	Common
+	implementation 'org.jetbrains:annotations:24.0.0'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//	JWT
+	def verJwt = '0.11.5'
+	implementation "io.jsonwebtoken:jjwt-api:$verJwt"
+	implementation "io.jsonwebtoken:jjwt-impl:$verJwt"
+	implementation "io.jsonwebtoken:jjwt-jackson:$verJwt"
+
+	//	Spring core
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//	Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	//	Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//	Database
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// Swagger
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
