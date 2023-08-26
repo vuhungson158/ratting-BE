@@ -7,26 +7,28 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kiis.edu.rating.features.user.UserRole;
+import kiis.ratingBE.enums.UserRole;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Set;
 
-import static kiis.edu.rating.helper.Constant.BEARER;
-import static kiis.edu.rating.helper.Constant.CLAIM_AUTHORITY;
-import static kiis.edu.rating.helper.Constant.ENCODED_SECRET_KEY;
-import static kiis.edu.rating.helper.Constant.LOGGER;
-import static kiis.edu.rating.helper.Constant.TOKEN_HEADER;
+import static kiis.ratingBE.helper.Constant.BEARER;
+import static kiis.ratingBE.helper.Constant.CLAIM_AUTHORITY;
+import static kiis.ratingBE.helper.Constant.ENCODED_SECRET_KEY;
+import static kiis.ratingBE.helper.Constant.LOGGER;
+import static kiis.ratingBE.helper.Constant.TOKEN_HEADER;
 
+@Component
 public class JwtTokenVerifier extends OncePerRequestFilter {
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
+    protected void doFilterInternal(@NotNull HttpServletRequest request,
                                     @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain)
             throws ServletException, IOException {

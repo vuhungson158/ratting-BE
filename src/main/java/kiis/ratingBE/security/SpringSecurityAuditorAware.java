@@ -1,22 +1,17 @@
 package kiis.ratingBE.security;
 
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@EnableJpaAuditing
+@Component
 public class SpringSecurityAuditorAware implements AuditorAware<String> {
-//    @Autowired
-//    private CommonService commonService;
-//
-//    @Override
-//    public Optional<String> getCurrentAuditor() {
-//        // Login した user
-//        ServiceUser serviceUser = commonService.getUser();
-//        return Optional.of(serviceUser.getUsername);
-//    }
 
     @Override
     @NonNull

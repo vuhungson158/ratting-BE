@@ -1,7 +1,7 @@
 package kiis.ratingBE.common;
 
-import kiis.edu.rating.exception.RecordNotFoundException;
-import kiis.edu.rating.exception.VersionException;
+import kiis.ratingBE.exception.RecordNotFoundException;
+import kiis.ratingBE.exception.VersionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;

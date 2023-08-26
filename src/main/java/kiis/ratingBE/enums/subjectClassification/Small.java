@@ -1,9 +1,9 @@
 package kiis.ratingBE.enums.subjectClassification;
 
-import kiis.edu.rating.enums.Department;
+import kiis.ratingBE.enums.Department;
 
-import static kiis.edu.rating.enums.Department.ALL;
-import static kiis.edu.rating.enums.Department.MANAGEMENT;
+import static kiis.ratingBE.enums.Department.ALL;
+import static kiis.ratingBE.enums.Department.MANAGEMENT;
 
 public enum Small {
     HUMANITIES(Middle.GENERAL_EDUCATION, ALL, "人文"),

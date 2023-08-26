@@ -1,6 +1,6 @@
 package kiis.ratingBE.helper;
 
-import kiis.edu.rating.RatingApplication;
+import kiis.ratingBE.RatingBeApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -17,9 +17,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Collections;
 import java.util.List;
 
-import static kiis.edu.rating.helper.Constant.TOKEN_HEADER;
-
-@SuppressWarnings("unused")
 @EnableSwagger2
 @Configuration
 public class SwaggerConfig {
@@ -27,7 +24,7 @@ public class SwaggerConfig {
     public Docket api() {
         // securitySchemeList
         final List<SecurityScheme> securitySchemeList = Collections.singletonList(
-                new ApiKey("JWT Token", TOKEN_HEADER, "header")
+                new ApiKey("JWT Token", Constant.TOKEN_HEADER, "header")
         );
 
         // securityContextList
@@ -44,9 +41,8 @@ public class SwaggerConfig {
                 .securitySchemes(securitySchemeList)
                 .securityContexts(securityContextList)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(RatingApplication.class.getPackage().getName()))
+                .apis(RequestHandlerSelectors.basePackage(RatingBeApplication.class.getPackage().getName()))
                 .paths(PathSelectors.any())
                 .build();
     }
-
 }
