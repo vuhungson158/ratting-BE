@@ -30,6 +30,7 @@ public class ControllerExceptionHandler {
             status = HttpStatus.UNAUTHORIZED;
         }
         if (exception instanceof DataIntegrityViolationException) {
+            message = "FK error, TODO";
             status = HttpStatus.BAD_REQUEST;
         }
         if (exception instanceof MethodArgumentNotValidException) {

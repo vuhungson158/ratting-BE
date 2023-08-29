@@ -35,15 +35,14 @@ public class SubjectEntity extends BaseEntity {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Long teacherId;
 
-    @Transient
-//    @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public TeacherEntity teacher;
 
     @Min(value = 1, message = "Min = 1")
     @Max(value = 6, message = "Max = 6")
-//    @Column(nullable = false)
+    @Column(nullable = false)
     public Integer credit;
 
     @Min(value = 1, message = "Min = 1")

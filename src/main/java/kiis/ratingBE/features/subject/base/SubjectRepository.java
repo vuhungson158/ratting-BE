@@ -32,9 +32,8 @@ public interface SubjectRepository extends SimpleCurdRepository<SubjectEntity> {
     List<SubjectEntity> findAllByTeacherId(Long teacherId);
 
     @Override
-    @NotNull
     @EntityGraph(attributePaths = {"teacher"})
-    List<SubjectEntity> findAll();
+    @NotNull List<SubjectEntity> findAll();
 }
 
 
