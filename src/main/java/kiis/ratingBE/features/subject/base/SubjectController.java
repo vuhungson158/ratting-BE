@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 //@AllowFeature(SUBJECT)
 public class SubjectController extends SimpleCurdController<SubjectEntity> {
 
+    private final SubjectService subjectService;
+
     @Autowired
     public SubjectController(SubjectService subjectService) {
         super(subjectService);
+        this.subjectService = subjectService;
     }
 }

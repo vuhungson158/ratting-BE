@@ -2,11 +2,15 @@ package kiis.ratingBE.features.teacher.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.enums.Gender;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
@@ -24,10 +28,6 @@ import java.util.List;
 @NoArgsConstructor
 public class TeacherEntity extends BaseEntity {
 
-    @OneToMany(mappedBy = "teacher")
-    @JsonIgnore
-    public List<SubjectEntity> subjectList;
-
     public String name, nationality;
 
 //    @Type(type = "gender")
@@ -36,4 +36,8 @@ public class TeacherEntity extends BaseEntity {
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     public Date dob;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public List<SubjectEntity> subjectList;
 }

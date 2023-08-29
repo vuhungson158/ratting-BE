@@ -1,6 +1,8 @@
 package kiis.ratingBE.features.subject.base;
 
 import kiis.ratingBE.common.SimpleCurdRepository;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,6 +30,11 @@ public interface SubjectRepository extends SimpleCurdRepository<SubjectEntity> {
     List<Long> findByIdList(@Param("idList") List<Long> idList);
 
     List<SubjectEntity> findAllByTeacherId(Long teacherId);
+
+    @Override
+    @NotNull
+    @EntityGraph(attributePaths = {"teacher"})
+    List<SubjectEntity> findAll();
 }
 
 

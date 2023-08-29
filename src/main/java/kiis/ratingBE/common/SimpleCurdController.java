@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 import static kiis.ratingBE.enums.UserRole.Method.CREATE;
 import static kiis.ratingBE.enums.UserRole.Method.DELETE;
-import static kiis.ratingBE.enums.UserRole.Method.FIND_ALL;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_FILTER;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_ID;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
@@ -33,15 +30,15 @@ public abstract class SimpleCurdController<T extends BaseEntity> implements Simp
         return mainService.findById(id);
     }
 
+    //    @Override
+//    @GetMapping
+//    @AllowMethod(FIND_ALL)
+//    public List<T> findAll() {
+//        return mainService.findAll();
+//    }
+//
     @Override
     @GetMapping
-    @AllowMethod(FIND_ALL)
-    public List<T> findAll() {
-        return mainService.findAll();
-    }
-
-    @Override
-    @GetMapping("/pageable")
     @AllowMethod(FIND_BY_PAGEABLE)
     public Page<T> findAll(@RequestParam int page, @RequestParam int limit) {
         return mainService.findAll(page, limit);
