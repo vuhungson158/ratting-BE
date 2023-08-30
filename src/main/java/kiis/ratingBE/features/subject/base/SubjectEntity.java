@@ -2,6 +2,8 @@ package kiis.ratingBE.features.subject.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -38,6 +40,7 @@ public class SubjectEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Schema(allOf = TeacherEntity.class)
     public TeacherEntity teacher;
 
     @Min(value = 1, message = "Min = 1")

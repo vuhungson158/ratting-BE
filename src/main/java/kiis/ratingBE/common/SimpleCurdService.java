@@ -26,11 +26,12 @@ public abstract class SimpleCurdService<T extends BaseEntity>
     @Override
     public Page<T> findAll(int page, int limit) {
         final Pageable pageable = PageRequest.of(page, limit);
-        return mainRepository.findAll(pageable);
+        return mainRepository.findAllByIsDeletedIsFalse(pageable);
     }
 
     @Override
     public Page<T> findAll(T exampleEntity, int page, int limit) {
+        exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
         final Example<T> example = Example.of(exampleEntity);
         return mainRepository.findAll(example, pageable);
