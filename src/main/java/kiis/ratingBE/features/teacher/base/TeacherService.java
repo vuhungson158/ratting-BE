@@ -5,7 +5,6 @@ import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.features.subject.base.SubjectRepository;
 import kiis.ratingBE.features.subject.base.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,5 +34,10 @@ public class TeacherService extends SimpleCurdService<TeacherEntity> {
                 .peek(subject -> subject.teacher = null)
                 .toList();
         return teacher;
+    }
+
+    @Override
+    protected void attachAssociate(TeacherEntity returnEntity) {
+
     }
 }

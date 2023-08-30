@@ -1,5 +1,6 @@
 package kiis.ratingBE.common;
 
+import jakarta.persistence.ManyToOne;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,9 @@ public abstract class SimpleCurdService<T extends BaseEntity>
 
     @Override
     public T create(T entity) {
-        return mainRepository.save(entity);
+        final T returnedEntity = mainRepository.save(entity);
+        attachAssociate(returnedEntity);
+        return returnedEntity;
     }
 
     @Override
@@ -49,13 +52,24 @@ public abstract class SimpleCurdService<T extends BaseEntity>
             throw new VersionException();
         }
         BeanUtils.copyProperties(entity, old);
-        return mainRepository.save(old);
+        final T returnedEntity = mainRepository.save(old);
+        attachAssociate(returnedEntity);
+        return returnedEntity;
     }
 
     @Override
     public T delete(long id) {
         final T entity = findById(id);
         entity.isDeleted = false;
-        return mainRepository.save(entity);
+        final T returnedEntity = mainRepository.save(entity);
+        attachAssociate(returnedEntity);
+        return returnedEntity;
     }
+
+    /**
+     * attach all {@link ManyToOne} properties
+     *
+     * @param returnEntity entity that returned when saved
+     */
+    protected abstract void attachAssociate(T returnEntity);
 }
