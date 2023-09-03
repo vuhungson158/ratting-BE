@@ -5,7 +5,10 @@ import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.features.subject.base.SubjectRepository;
 import kiis.ratingBE.features.subject.base.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherService extends SimpleCurdService<TeacherEntity> {
@@ -23,18 +26,14 @@ public class TeacherService extends SimpleCurdService<TeacherEntity> {
     @Override
     public TeacherEntity findById(long id) {
         final TeacherEntity teacher = super.findById(id);
-
-        final SubjectEntity exampleSubject = new SubjectEntity();
-        exampleSubject.teacherId = teacher.id;
-        exampleSubject.isDeleted = false;
-
-        teacher.subjectList = subjectService
-                .findAll(exampleSubject, 0, 10)
-                .stream()
-                .peek(subject -> subject.teacher = null)
-                .toList();
+        teacher.subjects = teacher.subjectList;
         return teacher;
     }
+
+//    @Override
+//    public Page<TeacherEntity> findAll(int page, int limit) {
+//        return super.findAll(page, limit).map(TeacherDto.mapper());
+//    }
 
     @Override
     protected void attachAssociate(TeacherEntity returnEntity) {
