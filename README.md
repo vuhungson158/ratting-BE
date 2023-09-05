@@ -38,13 +38,18 @@ After code for 3 months, I realize that almost every table has 6 same end points
 5. `update(Long)`: update a record
 6. `delete(Long)`: soft delete a record (set field `id_delete` = true)
 
-So I group these end point into **_an abstract controller_**: `SimpleCurdController<T>`. T must be a `Entity`
+So I group these end point processes flow into a [package][common-package-url]
+
+- **_an abstract Controller_**: `SimpleCurdController<T>`. T must be a `Entity`
+- **_an abstract Service_**: `SimpleCurdService<T>`.
+- **_an abstract Repository_**: `SimpleCurdRepository<T>`.
 
 Why **_abstract_** ???
 Because you cannot use (create instance) an abstract class directly.
 You must create a class, example: `TeacherController` extend `SimpleCurdController<TeacherEntity>`
+to get these common endpoints.
 
-Same thing with `SimpleCurdService<T>` and `SimpleCurdRepository<T>`
+And of course, you always can write new method (C-S-R flow), with full control.
 
 | Layer      | Description                                                                                                                                                                                                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -73,5 +78,7 @@ Same thing with `SimpleCurdService<T>` and `SimpleCurdRepository<T>`
 [front-end-url]: http://localhost:8080/api/v1/swagger-ui/index.html
 
 [old-version-url]: https://github.com/vuhungson158/school-subject-rating-BE
+
+[common-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/common
 
 <!-- IMAGES -->
