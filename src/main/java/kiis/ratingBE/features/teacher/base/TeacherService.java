@@ -1,14 +1,10 @@
 package kiis.ratingBE.features.teacher.base;
 
 import kiis.ratingBE.common.SimpleCurdService;
-import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.features.subject.base.SubjectRepository;
 import kiis.ratingBE.features.subject.base.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.stream.Collectors;
 
 @Service
 public class TeacherService extends SimpleCurdService<TeacherEntity> {
@@ -26,7 +22,10 @@ public class TeacherService extends SimpleCurdService<TeacherEntity> {
     @Override
     public TeacherEntity findById(long id) {
         final TeacherEntity teacher = super.findById(id);
-        teacher.subjects = teacher.subjectList;
+        teacher.subjects = teacher.subjectList
+                .stream()
+                .peek(subjectEntity -> subjectEntity.teacher = null)
+                .toList();
         return teacher;
     }
 
