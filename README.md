@@ -3,9 +3,9 @@
 # School Rating App (BackEnd)
 
 <!-- DESCRIPTION -->
-> This is description
+> My project is a web application that allows users (almost students) to easily evaluate subjects and teachers
 >
-> in multiline
+> The Main feature is rating, show all ratings as graph, write comment for each subject and teacher
 
 <!-- RELATED LINK  -->
 
@@ -15,23 +15,33 @@
 
 ## Index
 
-1. [Example](#Built-With)
+1. [Getting Started](#Getting-Started)
+    - [By Docker compose](#By-Docker-compose)
+    - [Manually](#Manually)
+2. [Access Modifier](#Access-Modifier)
+3. [Anti DTO](#Anti-DTO)
+4. [Commonize](#Commonize)
+5. [JPA Relationship](#JPA-Relationship)
+6. [Other](#Other)
+    - [AOP](#AOP)
+    - [Exception Handler](#Exception-Handler)
+7. [Built With](#Built-With)
+8. [Roadmap](#Roadmap)
+9. [Contact](#Contact)
 
 ## Getting Started
 
 ### By Docker compose
 
-## Highlight
+### Manually
 
-### AOP
+## Access Modifier
 
-### Anti DTO
+## Anti DTO
 
-### Access Modifier
+## Commonize
 
-### Commonize
-
-> I extremely hate duplicate code
+> DRY: don't repeat yourself
 
 After code for 3 months, I realize that almost every table has 6 same end points
 
@@ -61,15 +71,17 @@ And of course, you always can write new method (C-S-R flow), with full control.
 | Service    | Use to write business logic code, method name, return type, parameters must same with Controller's method                                                                                                                                                                                                |
 | Repository | Use to create `@Query` to get data from database. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                |
 
-### JPA Relationship
+## JPA Relationship
 
-### Other
+## Other
 
-#### Exception Handler
+### AOP
+
+### Exception Handler
 
 ## Built With
 
-### Roadmap
+## Roadmap
 
 ## Contact
 
