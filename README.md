@@ -146,7 +146,9 @@ But remember to follow the [Project Structure](#Project-Structure)
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Controller | Use Mapping Annotation to create end point: `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`<br/>Use `@AllowMethod` and `@AllowFeature` to authorize<br/>Never write logic code here, create a method on service layer to do that, which have same name, same return type, same parameters |
 | Service    | Use to write business logic code, method name, return type, parameters must same with Controller's method                                                                                                                                                                                                |
-| Repository | Use to create `@Query` to get data from database. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                |
+| Repository | Use to create `@Query` to get data from DB[^DB]. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                 |
+
+[^DB]: Database
 
 ## Other
 
@@ -182,3 +184,7 @@ But remember to follow the [Project Structure](#Project-Structure)
 [teacher-base-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/features/teacher/base
 
 <!-- IMAGES -->
+
+<!-- Footnotes -->
+
+
