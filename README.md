@@ -22,12 +22,13 @@
 3. [Anti DTO](#Anti-DTO)
 4. [Commonize](#Commonize)
 5. [JPA Relationship](#JPA-Relationship)
-6. [Other](#Other)
+6. [Project Structure](#Project-Structure)
+7. [Other](#Other)
     - [AOP](#AOP)
     - [Exception Handler](#Exception-Handler)
-7. [Built With](#Built-With)
-8. [Roadmap](#Roadmap)
-9. [Contact](#Contact)
+8. [Built With](#Built-With)
+9. [Roadmap](#Roadmap)
+10. [Contact](#Contact)
 
 ## Getting Started
 
@@ -52,11 +53,13 @@ After code for 3 months, I realize that almost every table has 6 same end points
 5. `update(Long)`: update a record
 6. `delete(Long)`: soft delete a record (set field `id_delete` = true)
 
-So I group these end point processes flow into a [package][common-package-url]
+So I create three abstract classes to group these end point processes flow.
+You can find these classes in [this package][common-package-url].
 
-- **_an abstract Controller_**: `SimpleCurdController<T>`. T must be a `Entity`
-- **_an abstract Service_**: `SimpleCurdService<T>`.
-- **_an abstract Repository_**: `SimpleCurdRepository<T>`.
+- T must be a `Entity`
+- `SimpleCurdController<T>`.
+- `SimpleCurdService<T>`.
+- `SimpleCurdRepository<T>`.
 
 Why **_abstract_** ???
 Because you cannot use (create instance) an abstract class directly.
@@ -65,13 +68,15 @@ to get these common endpoints.
 
 And of course, you always can write new method (C-S-R flow), with full control.
 
+## JPA Relationship
+
+## Project Structure
+
 | Layer      | Description                                                                                                                                                                                                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Controller | Use Mapping Annotation to create end point: `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`<br/>Use `@AllowMethod` and `@AllowFeature` to authorize<br/>Never write logic code here, create a method on service layer to do that, which have same name, same return type, same parameters |
 | Service    | Use to write business logic code, method name, return type, parameters must same with Controller's method                                                                                                                                                                                                |
 | Repository | Use to create `@Query` to get data from database. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                |
-
-## JPA Relationship
 
 ## Other
 
