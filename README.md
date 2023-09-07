@@ -25,6 +25,8 @@
 5. [JPA Relationship](#JPA-Relationship)
 6. [Project Structure](#Project-Structure)
 7. [Other](#Other)
+    - [Final](#Final)
+    - [Validate](#Validate)
     - [AOP](#AOP)
     - [Exception Handler](#Exception-Handler)
     - [Common Projection](#Common-Projection)
@@ -38,7 +40,63 @@
 
 ### Manually
 
+---
+
+# My creation
+
 ## Access Modifier
+
+If you have experience of java, you must have seen this pattern:
+
+```java
+
+@Getter
+@Setter
+public class SubjectEntity {
+    private Integer id;
+    private String teacherName;
+    // Some other fields
+}
+
+public class Test {
+    public void test(TeacherEntity teacher) {
+        final SubjectEntity subject = new SubjectEntity();
+        subject.setTeacherName(teacher.getName());
+        System.out.println(subject.getTeacherName());
+    }
+}
+```
+
+I think it's call `java bean`.
+I used to follow this pattern too.
+But one day, I wonder why not just use `public` ?
+Like this:
+
+```java
+public class SubjectEntity {
+    public Integer id;
+    public String teacherName;
+    // Some other fields
+}
+
+public class Test {
+    public void test(TeacherEntity teacher) {
+        final SubjectEntity subject = new SubjectEntity();
+        subject.teacherName = teacher.name;
+        System.out.println(subject.teacherName);
+    }
+}
+```
+
+I start finding why?
+And know that few people have the same question with me.
+[Stack Overflow](https://stackoverflow.com/questions/1568091/why-use-getters-and-setters-accessors).
+
+After summary of all answers, I found three answers that I think reasonable.
+
+1. Old framework like JSP, Thymeleaf, ... need Getter, Setter to binding data
+2. We need to validate values before set it into an object, so we need setter to write validate logic inside
+3. Easy to debug
 
 ## Anti DTO
 
@@ -72,13 +130,13 @@ to get these common endpoints.
 
 And of course, you always can write new method (C-S-R flow), with full control. [Reference][teacher-base-package-url].
 
-Create classes :
+Create three extend classes to generate 6 end points as default:
 
 - `TeacherController` extends `SimpleCurdController<TeacherEntity>`
 - `TeacherService` extends `SimpleCurdService<TeacherEntity>`
 - `TeacherRepository` extends `SimpleCurdRepository<TeacherEntity>`
 
-And `@Override` method if you need to add more logic, or create new end point. 
+And `@Override` method if you need to add more logic, or create new end point.
 But remember to follow the [Project Structure](#Project-Structure)
 
 ## JPA Relationship
@@ -93,6 +151,10 @@ But remember to follow the [Project Structure](#Project-Structure)
 
 ## Other
 
+### Final
+
+### Validate
+
 ### AOP
 
 ### Exception Handler
@@ -106,6 +168,7 @@ But remember to follow the [Project Structure](#Project-Structure)
 ## Contact
 
 - Gmail: [vuhungson158@gmail.com](mailto:vuhungson158@gmail.com)
+- Facebook: [Vũ Hùng Sơn](https://www.facebook.com/hungson.vu.14)
 
 <!-- MARKDOWN LINKS -->
 

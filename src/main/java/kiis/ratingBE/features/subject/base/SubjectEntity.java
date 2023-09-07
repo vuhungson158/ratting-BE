@@ -1,6 +1,5 @@
 package kiis.ratingBE.features.subject.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -18,7 +17,6 @@ import kiis.ratingBE.enums.subjectClassification.Small;
 import kiis.ratingBE.features.teacher.base.TeacherEntity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "subject")
