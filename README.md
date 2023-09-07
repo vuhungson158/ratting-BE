@@ -181,7 +181,7 @@ But remember to follow the [Project Structure](#Project-Structure)
 
 [common-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/common
 
-[teacher-base-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/features/teacher/base
+[teacher-base-package-url]: src/main/java/kiis/ratingBE/features/teacher/base
 
 <!-- IMAGES -->
 
