@@ -41,7 +41,7 @@ public abstract class SimpleCurdService<T extends BaseEntity>
     @Override
     public T create(T entity) {
         final T returnedEntity = mainRepository.save(entity);
-        attachAssociate(returnedEntity);
+        validate(returnedEntity);
         return returnedEntity;
     }
 
@@ -53,7 +53,7 @@ public abstract class SimpleCurdService<T extends BaseEntity>
         }
         BeanUtils.copyProperties(entity, old);
         final T returnedEntity = mainRepository.save(old);
-        attachAssociate(returnedEntity);
+        validate(returnedEntity);
         return returnedEntity;
     }
 
@@ -62,7 +62,7 @@ public abstract class SimpleCurdService<T extends BaseEntity>
         final T entity = findById(id);
         entity.isDeleted = false;
         final T returnedEntity = mainRepository.save(entity);
-        attachAssociate(returnedEntity);
+        validate(returnedEntity);
         return returnedEntity;
     }
 
@@ -71,5 +71,5 @@ public abstract class SimpleCurdService<T extends BaseEntity>
      *
      * @param returnEntity entity that returned when saved
      */
-    protected abstract void attachAssociate(T returnEntity);
+    protected abstract void validate(T returnEntity);
 }

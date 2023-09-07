@@ -34,7 +34,7 @@ public class SubjectService extends SimpleCurdService<SubjectEntity> {
 //    }
 
     @Override
-    protected void attachAssociate(SubjectEntity returnEntity) {
+    protected void validate(SubjectEntity returnEntity) {
         returnEntity.teacher = teacherRepository
                 .findById(returnEntity.teacherId)
                 .orElseThrow(() -> new RecordNotFoundException("Teacher", returnEntity.teacherId));

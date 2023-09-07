@@ -25,6 +25,10 @@
 
 ### AOP
 
+### Anti DTO
+
+### Access Modifier
+
 ### Commonize
 
 > I extremely hate duplicate code

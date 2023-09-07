@@ -22,20 +22,12 @@ public class TeacherService extends SimpleCurdService<TeacherEntity> {
     @Override
     public TeacherEntity findById(long id) {
         final TeacherEntity teacher = super.findById(id);
-        teacher.subjects = teacher.subjectList
-                .stream()
-                .peek(subjectEntity -> subjectEntity.teacher = null)
-                .toList();
+        teacher.transferSubjects();
         return teacher;
     }
 
-//    @Override
-//    public Page<TeacherEntity> findAll(int page, int limit) {
-//        return super.findAll(page, limit).map(TeacherDto.mapper());
-//    }
-
     @Override
-    protected void attachAssociate(TeacherEntity returnEntity) {
+    protected void validate(TeacherEntity returnEntity) {
 
     }
 }
