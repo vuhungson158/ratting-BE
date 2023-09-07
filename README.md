@@ -27,6 +27,7 @@
 7. [Other](#Other)
     - [AOP](#AOP)
     - [Exception Handler](#Exception-Handler)
+    - [Common Projection](#Common-Projection)
 8. [Built With](#Built-With)
 9. [Roadmap](#Roadmap)
 10. [Contact](#Contact)
@@ -76,6 +77,9 @@ Create classes :
 - `TeacherController` extends `SimpleCurdController<TeacherEntity>`
 - `TeacherService` extends `SimpleCurdService<TeacherEntity>`
 - `TeacherRepository` extends `SimpleCurdRepository<TeacherEntity>`
+
+And `@Override` method if you need to add more logic, or create new end point. 
+But remember to follow the [Project Structure](#Project-Structure)
 
 ## JPA Relationship
 
