@@ -1,5 +1,6 @@
 package kiis.ratingBE.features.subject.base;
 
+import kiis.ratingBE.common.BaseProjector;
 import kiis.ratingBE.common.Projector;
 
 /**
@@ -11,10 +12,11 @@ import kiis.ratingBE.common.Projector;
  * </pre>
  *
  * @author vuhungson
+ * @see BaseProjector
  * @see SubjectEntity
  * @see Projector
  */
-public interface SubjectProjector {
+public interface SubjectProjector extends BaseProjector {
 
     /**
      * @see SubjectEntity#teacherId

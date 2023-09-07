@@ -1,4 +1,6 @@
 package kiis.ratingBE.features.teacher.base;
 
-public interface TeacherProjector {
+import kiis.ratingBE.common.BaseProjector;
+
+public interface TeacherProjector extends BaseProjector {
 }

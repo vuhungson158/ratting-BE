@@ -21,6 +21,7 @@
 2. [Access Modifier](#Access-Modifier)
 3. [Anti DTO](#Anti-DTO)
 4. [Commonize](#Commonize)
+    - [Usage](#Usage)
 5. [JPA Relationship](#JPA-Relationship)
 6. [Project Structure](#Project-Structure)
 7. [Other](#Other)
@@ -57,16 +58,24 @@ So I create three abstract classes to group these end point processes flow.
 You can find these classes in [this package][common-package-url].
 
 - T must be a `Entity`
-- `SimpleCurdController<T>`.
-- `SimpleCurdService<T>`.
-- `SimpleCurdRepository<T>`.
+- `SimpleCurdController<T>`
+- `SimpleCurdService<T>`
+- `SimpleCurdRepository<T>`
 
 Why **_abstract_** ???
 Because you cannot use (create instance) an abstract class directly.
 You must create a class, example: `TeacherController` extend `SimpleCurdController<TeacherEntity>`
 to get these common endpoints.
 
-And of course, you always can write new method (C-S-R flow), with full control.
+#### Usage
+
+And of course, you always can write new method (C-S-R flow), with full control. [Reference][teacher-base-package-url].
+
+Create classes :
+
+- `TeacherController` extends `SimpleCurdController<TeacherEntity>`
+- `TeacherService` extends `SimpleCurdService<TeacherEntity>`
+- `TeacherRepository` extends `SimpleCurdRepository<TeacherEntity>`
 
 ## JPA Relationship
 
@@ -83,6 +92,8 @@ And of course, you always can write new method (C-S-R flow), with full control.
 ### AOP
 
 ### Exception Handler
+
+### Common Projection
 
 ## Built With
 
@@ -101,5 +112,7 @@ And of course, you always can write new method (C-S-R flow), with full control.
 [old-version-url]: https://github.com/vuhungson158/school-subject-rating-BE
 
 [common-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/common
+
+[teacher-base-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/features/teacher/base
 
 <!-- IMAGES -->
