@@ -19,19 +19,21 @@
     - [By Docker compose](#By-Docker-compose)
     - [Manually](#Manually)
 2. **Highlight (My creation)**
-    1. [Access Modifier](#Access-Modifier)
-    2. [Anti DTO](#Anti-DTO)
-    3. [Commonize](#Commonize)
+    1. [API Tester](#API-Tester)
+    2. [Access Modifier](#Access-Modifier)
+    3. [Anti DTO](#Anti-DTO)
+    4. [Commonize](#Commonize)
         - [Usage](#Usage)
-    4. [JPA Relationship](#JPA-Relationship)
-    5. [Project Structure](#Project-Structure)
-    6. [Other](#Other)
+    5. [JPA Relationship](#JPA-Relationship)
+    6. [Project Structure](#Project-Structure)
+    7. [Other](#Other)
         - [Final](#Final)
         - [Validate](#Validate)
         - [AOP](#AOP)
         - [Exception Handler](#Exception-Handler)
         - [Common Projection](#Common-Projection)
 3. [Built With](#Built-With)
+    - [spring-data-jpa-entity-graph](#spring-data-jpa-entity-graph)
 4. [Roadmap](#Roadmap)
 5. [Contact](#Contact)
 
@@ -45,6 +47,8 @@
 
 ---
 > From here, I will write about the difference thing of my project
+
+## API Tester
 
 ## Access Modifier
 
@@ -216,7 +220,60 @@ But remember to follow the [Project Structure](#Project-Structure)
 
 > N + 1 Query problem
 
-My colleagues usually avoid using `@OneToMany`, `@ManyToOne` because of  
+My colleagues usually avoid using `@OneToMany`, `@ManyToOne` because of  `n+1 query problem`
+
+I solve that problem by changed code style:
+
+```java
+public class TeacherEntity extends BaseEntity {
+
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
+    private List<SubjectEntity> subjectList = new ArrayList<>();
+
+    @Transient
+    public List<SubjectEntity> subjects = new ArrayList<>();
+
+    public void transferSubjects() {
+        subjects = subjectList
+                .stream()
+                .peek(subjectEntity -> subjectEntity.teacher = null)
+                .toList();
+    }
+}
+```
+
+I separate to two properties to avoid `@OneToMany` auto execute query get associations (**n+1 query**).
+If you need to get entity with associations, use `@EntityGraph` to attach `join` statement automatically.
+And I use [spring-data-jpa-entity-graph](#spring-data-jpa-entity-graph) to create dynamic EntityGraph.
+
+Remember, use `transferSubjects()` else `subjects` always empty.
+
+```java
+public class SubjectEntity extends BaseEntity {
+
+    @Column(name = "teacher_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Long teacherId;
+
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Schema(allOf = TeacherEntity.class)
+    public TeacherEntity teacher;
+}
+```
+
+But you don't have to always separate association properties.
+Like the above example, I want `teacher` association always be attached when fetching `SubjectEntity` (**FetchType.EAGER**).
+
+But when use `@ManyToOne`, you have to separate like the above code. 
+It saves you the work of set A into B every time you insert or update.
+
+If you want to fetch not **EAGER** but **LAZY**, then separate properties to 3.
+
+About `@JsonProperty` see [Anti DTO section](#anti-dto).
+About `@Schema` see [API Tester section](#api-tester).
 
 ## Project Structure
 
@@ -239,6 +296,8 @@ My colleagues usually avoid using `@OneToMany`, `@ManyToOne` because of
 ### Common Projection
 
 ## Built With
+
+### spring-data-jpa-entity-graph
 
 ## Roadmap
 
