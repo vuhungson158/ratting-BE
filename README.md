@@ -19,18 +19,18 @@
     - [By Docker compose](#By-Docker-compose)
     - [Manually](#Manually)
 2. **Highlight (My creation)**
-   1. [Access Modifier](#Access-Modifier)
-   2. [Anti DTO](#Anti-DTO)
-   3. [Commonize](#Commonize)
-       - [Usage](#Usage)
-   4. [JPA Relationship](#JPA-Relationship)
-   5. [Project Structure](#Project-Structure)
-   6. [Other](#Other)
-       - [Final](#Final)
-       - [Validate](#Validate)
-       - [AOP](#AOP)
-       - [Exception Handler](#Exception-Handler)
-       - [Common Projection](#Common-Projection)
+    1. [Access Modifier](#Access-Modifier)
+    2. [Anti DTO](#Anti-DTO)
+    3. [Commonize](#Commonize)
+        - [Usage](#Usage)
+    4. [JPA Relationship](#JPA-Relationship)
+    5. [Project Structure](#Project-Structure)
+    6. [Other](#Other)
+        - [Final](#Final)
+        - [Validate](#Validate)
+        - [AOP](#AOP)
+        - [Exception Handler](#Exception-Handler)
+        - [Common Projection](#Common-Projection)
 3. [Built With](#Built-With)
 4. [Roadmap](#Roadmap)
 5. [Contact](#Contact)
@@ -40,6 +40,8 @@
 ### By Docker compose
 
 ### Manually
+
+---
 
 ---
 > From here, I will write about the difference thing of my project
@@ -97,6 +99,15 @@ After summary of all answers, I found three answers that I think reasonable.
 1. Old framework like JSP, Thymeleaf, ... need Getter, Setter to binding data
 2. We need to validate values before set it into an object, so we need setter to write validate logic inside
 3. Easy to debug
+
+But times have changed
+
+1. This project is a RestFul API Server, so I don't need to binding data to view template
+2. Validate logic now using `@Annotation` instead setter. See my [Validate section](#Validate)
+3. True, but not worst
+
+Of course, I still follow **OOP encapsulation**.
+Properties are always `private` in almost class, `public` properties are only for `data class` like: Entity, DTO, ...
 
 ## Anti DTO
 
