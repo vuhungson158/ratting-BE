@@ -18,21 +18,22 @@
 1. [Getting Started](#Getting-Started)
     - [By Docker compose](#By-Docker-compose)
     - [Manually](#Manually)
-2. [Access Modifier](#Access-Modifier)
-3. [Anti DTO](#Anti-DTO)
-4. [Commonize](#Commonize)
-    - [Usage](#Usage)
-5. [JPA Relationship](#JPA-Relationship)
-6. [Project Structure](#Project-Structure)
-7. [Other](#Other)
-    - [Final](#Final)
-    - [Validate](#Validate)
-    - [AOP](#AOP)
-    - [Exception Handler](#Exception-Handler)
-    - [Common Projection](#Common-Projection)
-8. [Built With](#Built-With)
-9. [Roadmap](#Roadmap)
-10. [Contact](#Contact)
+2. **Highlight (My creation)**
+   1. [Access Modifier](#Access-Modifier)
+   2. [Anti DTO](#Anti-DTO)
+   3. [Commonize](#Commonize)
+       - [Usage](#Usage)
+   4. [JPA Relationship](#JPA-Relationship)
+   5. [Project Structure](#Project-Structure)
+   6. [Other](#Other)
+       - [Final](#Final)
+       - [Validate](#Validate)
+       - [AOP](#AOP)
+       - [Exception Handler](#Exception-Handler)
+       - [Common Projection](#Common-Projection)
+3. [Built With](#Built-With)
+4. [Roadmap](#Roadmap)
+5. [Contact](#Contact)
 
 ## Getting Started
 
@@ -148,8 +149,6 @@ But remember to follow the [Project Structure](#Project-Structure)
 | Service    | Use to write business logic code, method name, return type, parameters must same with Controller's method                                                                                                                                                                                                |
 | Repository | Use to create `@Query` to get data from DB[^DB]. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                 |
 
-[^DB]: Database
-
 ## Other
 
 ### Final
@@ -179,7 +178,7 @@ But remember to follow the [Project Structure](#Project-Structure)
 
 [old-version-url]: https://github.com/vuhungson158/school-subject-rating-BE
 
-[common-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/common
+[common-package-url]: src/main/java/kiis/ratingBE/common
 
 [teacher-base-package-url]: src/main/java/kiis/ratingBE/features/teacher/base
 
@@ -187,4 +186,4 @@ But remember to follow the [Project Structure](#Project-Structure)
 
 <!-- Footnotes -->
 
-
+[^DB]: Database
