@@ -13,10 +13,6 @@ import java.util.List;
 @Repository
 public interface SubjectRepository extends SimpleCurdRepository<SubjectEntity> {
 
-//    @Override
-//    @EntityGraph(attributePaths = {"teacher"})
-//    @NotNull List<SubjectEntity> findAll();
-
     @Override
     @EntityGraph(attributePaths = {"teacher"})
     List<SubjectEntity> findAllByIsDeletedIsFalse();
