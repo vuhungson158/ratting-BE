@@ -3,9 +3,9 @@
 # School Rating App (BackEnd)
 
 <!-- DESCRIPTION -->
-> This is description
+> My project is a web application that allows users (almost students) to easily evaluate subjects and teachers
 >
-> in multiline
+> The Main feature is rating, show all ratings as graph, write comment for each subject and teacher
 
 <!-- RELATED LINK  -->
 
@@ -15,23 +15,105 @@
 
 ## Index
 
-1. [Example](#Built-With)
+1. [Getting Started](#Getting-Started)
+    - [By Docker compose](#By-Docker-compose)
+    - [Manually](#Manually)
+2. **Highlight (My creation)**
+    1. [Access Modifier](#Access-Modifier)
+    2. [Anti DTO](#Anti-DTO)
+    3. [Commonize](#Commonize)
+        - [Usage](#Usage)
+    4. [JPA Relationship](#JPA-Relationship)
+    5. [Project Structure](#Project-Structure)
+    6. [Other](#Other)
+        - [Final](#Final)
+        - [Validate](#Validate)
+        - [AOP](#AOP)
+        - [Exception Handler](#Exception-Handler)
+        - [Common Projection](#Common-Projection)
+3. [Built With](#Built-With)
+4. [Roadmap](#Roadmap)
+5. [Contact](#Contact)
 
 ## Getting Started
 
 ### By Docker compose
 
-## Highlight
+### Manually
 
-### AOP
+---
 
-### Anti DTO
+---
+> From here, I will write about the difference thing of my project
 
-### Access Modifier
+## Access Modifier
 
-### Commonize
+If you have experience of java, you must have seen this pattern:
 
-> I extremely hate duplicate code
+```java
+
+@Getter
+@Setter
+public class SubjectEntity {
+    private Integer id;
+    private String teacherName;
+    // Some other fields
+}
+
+public class Test {
+    public void test(TeacherEntity teacher) {
+        final SubjectEntity subject = new SubjectEntity();
+        subject.setTeacherName(teacher.getName());
+        System.out.println(subject.getTeacherName());
+    }
+}
+```
+
+I think it's call `java bean`.
+I used to follow this pattern too.
+But one day, I wonder why not just use `public` ?
+Like this:
+
+```java
+public class SubjectEntity {
+    public Integer id;
+    public String teacherName;
+    // Some other fields
+}
+
+public class Test {
+    public void test(TeacherEntity teacher) {
+        final SubjectEntity subject = new SubjectEntity();
+        subject.teacherName = teacher.name;
+        System.out.println(subject.teacherName);
+    }
+}
+```
+
+I start finding why?
+And know that few people have the same question with me.
+[Stack Overflow](https://stackoverflow.com/questions/1568091/why-use-getters-and-setters-accessors).
+
+After summary of all answers, I found three answers that I think reasonable.
+
+1. Old framework like JSP, Thymeleaf, ... need Getter, Setter to binding data
+2. We need to validate values before set it into an object, so we need setter to write validate logic inside
+3. Easy to debug
+
+But times have changed
+
+1. This project is a RestFul API Server, so I don't need to binding data to view template
+2. Validate logic now using `@Annotation` instead setter. See my [Validate section](#Validate)
+3. True, but not worst
+
+Of course, I still follow **OOP encapsulation**.
+Properties are always `private` in almost class, `public` properties are only for `data class` like: Entity, DTO, ...
+
+## Anti DTO
+
+## Commonize
+
+> DRY: don't repeat yourself
 
 After code for 3 months, I realize that almost every table has 6 same end points
 
@@ -42,38 +124,62 @@ After code for 3 months, I realize that almost every table has 6 same end points
 5. `update(Long)`: update a record
 6. `delete(Long)`: soft delete a record (set field `id_delete` = true)
 
-So I group these end point processes flow into a [package][common-package-url]
+So I create three abstract classes to group these end point processes flow.
+You can find these classes in [this package][common-package-url].
 
-- **_an abstract Controller_**: `SimpleCurdController<T>`. T must be a `Entity`
-- **_an abstract Service_**: `SimpleCurdService<T>`.
-- **_an abstract Repository_**: `SimpleCurdRepository<T>`.
+- T must be a `Entity`
+- `SimpleCurdController<T>`
+- `SimpleCurdService<T>`
+- `SimpleCurdRepository<T>`
 
 Why **_abstract_** ???
 Because you cannot use (create instance) an abstract class directly.
 You must create a class, example: `TeacherController` extend `SimpleCurdController<TeacherEntity>`
 to get these common endpoints.
 
-And of course, you always can write new method (C-S-R flow), with full control.
+#### Usage
+
+And of course, you always can write new method (C-S-R flow), with full control. [Reference][teacher-base-package-url].
+
+Create three extend classes to generate 6 end points as default:
+
+- `TeacherController` extends `SimpleCurdController<TeacherEntity>`
+- `TeacherService` extends `SimpleCurdService<TeacherEntity>`
+- `TeacherRepository` extends `SimpleCurdRepository<TeacherEntity>`
+
+And `@Override` method if you need to add more logic, or create new end point.
+But remember to follow the [Project Structure](#Project-Structure)
+
+## JPA Relationship
+
+## Project Structure
 
 | Layer      | Description                                                                                                                                                                                                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Controller | Use Mapping Annotation to create end point: `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`<br/>Use `@AllowMethod` and `@AllowFeature` to authorize<br/>Never write logic code here, create a method on service layer to do that, which have same name, same return type, same parameters |
 | Service    | Use to write business logic code, method name, return type, parameters must same with Controller's method                                                                                                                                                                                                |
-| Repository | Use to create `@Query` to get data from database. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                |
+| Repository | Use to create `@Query` to get data from DB[^DB]. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                 |
 
-### JPA Relationship
+## Other
 
-### Other
+### Final
 
-#### Exception Handler
+### Validate
+
+### AOP
+
+### Exception Handler
+
+### Common Projection
 
 ## Built With
 
-### Roadmap
+## Roadmap
 
 ## Contact
 
 - Gmail: [vuhungson158@gmail.com](mailto:vuhungson158@gmail.com)
+- Facebook: [Vũ Hùng Sơn](https://www.facebook.com/hungson.vu.14)
 
 <!-- MARKDOWN LINKS -->
 
@@ -83,6 +189,12 @@ And of course, you always can write new method (C-S-R flow), with full control.
 
 [old-version-url]: https://github.com/vuhungson158/school-subject-rating-BE
 
-[common-package-url]: https://github.com/vuhungson158/ratting-BE/tree/master/src/main/java/kiis/ratingBE/common
+[common-package-url]: src/main/java/kiis/ratingBE/common
+
+[teacher-base-package-url]: src/main/java/kiis/ratingBE/features/teacher/base
 
 <!-- IMAGES -->
+
+<!-- Footnotes -->
+
+[^DB]: Database
