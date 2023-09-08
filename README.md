@@ -214,6 +214,10 @@ But remember to follow the [Project Structure](#Project-Structure)
 
 ## JPA Relationship
 
+> N + 1 Query problem
+
+My colleagues usually avoid using `@OneToMany`, `@ManyToOne` because of  
+
 ## Project Structure
 
 | Layer      | Description                                                                                                                                                                                                                                                                                              |

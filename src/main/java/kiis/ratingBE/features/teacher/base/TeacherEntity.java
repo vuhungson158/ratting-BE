@@ -34,7 +34,7 @@ public class TeacherEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
-    private List<SubjectEntity> subjectList = new ArrayList<>();
+    public List<SubjectEntity> subjectList = new ArrayList<>();
 
     @Transient
     public List<SubjectEntity> subjects = new ArrayList<>();
