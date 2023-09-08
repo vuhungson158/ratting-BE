@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TeacherRepository extends SimpleCurdRepository<TeacherEntity> {
+public interface TeacherRepository extends
+        SimpleCurdRepository<TeacherEntity> {
 
     @Override
     @NotNull
