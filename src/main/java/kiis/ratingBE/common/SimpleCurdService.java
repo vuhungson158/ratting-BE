@@ -1,6 +1,6 @@
 package kiis.ratingBE.common;
 
-import jakarta.persistence.ManyToOne;
+import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,14 @@ public abstract class SimpleCurdService<T extends BaseEntity>
 
     @Override
     public T findById(long id) {
-        return mainRepository.findById(id)
+        return mainRepository.findById(id, defaultEntityGraph())
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
     }
 
     @Override
     public Page<T> findAll(int page, int limit) {
         final Pageable pageable = PageRequest.of(page, limit);
-        return mainRepository.findAllByIsDeletedIsFalse(pageable);
+        return mainRepository.findAllByIsDeletedIsFalse(pageable, defaultEntityGraph());
     }
 
     @Override
@@ -35,14 +35,12 @@ public abstract class SimpleCurdService<T extends BaseEntity>
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
         final Example<T> example = Example.of(exampleEntity);
-        return mainRepository.findAll(example, pageable);
+        return mainRepository.findAll(example, pageable, defaultEntityGraph());
     }
 
     @Override
     public T create(T entity) {
-        final T returnedEntity = mainRepository.save(entity);
-        validate(returnedEntity);
-        return returnedEntity;
+        return mainRepository.save(entity);
     }
 
     @Override
@@ -52,24 +50,18 @@ public abstract class SimpleCurdService<T extends BaseEntity>
             throw new VersionException();
         }
         BeanUtils.copyProperties(entity, old);
-        final T returnedEntity = mainRepository.save(old);
-        validate(returnedEntity);
-        return returnedEntity;
+        return mainRepository.save(old);
     }
 
     @Override
     public T delete(long id) {
         final T entity = findById(id);
         entity.isDeleted = false;
-        final T returnedEntity = mainRepository.save(entity);
-        validate(returnedEntity);
-        return returnedEntity;
+        return mainRepository.save(entity);
     }
 
     /**
-     * attach all {@link ManyToOne} properties
-     *
-     * @param returnEntity entity that returned when saved
+     * @return EntityGraph to automatically join. Use for all Common GetMapping
      */
-    protected abstract void validate(T returnEntity);
+    protected abstract EntityGraph defaultEntityGraph();
 }

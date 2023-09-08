@@ -1,5 +1,7 @@
 package kiis.ratingBE.features.subject.base;
 
+import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
+import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.common.SimpleCurdService;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.features.teacher.base.TeacherRepository;
@@ -26,17 +28,8 @@ public class SubjectService extends SimpleCurdService<SubjectEntity> {
         return subjectRepository.findAllByIsDeletedIsFalse();
     }
 
-//    @Override
-//    public SubjectEntity create(SubjectEntity entity) {
-//        final SubjectEntity returnEntity = super.create(entity);
-//        attachAssociate(returnEntity);
-//        return returnEntity;
-//    }
-
     @Override
-    protected void validate(SubjectEntity returnEntity) {
-        returnEntity.teacher = teacherRepository
-                .findById(returnEntity.teacherId)
-                .orElseThrow(() -> new RecordNotFoundException("Teacher", returnEntity.teacherId));
+    protected EntityGraph defaultEntityGraph() {
+        return DynamicEntityGraph.loading(List.of("teacher"));
     }
 }
