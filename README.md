@@ -32,6 +32,7 @@
         - [AOP](#AOP)
         - [Exception Handler](#Exception-Handler)
         - [Common Projection](#Common-Projection)
+        - [Abstract Class](#Abstract-Class)
 3. [Built With](#Built-With)
     - [spring-data-jpa-entity-graph](#spring-data-jpa-entity-graph)
 4. [Roadmap](#Roadmap)
@@ -294,6 +295,8 @@ About `@Schema` see [API Tester section](#api-tester).
 ### Exception Handler
 
 ### Common Projection
+
+### Abstract Class
 
 ## Built With
 
