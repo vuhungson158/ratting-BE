@@ -17,6 +17,7 @@ import kiis.ratingBE.features.subject.base.SubjectEntity;
  * @see SubjectEntity
  * @see Projector
  */
+@SuppressWarnings("unused")
 public interface CommentProjector extends BaseProjector {
 
     /**

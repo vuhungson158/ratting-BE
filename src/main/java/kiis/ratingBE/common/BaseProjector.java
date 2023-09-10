@@ -2,6 +2,7 @@ package kiis.ratingBE.common;
 
 import java.time.Instant;
 
+@SuppressWarnings("unused")
 public interface BaseProjector {
 
     /**
