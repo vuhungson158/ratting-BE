@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SubjectService extends SimpleCurdService<SubjectEntity> {
+public class SubjectService
+        extends SimpleCurdService<SubjectEntity>
+        implements SubjectEndpoint {
 
     private final SubjectRepository subjectRepository;
     private final TeacherRepository teacherRepository;
@@ -23,6 +25,7 @@ public class SubjectService extends SimpleCurdService<SubjectEntity> {
         this.teacherRepository = teacherRepository;
     }
 
+    @Override
     public List<SubjectEntity> findAll() {
         return subjectRepository.findAllByIsDeletedIsFalse();
     }

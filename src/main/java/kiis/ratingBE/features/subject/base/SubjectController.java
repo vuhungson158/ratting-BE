@@ -11,7 +11,9 @@ import java.util.List;
 @RequestMapping(path = "/subject")
 @RestController
 //@AllowFeature(SUBJECT)
-public class SubjectController extends SimpleCurdController<SubjectEntity> {
+public class SubjectController
+        extends SimpleCurdController<SubjectEntity>
+        implements SubjectEndpoint {
 
     private final SubjectService subjectService;
 
@@ -21,6 +23,7 @@ public class SubjectController extends SimpleCurdController<SubjectEntity> {
         this.subjectService = subjectService;
     }
 
+    @Override
     @GetMapping("/all")
     public List<SubjectEntity> findAll() {
         return subjectService.findAll();

@@ -33,20 +33,19 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     @NotNull FilterChain filterChain)
             throws ServletException, IOException {
 
-        final String authorizationHeader = request.getHeader(TOKEN_HEADER);
+        final String token = request.getHeader(TOKEN_HEADER);
 
-        if (authorizationHeader == null || !authorizationHeader.startsWith(BEARER)) {
+        if (token == null || !token.startsWith(BEARER)) {
             // If not login, still use some endpoints (UserRole.ANONYMOUS)
             final Authentication anonymousAuthentication = new UsernamePasswordAuthenticationToken(
                     "", null, UserRole.ANONYMOUS.getGrantedAuthorities());
             SecurityContextHolder.getContext().setAuthentication(anonymousAuthentication);
         } else {
             try {
-                final String token = authorizationHeader.replace(BEARER, "");
                 final Claims claimsJwsBody = Jwts.parserBuilder()
                         .setSigningKey(ENCODED_SECRET_KEY)
                         .build()
-                        .parseClaimsJws(token)
+                        .parseClaimsJws(token.replace(BEARER, ""))
                         .getBody();
                 final String username = claimsJwsBody.getSubject();
                 final UserRole role = UserRole.valueOf((String) claimsJwsBody.get(CLAIM_AUTHORITY));

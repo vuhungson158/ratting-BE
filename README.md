@@ -20,16 +20,21 @@
     - [Manually](#Manually)
 2. **Highlight (My creation)**
     1. [API Tester](#API-Tester)
-    2. [Access Modifier](#Access-Modifier)
-    3. [Anti DTO](#Anti-DTO)
-    4. [Commonize](#Commonize)
+    2. [Authorize](#Authorize)
+        - [JWT](#JWT)
+        - [AOP](#AOP)
+    3. [Access Modifier](#Access-Modifier)
+        - [Anti Getter Setter](#Anti-Getter-Setter)
+        - [Protected](#Protected)
+    4. [Anti DTO](#Anti-DTO)
+    5. [Commonize](#Commonize)
         - [Usage](#Usage)
-    5. [JPA Relationship](#JPA-Relationship)
-    6. [Project Structure](#Project-Structure)
-    7. [Other](#Other)
+    6. [JPA Relationship](#JPA-Relationship)
+    7. [Project Structure](#Project-Structure)
+    8. [Other](#Other)
         - [Final](#Final)
         - [Validate](#Validate)
-        - [AOP](#AOP)
+        - [Response Wrapper](#Response-Wrapper)
         - [Exception Handler](#Exception-Handler)
         - [Common Projection](#Common-Projection)
         - [Abstract Class](#Abstract-Class)
@@ -51,7 +56,15 @@
 
 ## API Tester
 
+## Authorize
+
+### JWT
+
+### AOP
+
 ## Access Modifier
+
+### Anti Getter Setter
 
 If you have experience of java, you must have seen this pattern:
 
@@ -113,6 +126,8 @@ But times have changed
 
 Of course, I still follow **OOP encapsulation**.
 Properties are always `private` in almost class, `public` properties are only for `data class` like: Entity, DTO, ...
+
+### Protected
 
 ## Anti DTO
 
@@ -266,9 +281,10 @@ public class SubjectEntity extends BaseEntity {
 ```
 
 But you don't have to always separate association properties.
-Like the above example, I want `teacher` association always be attached when fetching `SubjectEntity` (**FetchType.EAGER**).
+Like the above example, I want `teacher` association always be attached when fetching `SubjectEntity` (**FetchType.EAGER
+**).
 
-But when use `@ManyToOne`, you have to separate like the above code. 
+But when use `@ManyToOne`, you have to separate like the above code.
 It saves you the work of set A into B every time you insert or update.
 
 If you want to fetch not **EAGER** but **LAZY**, then separate properties to 3.
@@ -290,7 +306,7 @@ About `@Schema` see [API Tester section](#api-tester).
 
 ### Validate
 
-### AOP
+### Response Wrapper
 
 ### Exception Handler
 
