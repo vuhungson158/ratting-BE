@@ -3,6 +3,8 @@ package kiis.ratingBE.common;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 
+import static kiis.ratingBE.helper.Constant.SUCCESS;
+
 public class BaseResponse<T> {
     public final int code;
     public final String status, massage, errorClass;
@@ -21,6 +23,6 @@ public class BaseResponse<T> {
     }
 
     public BaseResponse(T data) {
-        this(HttpStatus.OK, "Success", null, data);
+        this(HttpStatus.OK, SUCCESS, null, data);
     }
 }

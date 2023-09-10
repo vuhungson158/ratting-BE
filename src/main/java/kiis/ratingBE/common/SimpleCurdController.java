@@ -30,13 +30,6 @@ public abstract class SimpleCurdController<T extends BaseEntity> implements Simp
         return mainService.findById(id);
     }
 
-    //    @Override
-//    @GetMapping
-//    @AllowMethod(FIND_ALL)
-//    public List<T> findAll() {
-//        return mainService.findAll();
-//    }
-//
     @Override
     @GetMapping
     @AllowMethod(FIND_BY_PAGEABLE)

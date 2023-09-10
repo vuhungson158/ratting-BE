@@ -13,6 +13,7 @@ public interface Constant {
     String TOKEN_HEADER = "Authorization";
     String CLAIM_AUTHORITY = "authorities";
     String BEARER = "Bearer ";
+    String SUCCESS = "Success";
     //  Logger
     Logger LOGGER = LoggerFactory.getLogger(Logger.class);
 }
