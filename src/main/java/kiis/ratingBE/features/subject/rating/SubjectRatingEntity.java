@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.features.user.UserEntity;
@@ -32,6 +34,7 @@ public class SubjectRatingEntity extends BaseEntity {
     /**
      * @see SubjectRatingEntity#subject
      */
+    @NotNull
     @Column(name = "subject_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Long subjectId;
@@ -39,7 +42,7 @@ public class SubjectRatingEntity extends BaseEntity {
     /**
      * @see SubjectRatingEntity#subjectId
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", nullable = false, insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = SubjectEntity.class)
@@ -48,6 +51,7 @@ public class SubjectRatingEntity extends BaseEntity {
     /**
      * @see SubjectRatingEntity#user
      */
+    @NotNull
     @Column(name = "user_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Long userId;
@@ -55,7 +59,7 @@ public class SubjectRatingEntity extends BaseEntity {
     /**
      * @see SubjectRatingEntity#userId
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = UserEntity.class)

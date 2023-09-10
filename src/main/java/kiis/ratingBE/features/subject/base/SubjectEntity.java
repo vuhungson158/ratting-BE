@@ -55,6 +55,7 @@ public class SubjectEntity extends BaseEntity {
     /**
      * @see SubjectEntity#teacher
      */
+    @NotNull
     @Column(name = "teacher_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Long teacherId;
