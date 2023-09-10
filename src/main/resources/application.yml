@@ -28,6 +28,9 @@ logging:
       hibernate:
     #        type: trace
     web: debug
+springdoc:
+  swagger-ui:
+    doc-expansion: none
 
 #    sql: trace
 
