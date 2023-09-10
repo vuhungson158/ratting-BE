@@ -13,11 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AOPHandler {
 
-//    @Before(value = "@target(allowFeature) && @annotation(allowMethod)", argNames = "allowFeature,allowMethod")
-//    public void featureMethodInheritPointcut(AllowFeature allowFeature, AllowMethod allowMethod) {
-//        permissionCheck(allowFeature.value().concat(allowMethod.value()));
-//    }
-
     @Before(value = "@target(allowFeature) && @annotation(allowMethod)", argNames = "allowFeature,allowMethod")
     public void featureMethodPointcut(AllowFeature allowFeature, AllowMethod allowMethod) {
         permissionCheck(allowFeature.value().concat(allowMethod.value()));
