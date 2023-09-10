@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kiis.ratingBE.enums.UserRole;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,29 +33,41 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain)
             throws ServletException, IOException {
+
         final String authorizationHeader = request.getHeader(TOKEN_HEADER);
+
         if (authorizationHeader == null || !authorizationHeader.startsWith(BEARER)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+            final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            final String username = ((String) authentication.getPrincipal());
 
-        try {
-            final String token = authorizationHeader.replace(BEARER, "");
-            final Claims claimsJwsBody = Jwts.parserBuilder()
-                    .setSigningKey(ENCODED_SECRET_KEY)
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
-            final String username = claimsJwsBody.getSubject();
-            final UserRole role = UserRole.valueOf((String) claimsJwsBody.get(CLAIM_AUTHORITY));
-            final Set<SimpleGrantedAuthority> simpleGrantedAuthorities = role.getGrantedAuthorities();
+            // If not login, still use some endpoints (UserRole.ANONYMOUS)
+            if (StringUtils.equals(username, "anonymousUser")) {
+                final Authentication anonymousAuthentication = new UsernamePasswordAuthenticationToken(
+                        username, null, UserRole.ANONYMOUS.getGrantedAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(anonymousAuthentication);
+            } else {
+                filterChain.doFilter(request, response);
+                return;
+            }
+        } else {
+            try {
+                final String token = authorizationHeader.replace(BEARER, "");
+                final Claims claimsJwsBody = Jwts.parserBuilder()
+                        .setSigningKey(ENCODED_SECRET_KEY)
+                        .build()
+                        .parseClaimsJws(token)
+                        .getBody();
+                final String username = claimsJwsBody.getSubject();
+                final UserRole role = UserRole.valueOf((String) claimsJwsBody.get(CLAIM_AUTHORITY));
+                final Set<SimpleGrantedAuthority> simpleGrantedAuthorities = role.getGrantedAuthorities();
 
-            final Authentication authentication =
-                    new UsernamePasswordAuthenticationToken(username, null, simpleGrantedAuthorities);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                final Authentication authentication =
+                        new UsernamePasswordAuthenticationToken(username, null, simpleGrantedAuthorities);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        } catch (final JwtException e) {
-            LOGGER.error("Token cannot be trust");
+            } catch (final JwtException e) {
+                LOGGER.error("Token cannot be trust");
+            }
         }
 
         filterChain.doFilter(request, response);

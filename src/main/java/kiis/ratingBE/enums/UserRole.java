@@ -9,16 +9,32 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static kiis.ratingBE.enums.UserRole.Feature.SUBJECT;
+import static kiis.ratingBE.enums.UserRole.Feature.SUBJECT_COMMENT;
+import static kiis.ratingBE.enums.UserRole.Feature.SUBJECT_RATING;
+import static kiis.ratingBE.enums.UserRole.Feature.TEACHER;
+import static kiis.ratingBE.enums.UserRole.Feature.TEACHER_COMMENT;
+import static kiis.ratingBE.enums.UserRole.Feature.altogether;
+import static kiis.ratingBE.enums.UserRole.Method.CREATE;
+import static kiis.ratingBE.enums.UserRole.Method.DELETE;
+import static kiis.ratingBE.enums.UserRole.Method.FIND_ALL;
+import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_ID;
+import static kiis.ratingBE.enums.UserRole.Method.UPDATE;
+
 public enum UserRole {
-    ADMIN(Feature.altogether()),
+    ADMIN(altogether()),
     MANAGER(
-            Feature.SUBJECT.all(),
-            Feature.SUBJECT_RATING.all(),
-            Feature.SUBJECT_COMMENT.all()
+            SUBJECT.all(),
+            SUBJECT_RATING.all(),
+            SUBJECT_COMMENT.all()
     ),
     USER(
-            Feature.TEACHER.methods(Method.FIND_ALL, Method.CREATE),
-            Feature.TEACHER_COMMENT.methods(Method.UPDATE, Method.DELETE)
+            TEACHER.methods(FIND_ALL, CREATE),
+            TEACHER_COMMENT.methods(UPDATE, DELETE)
+    ),
+    ANONYMOUS(
+            SUBJECT.methods(FIND_BY_ID, FIND_ALL),
+            TEACHER.methods(FIND_BY_ID, FIND_ALL)
     );
 
     public final Set<String> authorities;
@@ -72,7 +88,7 @@ public enum UserRole {
 
         public static @NotNull Set<Combinator> altogether() {
             final Set<Combinator> result = new HashSet<>();
-            Arrays.stream(Feature.values()).forEach(feature -> result.addAll(feature.all()));
+            Arrays.stream(values()).forEach(feature -> result.addAll(feature.all()));
             return result;
         }
     }
