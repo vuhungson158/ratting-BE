@@ -10,6 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.enums.Gender;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
@@ -34,7 +35,7 @@ public class TeacherEntity extends BaseEntity {
     public String nationality;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
+    @NotNull
     public Gender gender;
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
