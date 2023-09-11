@@ -14,20 +14,15 @@ public class SubjectService
         extends SimpleCurdService<SubjectEntity>
         implements SubjectEndpoint {
 
-    private final SubjectRepository subjectRepository;
-    private final TeacherRepository teacherRepository;
+//    private final SubjectRepository subjectRepository;
+//    private final TeacherRepository teacherRepository;
 
     @Autowired
     public SubjectService(SubjectRepository subjectRepository,
                           TeacherRepository teacherRepository) {
         super(subjectRepository);
-        this.subjectRepository = subjectRepository;
-        this.teacherRepository = teacherRepository;
-    }
-
-    @Override
-    public List<SubjectEntity> findAll() {
-        return subjectRepository.findAllByIsDeletedIsFalse();
+//        this.subjectRepository = subjectRepository;
+//        this.teacherRepository = teacherRepository;
     }
 
     @Override

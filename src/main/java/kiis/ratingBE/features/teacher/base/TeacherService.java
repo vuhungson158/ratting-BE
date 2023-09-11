@@ -4,39 +4,47 @@ import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.common.SimpleCurdService;
 import kiis.ratingBE.exception.RecordNotFoundException;
-import kiis.ratingBE.features.subject.base.SubjectRepository;
-import kiis.ratingBE.features.subject.base.SubjectService;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TeacherService extends SimpleCurdService<TeacherEntity> {
+public class TeacherService
+        extends SimpleCurdService<TeacherEntity>
+        implements TeacherEndpoint {
+
     private final TeacherRepository teacherRepository;
-    private final SubjectRepository subjectRepository;
-    private final SubjectService subjectService;
 
     @Autowired
-    public TeacherService(TeacherRepository repository,
-                          SubjectRepository subjectRepository,
-                          SubjectService subjectService) {
+    public TeacherService(TeacherRepository repository) {
         super(repository);
         this.teacherRepository = repository;
-        this.subjectRepository = subjectRepository;
-        this.subjectService = subjectService;
     }
 
+    @Override
     public TeacherEntity findOneJoinSubject(long id) {
         final TeacherEntity teacher = teacherRepository
-                .findById(id, DynamicEntityGraph.loading(List.of("subjectList")))
+                .findById(id, joinSubjects())
                 .orElseThrow(() -> new RecordNotFoundException("Teacher", id));
         teacher.transferSubjects();
         return teacher;
     }
 
     @Override
+    public List<TeacherEntity> findAll() {
+        return teacherRepository.findAll();
+    }
+
+    @Override
     protected EntityGraph defaultEntityGraph() {
         return EntityGraph.NOOP;
+    }
+
+    @Contract(" -> new")
+    private @NotNull EntityGraph joinSubjects() {
+        return DynamicEntityGraph.loading(List.of("subjectList"));
     }
 }
