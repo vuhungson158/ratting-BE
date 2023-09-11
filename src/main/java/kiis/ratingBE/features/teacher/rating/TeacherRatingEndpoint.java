@@ -7,5 +7,5 @@ public interface TeacherRatingEndpoint {
 
     List<TeacherRatingEntity> findAverageByUserId(long userId);
 
-    TeacherRatingEntity getByTeacherIdAndUserId(long teacherId, long userId);
+    TeacherRatingEntity findByTeacherIdAndUserId(long teacherId, long userId);
 }

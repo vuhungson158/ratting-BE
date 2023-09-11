@@ -37,7 +37,7 @@ public class TeacherRatingController
 
     @Override
     @GetMapping("/findOne")
-    public TeacherRatingEntity getByTeacherIdAndUserId(long teacherId, long userId) {
-        return teacherRatingService.getByTeacherIdAndUserId(teacherId, userId);
+    public TeacherRatingEntity findByTeacherIdAndUserId(long teacherId, long userId) {
+        return teacherRatingService.findByTeacherIdAndUserId(teacherId, userId);
     }
 }

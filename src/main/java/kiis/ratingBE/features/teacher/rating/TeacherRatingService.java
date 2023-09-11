@@ -33,7 +33,7 @@ public class TeacherRatingService
     }
 
     @Override
-    public TeacherRatingEntity getByTeacherIdAndUserId(long teacherId, long userId) {
+    public TeacherRatingEntity findByTeacherIdAndUserId(long teacherId, long userId) {
         return null;
     }
 }
