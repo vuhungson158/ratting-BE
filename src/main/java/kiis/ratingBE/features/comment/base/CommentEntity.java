@@ -74,7 +74,7 @@ public class CommentEntity extends BaseEntity {
     /**
      * @see CommentEntity#userId
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = UserEntity.class)

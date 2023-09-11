@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping(path = "/comment")
 @RestController
-public class CommentController extends
-        SimpleCurdController<CommentEntity> {
+public class CommentController
+        extends SimpleCurdController<CommentEntity>
+        implements CommentEndpoint {
 
     @Autowired
     public CommentController(CommentService commentService) {
