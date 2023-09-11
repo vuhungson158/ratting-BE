@@ -40,6 +40,8 @@
         - [Abstract Class](#Abstract-Class)
 3. [Built With](#Built-With)
     - [spring-data-jpa-entity-graph](#spring-data-jpa-entity-graph)
+    - [Swagger](#Swagger)
+    - [JWT](#JWT)
 4. [Roadmap](#Roadmap)
 5. [Contact](#Contact)
 
