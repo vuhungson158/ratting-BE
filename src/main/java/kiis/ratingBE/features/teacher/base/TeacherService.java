@@ -23,6 +23,10 @@ public class TeacherService
         super(repository);
         this.teacherRepository = repository;
     }
+    @Override
+    protected EntityGraph defaultEntityGraph() {
+        return EntityGraph.NOOP;
+    }
 
     @Override
     public TeacherEntity findOneJoinSubject(long id) {
@@ -36,11 +40,6 @@ public class TeacherService
     @Override
     public List<TeacherEntity> findAll() {
         return teacherRepository.findAll();
-    }
-
-    @Override
-    protected EntityGraph defaultEntityGraph() {
-        return EntityGraph.NOOP;
     }
 
     @Contract(" -> new")
