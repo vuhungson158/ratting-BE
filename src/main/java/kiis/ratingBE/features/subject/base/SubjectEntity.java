@@ -35,11 +35,11 @@ public class SubjectEntity extends BaseEntity {
     @NotBlank
     public String name;
 
-    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     public Department department;
 
-    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     public Small classification;
 

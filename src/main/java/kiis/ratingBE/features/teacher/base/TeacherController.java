@@ -1,5 +1,6 @@
 package kiis.ratingBE.features.teacher.base;
 
+import kiis.ratingBE.aop.AllowFeature;
 import kiis.ratingBE.common.SimpleCurdController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//@AllowFeature(TEACHER)
+import static kiis.ratingBE.enums.UserRole.Feature.TEACHER;
+
+@AllowFeature(TEACHER)
 @RestController
 @RequestMapping(path = "/teacher")
 public class TeacherController
@@ -31,6 +34,7 @@ public class TeacherController
     }
 
     @Override
+    @GetMapping("/allRecords")
     public List<TeacherEntity> findAll() {
         return teacherService.findAll();
     }

@@ -17,4 +17,9 @@ public class UserService extends SimpleCurdService<UserEntity> {
     protected EntityGraph defaultEntityGraph() {
         return EntityGraph.NOOP;
     }
+
+    @Override
+    protected UserEntity findSavedEntityJoin(long id) {
+        return null;
+    }
 }

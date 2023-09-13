@@ -23,6 +23,11 @@ public class SubjectRatingService
     }
 
     @Override
+    protected SubjectRatingEntity findSavedEntityJoin(long id) {
+        return null;
+    }
+
+    @Override
     public List<SubjectRatingEntity> findAverageBySubjectId(long subjectId) {
         return null;
     }

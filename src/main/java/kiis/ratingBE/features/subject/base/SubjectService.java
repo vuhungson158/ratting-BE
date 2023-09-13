@@ -29,4 +29,9 @@ public class SubjectService
     protected EntityGraph defaultEntityGraph() {
         return DynamicEntityGraph.loading(List.of("teacher"));
     }
+
+    @Override
+    protected SubjectEntity findSavedEntityJoin(long id) {
+        return null;
+    }
 }

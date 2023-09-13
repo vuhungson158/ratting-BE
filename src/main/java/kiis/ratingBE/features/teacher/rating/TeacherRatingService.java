@@ -23,6 +23,11 @@ public class TeacherRatingService
     }
 
     @Override
+    protected TeacherRatingEntity findSavedEntityJoin(long id) {
+        return null;
+    }
+
+    @Override
     public List<TeacherRatingEntity> findAverageByTeacherId(long teacherId) {
         return null;
     }

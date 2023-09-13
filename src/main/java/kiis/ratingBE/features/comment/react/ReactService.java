@@ -18,4 +18,9 @@ public class ReactService extends
     protected EntityGraph defaultEntityGraph() {
         return EntityGraph.NOOP;
     }
+
+    @Override
+    protected ReactEntity findSavedEntityJoin(long id) {
+        return null;
+    }
 }

@@ -31,6 +31,11 @@ public class CommentService
     }
 
     @Override
+    protected CommentEntity findSavedEntityJoin(long id) {
+        return null;
+    }
+
+    @Override
     public Page<CommentEntity> findAll(int page, int limit) {
         final List<Projector> queryResult = commentRepository.findAll(page, limit);
         final PageRequest pageRequest = PageRequest.of(page, limit);
