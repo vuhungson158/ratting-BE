@@ -1,6 +1,6 @@
 package kiis.ratingBE.features.teacher.rating;
 
-import kiis.ratingBE.common.CrudController;
+import kiis.ratingBE.common.crud.CrudController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

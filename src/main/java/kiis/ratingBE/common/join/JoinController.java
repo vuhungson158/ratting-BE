@@ -1,5 +1,7 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.common.join;
 
+import kiis.ratingBE.common.BaseEntity;
+import kiis.ratingBE.common.crud.CrudController;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

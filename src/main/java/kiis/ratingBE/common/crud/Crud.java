@@ -1,5 +1,6 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.common.crud;
 
+import kiis.ratingBE.common.BaseEntity;
 import org.springframework.data.domain.Page;
 
 public interface Crud<T extends BaseEntity> {

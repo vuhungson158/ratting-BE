@@ -2,7 +2,7 @@ package kiis.ratingBE.features.teacher.base;
 
 import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
-import kiis.ratingBE.common.CrudService;
+import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

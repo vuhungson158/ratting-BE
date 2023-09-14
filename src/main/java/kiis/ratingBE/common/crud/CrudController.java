@@ -1,6 +1,7 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.common.crud;
 
 import kiis.ratingBE.aop.AllowMethod;
+import kiis.ratingBE.common.BaseEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;

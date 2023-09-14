@@ -1,6 +1,6 @@
 package kiis.ratingBE.features.subject.base;
 
-import kiis.ratingBE.common.CrudService;
+import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.features.teacher.base.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

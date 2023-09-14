@@ -1,7 +1,7 @@
 package kiis.ratingBE.features.comment.base;
 
 import kiis.ratingBE.common.Projector;
-import kiis.ratingBE.common.CrudService;
+import kiis.ratingBE.common.crud.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

@@ -1,4 +1,6 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.common.join;
+
+import kiis.ratingBE.common.BaseEntity;
 
 import java.util.function.Consumer;
 

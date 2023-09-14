@@ -1,6 +1,6 @@
 package kiis.ratingBE.features.teacher.base;
 
-import kiis.ratingBE.common.JoinField;
+import kiis.ratingBE.common.join.JoinField;
 import lombok.RequiredArgsConstructor;
 
 import java.util.function.Consumer;

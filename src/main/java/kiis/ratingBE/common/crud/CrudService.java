@@ -1,5 +1,7 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.common.crud;
 
+import kiis.ratingBE.common.BaseEntity;
+import kiis.ratingBE.common.CommonRepository;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import org.springframework.beans.BeanUtils;
