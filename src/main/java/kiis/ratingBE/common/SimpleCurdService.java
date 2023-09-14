@@ -1,15 +1,19 @@
 package kiis.ratingBE.common;
 
+import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -79,4 +83,30 @@ public abstract class SimpleCurdService<T extends BaseEntity>
      * @return EntityGraph to automatically join. Use for all Common GetMapping
      */
     protected abstract EntityGraph defaultEntityGraph();
+
+
+    /**
+     * @return join nothing
+     */
+    protected static @NotNull EntityGraph noJoin() {
+        return EntityGraph.NOOP;
+    }
+
+    /**
+     * @param field must be Entity's OneToMany or ManyToOne field
+     * @return DynamicEntityGraph
+     */
+    @Contract("_ -> new")
+    protected static @NotNull EntityGraph join(String field) {
+        return joins(field);
+    }
+
+    /**
+     * @param fields must be Entity's OneToMany or ManyToOne fields
+     * @return DynamicEntityGraph
+     */
+    @Contract("_ -> new")
+    protected static @NotNull EntityGraph joins(String... fields) {
+        return DynamicEntityGraph.loading(List.of(fields));
+    }
 }
