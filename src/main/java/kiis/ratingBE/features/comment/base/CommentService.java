@@ -1,9 +1,7 @@
 package kiis.ratingBE.features.comment.base;
 
-import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
-import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.common.Projector;
-import kiis.ratingBE.common.SimpleCurdService;
+import kiis.ratingBE.common.crud.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,7 +12,7 @@ import java.util.List;
 
 @Service
 public class CommentService
-        extends SimpleCurdService<CommentEntity>
+        extends CrudService<CommentEntity>
         implements CommentEndpoint {
 
     private final CommentRepository commentRepository;
@@ -23,16 +21,6 @@ public class CommentService
     public CommentService(CommentRepository commentRepository) {
         super(commentRepository);
         this.commentRepository = commentRepository;
-    }
-
-    @Override
-    protected EntityGraph defaultEntityGraph() {
-        return DynamicEntityGraph.loading(List.of("user"));
-    }
-
-    @Override
-    protected CommentEntity findSavedEntityJoin(long id) {
-        return null;
     }
 
     @Override

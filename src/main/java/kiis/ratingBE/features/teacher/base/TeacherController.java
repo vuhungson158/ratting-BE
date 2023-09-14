@@ -1,7 +1,6 @@
 package kiis.ratingBE.features.teacher.base;
 
-import kiis.ratingBE.aop.AllowFeature;
-import kiis.ratingBE.common.SimpleCurdController;
+import kiis.ratingBE.common.join.JoinController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,13 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static kiis.ratingBE.enums.UserRole.Feature.TEACHER;
-
-@AllowFeature(TEACHER)
+//@AllowFeature(TEACHER)
 @RestController
 @RequestMapping(path = "/teacher")
 public class TeacherController
-        extends SimpleCurdController<TeacherEntity>
+        extends JoinController<TeacherEntity, TeacherJoinField>
         implements TeacherEndpoint {
 
     private final TeacherService teacherService;
@@ -28,13 +25,7 @@ public class TeacherController
     }
 
     @Override
-    @GetMapping("/findOneJoinSubject/{id}")
-    public TeacherEntity findOneJoinSubject(@PathVariable long id) {
-        return teacherService.findOneJoinSubject(id);
-    }
-
-    @Override
-    @GetMapping("/allRecords")
+    @GetMapping("everyRecords")
     public List<TeacherEntity> findAll() {
         return teacherService.findAll();
     }

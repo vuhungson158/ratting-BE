@@ -1,6 +1,7 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.common.crud;
 
 import kiis.ratingBE.aop.AllowMethod;
+import kiis.ratingBE.common.BaseEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,9 +20,10 @@ import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
 import static kiis.ratingBE.enums.UserRole.Method.UPDATE;
 
 @RequiredArgsConstructor
-public abstract class SimpleCurdController<T extends BaseEntity> implements SimpleCurd<T> {
+public abstract class CrudController<T extends BaseEntity>
+        implements Crud<T> {
 
-    private final SimpleCurdService<T> mainService;
+    private final CrudService<T> mainService;
 
     @Override
     @GetMapping("/{id}")

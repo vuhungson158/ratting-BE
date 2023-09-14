@@ -1,7 +1,6 @@
 package kiis.ratingBE.features.teacher.rating;
 
-import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
-import kiis.ratingBE.common.SimpleCurdService;
+import kiis.ratingBE.common.crud.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,22 +8,12 @@ import java.util.List;
 
 @Service
 public class TeacherRatingService
-        extends SimpleCurdService<TeacherRatingEntity>
+        extends CrudService<TeacherRatingEntity>
         implements TeacherRatingEndpoint {
 
     @Autowired
     public TeacherRatingService(TeacherRatingRepository teacherRatingRepository) {
         super(teacherRatingRepository);
-    }
-
-    @Override
-    protected EntityGraph defaultEntityGraph() {
-        return EntityGraph.NOOP;
-    }
-
-    @Override
-    protected TeacherRatingEntity findSavedEntityJoin(long id) {
-        return null;
     }
 
     @Override
