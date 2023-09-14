@@ -15,7 +15,7 @@ import java.util.List;
  * @see BaseEntity#id
  */
 @NoRepositoryBean
-public interface SimpleCurdRepository<T extends BaseEntity> extends
+public interface CommonRepository<T extends BaseEntity> extends
         EntityGraphJpaRepository<T, Long> {
 
     /**
@@ -24,6 +24,13 @@ public interface SimpleCurdRepository<T extends BaseEntity> extends
      * @see JpaRepository#findAll()
      */
     List<T> findAllByIsDeletedIsFalse();
+
+    /**
+     * same with findAll(Pageable), but where 'isDeleted' = false
+     *
+     * @see EntityGraphJpaRepository#findAll(Pageable)
+     */
+    Page<T> findAllByIsDeletedIsFalse(Pageable pageable);
 
     /**
      * same with findAll(Pageable, EntityGraph), but where 'isDeleted' = false

@@ -1,6 +1,6 @@
 package kiis.ratingBE.features.subject.rating;
 
-import kiis.ratingBE.common.SimpleCurdService;
+import kiis.ratingBE.common.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class SubjectRatingService
-        extends SimpleCurdService<SubjectRatingEntity>
+        extends CrudService<SubjectRatingEntity>
         implements SubjectRatingEndpoint {
 
     @Autowired

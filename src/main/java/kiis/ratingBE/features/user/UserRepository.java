@@ -1,13 +1,13 @@
 package kiis.ratingBE.features.user;
 
-import kiis.ratingBE.common.SimpleCurdRepository;
+import kiis.ratingBE.common.CommonRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
 public interface UserRepository extends
-        SimpleCurdRepository<UserEntity> {
+        CommonRepository<UserEntity> {
 
     Optional<UserEntity> findByEmail(String email);
 //

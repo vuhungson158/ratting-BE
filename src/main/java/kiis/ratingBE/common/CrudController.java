@@ -19,9 +19,10 @@ import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
 import static kiis.ratingBE.enums.UserRole.Method.UPDATE;
 
 @RequiredArgsConstructor
-public abstract class SimpleCurdController<T extends BaseEntity> implements SimpleCurd<T> {
+public abstract class CrudController<T extends BaseEntity>
+        implements Crud<T> {
 
-    private final SimpleCurdService<T> mainService;
+    private final CrudService<T> mainService;
 
     @Override
     @GetMapping("/{id}")
@@ -42,24 +43,6 @@ public abstract class SimpleCurdController<T extends BaseEntity> implements Simp
     @AllowMethod(FIND_BY_FILTER)
     public Page<T> findAll(@RequestBody T exampleEntity, @RequestParam int page, @RequestParam int limit) {
         return mainService.findAll(exampleEntity, page, limit);
-    }
-
-    @Override
-    @GetMapping("/join/{id}")
-    public T findByIdJoin(@PathVariable long id, JoinField<T>[] joinFields) {
-        return mainService.findByIdJoin(id, joinFields);
-    }
-
-    @Override
-    @GetMapping("/join")
-    public Page<T> findAllJoin(int page, int limit, JoinField<T>[] joinFields) {
-        return mainService.findAllJoin(page, limit, joinFields);
-    }
-
-    @Override
-    @PostMapping("/join/filter")
-    public Page<T> findAllJoin(T exampleEntity, int page, int limit, JoinField<T>[] joinFields) {
-        return mainService.findAllJoin(exampleEntity, page, limit, joinFields);
     }
 
     @Override

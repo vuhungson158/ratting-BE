@@ -1,7 +1,7 @@
 package kiis.ratingBE.features.comment.base;
 
 import kiis.ratingBE.common.Projector;
-import kiis.ratingBE.common.SimpleCurdService;
+import kiis.ratingBE.common.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class CommentService
-        extends SimpleCurdService<CommentEntity>
+        extends CrudService<CommentEntity>
         implements CommentEndpoint {
 
     private final CommentRepository commentRepository;

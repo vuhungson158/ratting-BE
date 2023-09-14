@@ -1,6 +1,6 @@
 package kiis.ratingBE.features.teacher.rating;
 
-import kiis.ratingBE.common.SimpleCurdController;
+import kiis.ratingBE.common.CrudController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(path = "/teacher-rating")
 @RestController
 public class TeacherRatingController
-        extends SimpleCurdController<TeacherRatingEntity>
+        extends CrudController<TeacherRatingEntity>
         implements TeacherRatingEndpoint {
 
     private final TeacherRatingService teacherRatingService;

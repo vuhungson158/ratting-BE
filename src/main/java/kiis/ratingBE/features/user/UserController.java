@@ -1,13 +1,13 @@
 package kiis.ratingBE.features.user;
 
-import kiis.ratingBE.common.SimpleCurdController;
+import kiis.ratingBE.common.CrudController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/user")
-public class UserController extends SimpleCurdController<UserEntity> {
+public class UserController extends CrudController<UserEntity> {
 
     @Autowired
     public UserController(UserService userService) {

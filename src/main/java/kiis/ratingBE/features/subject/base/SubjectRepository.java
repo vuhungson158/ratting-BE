@@ -1,10 +1,10 @@
 package kiis.ratingBE.features.subject.base;
 
-import kiis.ratingBE.common.SimpleCurdRepository;
+import kiis.ratingBE.common.CommonRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SubjectRepository extends SimpleCurdRepository<SubjectEntity> {
+public interface SubjectRepository extends CommonRepository<SubjectEntity> {
 }
 
 

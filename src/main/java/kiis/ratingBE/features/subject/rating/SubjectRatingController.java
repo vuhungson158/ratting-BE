@@ -1,6 +1,6 @@
 package kiis.ratingBE.features.subject.rating;
 
-import kiis.ratingBE.common.SimpleCurdController;
+import kiis.ratingBE.common.CrudController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping(path = "/subject-rating")
 @RestController
 public class SubjectRatingController
-        extends SimpleCurdController<SubjectRatingEntity>
+        extends CrudController<SubjectRatingEntity>
         implements SubjectRatingEndpoint {
 
     private final SubjectRatingService subjectRatingService;
