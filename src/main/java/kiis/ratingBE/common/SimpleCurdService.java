@@ -5,14 +5,17 @@ import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,37 +27,43 @@ public abstract class SimpleCurdService<T extends BaseEntity>
 
     @Override
     public T findById(long id) {
-        return mainRepository.findById(id, defaultEntityGraph())
-                .orElseThrow(() -> new RecordNotFoundException("Record", id));
+        return findByIdJoin(id, null);
     }
 
     @Override
     public Page<T> findAll(int page, int limit) {
-        final Pageable pageable = PageRequest.of(page, limit);
-        return mainRepository.findAllByIsDeletedIsFalse(pageable, defaultEntityGraph());
+        return findAllJoin(page, limit, null);
     }
 
     @Override
     public Page<T> findAll(T exampleEntity, int page, int limit) {
-        exampleEntity.isDeleted = false;
-        final Pageable pageable = PageRequest.of(page, limit);
-        final Example<T> example = Example.of(exampleEntity);
-        return mainRepository.findAll(example, pageable, defaultEntityGraph());
+        return findAllJoin(exampleEntity, page, limit, null);
     }
 
     @Override
     public T findByIdJoin(long id, JoinField<T>[] joinFields) {
-        return null;
+        final T result = mainRepository.findById(id, joins(joinFields))
+                .orElseThrow(() -> new RecordNotFoundException("Record", id));
+        transferFields(result, joinFields);
+        return result;
     }
 
     @Override
     public Page<T> findAllJoin(int page, int limit, JoinField<T>[] joinFields) {
-        return null;
+        final Pageable pageable = PageRequest.of(page, limit);
+        final Page<T> results = mainRepository.findAllByIsDeletedIsFalse(pageable, joins(joinFields));
+        transferFields(results, joinFields);
+        return results;
     }
 
     @Override
-    public Page<T> findAllJoin(T exampleEntity, int page, int limit, JoinField<T>[] joinFields) {
-        return null;
+    public Page<T> findAllJoin(@NotNull T exampleEntity, int page, int limit, JoinField<T>[] joinFields) {
+        exampleEntity.isDeleted = false;
+        final Pageable pageable = PageRequest.of(page, limit);
+        final Example<T> example = Example.of(exampleEntity);
+        final Page<T> results = mainRepository.findAll(example, pageable, joins(joinFields));
+        transferFields(results, joinFields);
+        return results;
     }
 
     @Override
@@ -79,11 +88,17 @@ public abstract class SimpleCurdService<T extends BaseEntity>
         return mainRepository.save(entity);
     }
 
-    /**
-     * @return EntityGraph to automatically join. Use for all Common GetMapping
-     */
-    protected abstract EntityGraph defaultEntityGraph();
+    private void transferFields(T result, JoinField<T>[] joinFields) {
+        transferFields(new PageImpl<>(List.of(result)), joinFields);
+    }
 
+    private void transferFields(@NotNull Page<T> results, JoinField<T>[] joinFields) {
+        if (Objects.nonNull(joinFields)) {
+            for (final JoinField<T> joinField : joinFields) {
+                results.forEach(result -> joinField.transferCallback().accept(result));
+            }
+        }
+    }
 
     /**
      * @return join nothing
@@ -93,20 +108,18 @@ public abstract class SimpleCurdService<T extends BaseEntity>
     }
 
     /**
-     * @param field must be Entity's OneToMany or ManyToOne field
+     * @param joinFields must be Entity's OneToMany or ManyToOne fields
      * @return DynamicEntityGraph
      */
+    @SafeVarargs
     @Contract("_ -> new")
-    protected static @NotNull EntityGraph join(String field) {
-        return joins(field);
-    }
-
-    /**
-     * @param fields must be Entity's OneToMany or ManyToOne fields
-     * @return DynamicEntityGraph
-     */
-    @Contract("_ -> new")
-    protected static @NotNull EntityGraph joins(String... fields) {
-        return DynamicEntityGraph.loading(List.of(fields));
+    protected final @NotNull EntityGraph joins(@NotNull JoinField<T>... joinFields) {
+        if (ArrayUtils.isEmpty(joinFields) || Objects.isNull(joinFields)) {
+            return noJoin();
+        }
+        final List<String> fieldNames = Arrays.stream(joinFields)
+                .map(JoinField::fieldName)
+                .toList();
+        return DynamicEntityGraph.loading(fieldNames);
     }
 }

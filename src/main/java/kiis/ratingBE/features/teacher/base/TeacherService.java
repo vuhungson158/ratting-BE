@@ -23,10 +23,6 @@ public class TeacherService
         super(repository);
         this.teacherRepository = repository;
     }
-    @Override
-    protected EntityGraph defaultEntityGraph() {
-        return EntityGraph.NOOP;
-    }
 
     @Override
     public TeacherEntity findOneJoinSubject(long id) {

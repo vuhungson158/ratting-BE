@@ -45,6 +45,24 @@ public abstract class SimpleCurdController<T extends BaseEntity> implements Simp
     }
 
     @Override
+    @GetMapping("/join/{id}")
+    public T findByIdJoin(@PathVariable long id, JoinField<T>[] joinFields) {
+        return mainService.findByIdJoin(id, joinFields);
+    }
+
+    @Override
+    @GetMapping("/join")
+    public Page<T> findAllJoin(int page, int limit, JoinField<T>[] joinFields) {
+        return mainService.findAllJoin(page, limit, joinFields);
+    }
+
+    @Override
+    @PostMapping("/join/filter")
+    public Page<T> findAllJoin(T exampleEntity, int page, int limit, JoinField<T>[] joinFields) {
+        return mainService.findAllJoin(exampleEntity, page, limit, joinFields);
+    }
+
+    @Override
     @PostMapping
     @AllowMethod(CREATE)
     public T create(@RequestBody T entity) {
