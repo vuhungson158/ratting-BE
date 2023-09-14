@@ -10,6 +10,12 @@ public interface SimpleCurd<T extends BaseEntity> {
 
     Page<T> findAll(T exampleEntity, int page, int limit);
 
+    T findByIdJoin(long id, JoinField<T>[] joinFields);
+
+    Page<T> findAllJoin(int page, int limit, JoinField<T>[] joinFields);
+
+    Page<T> findAllJoin(T exampleEntity, int page, int limit, JoinField<T>[] joinFields);
+
     T create(T entity);
 
     T update(T entity, long id);

@@ -39,6 +39,21 @@ public abstract class SimpleCurdService<T extends BaseEntity>
     }
 
     @Override
+    public T findByIdJoin(long id, JoinField<T>[] joinFields) {
+        return null;
+    }
+
+    @Override
+    public Page<T> findAllJoin(int page, int limit, JoinField<T>[] joinFields) {
+        return null;
+    }
+
+    @Override
+    public Page<T> findAllJoin(T exampleEntity, int page, int limit, JoinField<T>[] joinFields) {
+        return null;
+    }
+
+    @Override
     public T create(T entity) {
         return mainRepository.save(entity);
     }
