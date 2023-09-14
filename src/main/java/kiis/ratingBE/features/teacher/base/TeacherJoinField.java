@@ -8,14 +8,22 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public enum TeacherJoinField implements JoinField<TeacherEntity> {
 
-    SUBJECTS("subject", TeacherEntity::transferSubjects),
+    /**
+     * @see TeacherEntity#subjectList
+     */
+    SUBJECTS("subjectList", TeacherEntity::transferSubjects);
 
-    COMMENTS("comments", teacher -> {
-        System.out.println("comments");
-    });
-
+    /**
+     * Must be exactly property name
+     *
+     * @see jakarta.persistence.OneToMany
+     * @see jakarta.persistence.ManyToOne
+     */
     private final String fieldName;
 
+    /**
+     * Should create a transfer method in Entity, and use lambda
+     */
     private final Consumer<TeacherEntity> transferCallback;
 
     @Override

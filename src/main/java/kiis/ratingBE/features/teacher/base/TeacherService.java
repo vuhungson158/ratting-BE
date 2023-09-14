@@ -2,7 +2,7 @@ package kiis.ratingBE.features.teacher.base;
 
 import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
-import kiis.ratingBE.common.crud.CrudService;
+import kiis.ratingBE.common.join.JoinService;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class TeacherService
-        extends CrudService<TeacherEntity>
+        extends JoinService<TeacherEntity, TeacherJoinField>
         implements TeacherEndpoint {
 
     private final TeacherRepository teacherRepository;
