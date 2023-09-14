@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.function.Consumer;
 
 @RequiredArgsConstructor
-public enum TeacherJoinField implements JoinField<TeacherEntity> {
+public enum TeacherJoinField
+        implements JoinField<TeacherEntity> {
 
     /**
      * @see TeacherEntity#subjectList

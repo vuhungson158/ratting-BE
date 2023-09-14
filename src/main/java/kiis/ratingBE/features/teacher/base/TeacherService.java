@@ -25,15 +25,6 @@ public class TeacherService
     }
 
     @Override
-    public TeacherEntity findOneJoinSubject(long id) {
-        final TeacherEntity teacher = teacherRepository
-                .findById(id, joinSubjects())
-                .orElseThrow(() -> new RecordNotFoundException("Teacher", id));
-        teacher.transferSubjects();
-        return teacher;
-    }
-
-    @Override
     public List<TeacherEntity> findAll() {
         return teacherRepository.findAll();
     }

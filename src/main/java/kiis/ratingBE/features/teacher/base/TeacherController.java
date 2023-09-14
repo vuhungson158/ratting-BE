@@ -25,12 +25,6 @@ public class TeacherController
     }
 
     @Override
-    @GetMapping("/findOneJoinSubject/{id}")
-    public TeacherEntity findOneJoinSubject(@PathVariable long id) {
-        return teacherService.findOneJoinSubject(id);
-    }
-
-    @Override
     @GetMapping("everyRecords")
     public List<TeacherEntity> findAll() {
         return teacherService.findAll();
