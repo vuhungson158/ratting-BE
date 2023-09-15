@@ -30,6 +30,8 @@
     5. [Commonize](#Commonize)
         - [Usage](#Usage)
     6. [JPA Relationship](#JPA-Relationship)
+        - [Join & Limit](#Join-and-Limit)
+        - [Common Projection](#Common-Projection)
     7. [Project Structure](#Project-Structure)
         - [Repository](#Repository)
         - [Service](#Service)
@@ -39,7 +41,6 @@
         - [Validate](#Validate)
         - [Response Wrapper](#Response-Wrapper)
         - [Exception Handler](#Exception-Handler)
-        - [Common Projection](#Common-Projection)
         - [Abstract Class](#Abstract-Class)
 3. [Built With](#Built-With)
     - [spring-data-jpa-entity-graph](#spring-data-jpa-entity-graph)
@@ -297,6 +298,31 @@ If you want to fetch not **EAGER** but **LAZY**, then separate properties to 3.
 About `@JsonProperty` see [Anti DTO section](#anti-dto).
 About `@Schema` see [API Tester section](#api-tester).
 
+### Join and Limit
+
+> Just because you can, doesn't mean you should
+
+I **_strongly recommend_** not using findAll(Pageable, EntityGraph)
+
+Because it will select all from table and limiting by java code
+
+Example: 
+
+<pre>
+1 teacher - n student
+teacherRepo.findAll(int limit, int page);
+
+Select * from teacher: 10 records
+Select * from teacher join student: 37 records
+
+Select * from teacher join student limit 5
+
+Expected: 5 records of teachers
+But was: 2 teacher, teacher1 with 3 student + teacher2 with 2 student
+</pre>
+
+### Common Projection
+
 ## Project Structure
 
 | Layer      | Description                                                                                                                                                                                                                                                                                              |
@@ -314,8 +340,6 @@ About `@Schema` see [API Tester section](#api-tester).
 ### Response Wrapper
 
 ### Exception Handler
-
-### Common Projection
 
 ### Abstract Class
 

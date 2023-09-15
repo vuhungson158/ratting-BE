@@ -11,10 +11,10 @@ public abstract class Transferor {
      * @see TeacherEntity#subjects
      */
     public static void subjects(@NotNull TeacherEntity teacherEntity) {
-        teacherEntity.subjects = teacherEntity.joinSubjects
-                .stream()
-                .peek(subjectEntity -> subjectEntity.teacher = null)
-                .toList();
+        teacherEntity.subjects = teacherEntity.joinSubjects;
+//                .stream()
+//                .peek(subjectEntity -> subjectEntity.teacher = null)
+//                .toList();
     }
 
     /**

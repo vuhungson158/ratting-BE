@@ -1,6 +1,5 @@
 package kiis.ratingBE.features.teacher.base;
 
-import kiis.ratingBE.common.Transferor;
 import kiis.ratingBE.common.join.JoinField;
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +12,7 @@ public enum TeacherJoinField
     /**
      * @see TeacherEntity#joinSubjects
      */
-    SUBJECTS("joinSubjects", Transferor::subjects);
+    SUBJECTS("joinSubjects", teacherEntity -> teacherEntity.subjects = teacherEntity.joinSubjects);
 
     /**
      * Must be exactly property name
