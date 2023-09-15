@@ -38,4 +38,8 @@ public class AuthService {
                 .compact();
         return BEARER + token;
     }
+
+    public UserEntity resign(UserEntity userEntity) {
+        return userRepository.save(userEntity);
+    }
 }

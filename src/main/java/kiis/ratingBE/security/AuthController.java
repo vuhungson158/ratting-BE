@@ -22,4 +22,9 @@ public class AuthController {
     public String login(@RequestBody @NotNull UserEntity.LoginForm loginRequest) {
         return authService.login(loginRequest);
     }
+
+    @PostMapping("/resign")
+    public UserEntity resign(@RequestBody @NotNull UserEntity userEntity) {
+        return authService.resign(userEntity);
+    }
 }
