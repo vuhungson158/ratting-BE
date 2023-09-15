@@ -8,13 +8,19 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.features.comment.base.CommentEntity;
 import kiis.ratingBE.features.user.UserEntity;
 
 @Entity
-@Table(name = "react")
+@Table(
+        name = "react",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"comment_id", "user_id"})
+        }
+)
 public class ReactEntity extends BaseEntity {
 
     /**

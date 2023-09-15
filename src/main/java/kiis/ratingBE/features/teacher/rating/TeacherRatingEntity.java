@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +16,12 @@ import kiis.ratingBE.features.teacher.base.TeacherEntity;
 import kiis.ratingBE.features.user.UserEntity;
 
 @Entity
-@Table(name = "teacher-rating")
+@Table(
+        name = "teacher-rating",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"teacher_id", "user_id"})
+        }
+)
 public class TeacherRatingEntity extends BaseEntity {
 
     @Min(value = 0, message = "Min = 0")

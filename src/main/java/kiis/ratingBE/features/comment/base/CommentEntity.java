@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.common.BaseEntity;
@@ -17,7 +18,13 @@ import kiis.ratingBE.features.teacher.base.TeacherEntity;
 import kiis.ratingBE.features.user.UserEntity;
 
 @Entity
-@Table(name = "comment")
+@Table(
+        name = "comment",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"subject_id", "user_id"}),
+                @UniqueConstraint(columnNames = {"teacher_id", "user_id"})
+        }
+)
 public class CommentEntity extends BaseEntity {
 
     @NotBlank
