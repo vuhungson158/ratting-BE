@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.teacher.base;
+package kiis.ratingBE.features.subject.base;
 
 import kiis.ratingBE.common.Transferor;
 import kiis.ratingBE.common.join.JoinField;
@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import java.util.function.Consumer;
 
 @RequiredArgsConstructor
-public enum TeacherJoinField
-        implements JoinField<TeacherEntity> {
+public enum SubjectJoinField
+        implements JoinField<SubjectEntity> {
 
     /**
-     * @see TeacherEntity#joinSubjects
+     * @see SubjectEntity#joinTeacher
      */
-    SUBJECTS("joinSubjects", Transferor::subjects);
+    TEACHER("joinTeacher", Transferor::teacher);
 
     /**
      * Must be exactly property name
@@ -26,7 +26,7 @@ public enum TeacherJoinField
     /**
      * Should create a transfer method, and use lambda
      */
-    private final Consumer<TeacherEntity> transferCallback;
+    private final Consumer<SubjectEntity> transferCallback;
 
     @Override
     public String fieldName() {
@@ -34,7 +34,7 @@ public enum TeacherJoinField
     }
 
     @Override
-    public Consumer<TeacherEntity> transferCallback() {
+    public Consumer<SubjectEntity> transferCallback() {
         return transferCallback;
     }
 }

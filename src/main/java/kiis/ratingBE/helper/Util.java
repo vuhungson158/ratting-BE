@@ -1,18 +1,12 @@
 package kiis.ratingBE.helper;
 
-import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
-import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
-public class Util {
+public abstract class Util {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static <T> @Nullable T mapping(Object object, Class<T> type) {

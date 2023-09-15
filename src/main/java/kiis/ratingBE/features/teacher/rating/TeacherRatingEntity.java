@@ -1,5 +1,6 @@
 package kiis.ratingBE.features.teacher.rating;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -7,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -44,22 +46,20 @@ public class TeacherRatingEntity extends BaseEntity {
     @Max(value = 10, message = "Max = 10")
     public int star;
 
-    /**
-     * @see TeacherRatingEntity#teacher
-     */
     @NotNull
     @Column(name = "teacher_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Long teacherId;
 
-    /**
-     * @see TeacherRatingEntity#teacherId
-     */
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
+    @JsonIgnore
+
+    @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = TeacherEntity.class)
     public TeacherEntity teacher;
+
 
     /**
      * @see TeacherRatingEntity#user

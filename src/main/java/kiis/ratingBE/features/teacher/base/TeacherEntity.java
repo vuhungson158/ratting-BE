@@ -41,22 +41,17 @@ public class TeacherEntity extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     public Date dob;
 
-    @OneToMany(mappedBy = "teacher")
+    /**
+     * @see TeacherEntity#subjects
+     */
+    @OneToMany(mappedBy = "joinTeacher")
     @JsonIgnore
-    private List<SubjectEntity> subjectList = new ArrayList<>();
+    public List<SubjectEntity> joinSubjects = new ArrayList<>();
 
+    /**
+     * @see TeacherEntity#joinSubjects
+     */
     @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public List<SubjectEntity> subjects = new ArrayList<>();
-
-    /**
-     * @see TeacherEntity#subjectList
-     * @see TeacherEntity#subjects
-     */
-    public void transferSubjects() {
-        subjects = subjectList
-                .stream()
-                .peek(subjectEntity -> subjectEntity.teacher = null)
-                .toList();
-    }
 }

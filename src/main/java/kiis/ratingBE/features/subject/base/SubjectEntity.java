@@ -1,5 +1,6 @@
 package kiis.ratingBE.features.subject.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -63,8 +65,15 @@ public class SubjectEntity extends BaseEntity {
     /**
      * @see SubjectEntity#teacherId
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
+    @JsonIgnore
+    public TeacherEntity joinTeacher;
+
+    /**
+     * @see SubjectEntity#joinTeacher
+     */
+    @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = TeacherEntity.class)
     public TeacherEntity teacher;
