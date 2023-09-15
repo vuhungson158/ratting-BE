@@ -19,29 +19,29 @@
     - [By Docker compose](#By-Docker-compose)
     - [Manually](#Manually)
 2. **Guideline**
-    1. [API Tester](#API-Tester)
-    2. [Authorize](#Authorize)
-        - [JWT](#JWT)
-        - [AOP](#AOP)
+    1. [API Tester](src/guideline/API_Tester.md)
+    2. [Authorize](src/guideline/Authorize.md)
+        - JWT
+        - AOP
     3. [Access Modifier](src/guideline/AccessModifier.md)
         - Anti Getter Setter
         - Protected
-    4. [Anti DTO](#Anti-DTO)
-    5. [Commonize](#Commonize)
-        - [Usage](#Usage)
-    6. [JPA Relationship](#JPA-Relationship)
-        - [Join & Limit](#Join-and-Limit)
-        - [Common Projection](#Common-Projection)
-    7. [Project Structure](#Project-Structure)
-        - [Repository](#Repository)
-        - [Service](#Service)
-        - [Controller](#Controller)
-    8. [Other](#Other)
-        - [Final](#Final)
-        - [Validate](#Validate)
-        - [Response Wrapper](#Response-Wrapper)
-        - [Exception Handler](#Exception-Handler)
-        - [Abstract Class](#Abstract-Class)
+    4. [Anti DTO](src/guideline/Anti_DTO.md)
+    5. [Commonize](src/guideline/Commonize.md)
+        - Usage
+    6. [JPA Relationship](src/guideline/JPA_Relationship.md)
+        - Join & Limit
+        - Common Projection
+    7. [Project Structure](src/guideline/ProjectStructure.md)
+        - Repository
+        - Service
+        - Controller
+    8. [Other](src/guideline/Other.md)
+        - Final
+        - Validate
+        - Response Wrapper
+        - Exception Handler
+        - Abstract Class
 3. [Built With](#Built-With)
     - [spring-data-jpa-entity-graph](#spring-data-jpa-entity-graph)
     - [Swagger](#Swagger)
@@ -55,230 +55,13 @@
 
 ### Manually
 
----
-
----
-> From here, I will write about the difference thing of my project
-
-## API Tester
-
-## Authorize
-
-### JWT
-
-### AOP
-
-## Anti DTO
-
-> DRY: don't repeat yourself
-
-Let's see below codes
-
-```java
-public class SubjectEntity {
-    public Integer id;
-    public String name;
-    public TeacherDto teacher;
-    public List<Student> students;
-    // Some other fields
-}
-
-public class SubjectDto {
-    public Integer id;
-    public String name;
-    public Integer teacherId;
-    public String teacherName;
-    public Integer totalStudent;
-    // Some other fields
-}
-
-public class SubjectRequest {
-    public String name;
-    public Integer teacherId;
-    // Some other fields
-}
-```
-
-To remove duplication, I only use one class. See my below code.
-
-```java
-public class SubjectEntity {
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    public Integer id;
-    public String name;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Integer teacherId;
-    @JsonIgnore
-    public TeacherDto teacher;
-    @JsonIgnore
-    public List<Student> students;
-
-    @Transient
-    public String getTeacherName() {
-        return teacher.name;
-    }
-
-    @Transient
-    public Integer getTotalStudent() {
-        return students.size();
-    }
-}
-```
-
-I only use `Entity`. And I control which properties are shown on the outbound and return routes.
-
-- `@JsonProperty(access = JsonProperty.Access.READ_ONLY)`, **READ_ONLY**: only shown inside `@ResponseBody`
-- `@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)`, **WRITE_ONLY**: only shown inside `@RequestBody`
-- `@JsonIgnore`, **WRITE_ONLY**: hide on both sides
-- `@Transient`: not interact with DB[^DB]
-
-## Commonize
-
-> DRY: don't repeat yourself
-
-After code for 3 months, I realize that almost every table has 6 same end points
-
-1. `findAll(Pageable)`: get a list of record with pagination
-2. `findAll(Pageable, Example)`: get a list of record with pagination and filter
-3. `findById(Long)`: get a specific record by record ID
-4. `save(Long)`: insert a new record
-5. `update(Long)`: update a record
-6. `delete(Long)`: soft delete a record (set field `id_delete` = true)
-
-So I create three abstract classes to group these end point processes flow.
-You can find these classes in [this package][common-package-url].
-
-- T must be a `Entity`
-- `SimpleCurdController<T>`
-- `SimpleCurdService<T>`
-- `SimpleCurdRepository<T>`
-
-Why **_abstract_** ???
-Because you cannot use (create instance) an abstract class directly.
-You must create a class, example: `TeacherController` extend `SimpleCurdController<TeacherEntity>`
-to get these common endpoints.
-
-#### Usage
-
-And of course, you always can write new method (C-S-R flow), with full control. [Reference][teacher-base-package-url].
-
-Create three extend classes to generate 6 end points as default:
-
-- `TeacherController` extends `SimpleCurdController<TeacherEntity>`
-- `TeacherService` extends `SimpleCurdService<TeacherEntity>`
-- `TeacherRepository` extends `SimpleCurdRepository<TeacherEntity>`
-
-And `@Override` method if you need to add more logic, or create new end point.
-But remember to follow the [Project Structure](#Project-Structure)
-
-## JPA Relationship
-
-> N + 1 Query problem
-
-My colleagues usually avoid using `@OneToMany`, `@ManyToOne` because of  `n+1 query problem`
-
-I solve that problem by changed code style:
-
-```java
-public class TeacherEntity extends BaseEntity {
-
-    @OneToMany(mappedBy = "teacher")
-    @JsonIgnore
-    private List<SubjectEntity> subjectList = new ArrayList<>();
-
-    @Transient
-    public List<SubjectEntity> subjects = new ArrayList<>();
-
-    public void transferSubjects() {
-        subjects = subjectList
-                .stream()
-                .peek(subjectEntity -> subjectEntity.teacher = null)
-                .toList();
-    }
-}
-```
-
-I separate to two properties to avoid `@OneToMany` auto execute query get associations (**n+1 query**).
-If you need to get entity with associations, use `@EntityGraph` to attach `join` statement automatically.
-And I use [spring-data-jpa-entity-graph](#spring-data-jpa-entity-graph) to create dynamic EntityGraph.
-
-Remember, use `transferSubjects()` else `subjects` always empty.
-
-```java
-public class SubjectEntity extends BaseEntity {
-
-    @Column(name = "teacher_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Long teacherId;
-
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Schema(allOf = TeacherEntity.class)
-    public TeacherEntity teacher;
-}
-```
-
-But you don't have to always separate association properties.
-Like the above example, I want `teacher` association always be attached when fetching `SubjectEntity` (**FetchType.EAGER
-**).
-
-But when use `@ManyToOne`, you have to separate like the above code.
-It saves you the work of set A into B every time you insert or update.
-
-If you want to fetch not **EAGER** but **LAZY**, then separate properties to 3.
-
-About `@JsonProperty` see [Anti DTO section](#anti-dto).
-About `@Schema` see [API Tester section](#api-tester).
-
-### Join and Limit
-
-> Just because you can, doesn't mean you should
-
-I **_strongly recommend_** not using findAll(Pageable, EntityGraph)
-
-Because it will select all from table and limiting by java code
-
-Example: 
-
-<pre>
-1 teacher - n student
-teacherRepo.findAll(int limit, int page);
-
-Select * from teacher: 10 records
-Select * from teacher join student: 37 records
-
-Select * from teacher join student limit 5
-
-Expected: 5 records of teachers
-But was: 2 teacher, teacher1 with 3 student + teacher2 with 2 student
-</pre>
-
-### Common Projection
-
-## Project Structure
-
-| Layer      | Description                                                                                                                                                                                                                                                                                              |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Controller | Use Mapping Annotation to create end point: `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`<br/>Use `@AllowMethod` and `@AllowFeature` to authorize<br/>Never write logic code here, create a method on service layer to do that, which have same name, same return type, same parameters |
-| Service    | Use to write business logic code, method name, return type, parameters must same with Controller's method                                                                                                                                                                                                |
-| Repository | Use to create `@Query` to get data from DB[^DB]. Best Practice: **1 query per endpoint**                                                                                                                                                                                                                 |
-
-## Other
-
-### Final
-
-### Validate
-
-### Response Wrapper
-
-### Exception Handler
-
-### Abstract Class
-
 ## Built With
 
 ### spring-data-jpa-entity-graph
+
+### Swagger
+
+### JWT
 
 ## Roadmap
 
