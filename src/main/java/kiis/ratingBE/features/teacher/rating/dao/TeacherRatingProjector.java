@@ -1,8 +1,9 @@
-package kiis.ratingBE.features.teacher.rating;
+package kiis.ratingBE.features.teacher.rating.dao;
 
 import kiis.ratingBE.common.BaseProjector;
 import kiis.ratingBE.common.Projector;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
+import kiis.ratingBE.features.teacher.rating.TeacherRatingEntity;
 
 /**
  * <pre>
@@ -18,10 +19,11 @@ import kiis.ratingBE.features.subject.base.SubjectEntity;
  * @see Projector
  */
 @SuppressWarnings("unused")
-public interface TeacherRatingProjector extends BaseProjector {
+public interface TeacherRatingProjector
+        extends BaseProjector, AverageProjector {
 
     /**
-     * @see SubjectEntity#teacherId
+     * @see TeacherRatingEntity#enthusiasm
      */
-    Long getTeacherId();
+    Integer getEnthusiasm();
 }

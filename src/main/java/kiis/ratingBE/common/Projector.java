@@ -5,7 +5,7 @@ import kiis.ratingBE.features.comment.react.ReactProjector;
 import kiis.ratingBE.features.subject.base.SubjectProjector;
 import kiis.ratingBE.features.subject.rating.SubjectRatingProjector;
 import kiis.ratingBE.features.teacher.base.TeacherProjector;
-import kiis.ratingBE.features.teacher.rating.TeacherRatingProjector;
+import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingProjector;
 import kiis.ratingBE.helper.Util;
 
 /**

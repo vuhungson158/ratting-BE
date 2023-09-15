@@ -18,7 +18,7 @@ import kiis.ratingBE.features.user.UserEntity;
 
 @Entity
 @Table(
-        name = "subject-rating",
+        name = "subject_rating",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"subject_id", "user_id"})
         }

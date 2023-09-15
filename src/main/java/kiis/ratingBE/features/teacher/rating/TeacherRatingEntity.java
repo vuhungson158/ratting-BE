@@ -19,7 +19,7 @@ import kiis.ratingBE.features.user.UserEntity;
 
 @Entity
 @Table(
-        name = "teacher-rating",
+        name = "teacher_rating",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"teacher_id", "user_id"})
         }
@@ -28,23 +28,23 @@ public class TeacherRatingEntity extends BaseEntity {
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
-    public int enthusiasm;
+    public Integer enthusiasm;
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
-    public int friendly;
+    public Integer friendly;
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
-    public int erudition;
+    public Integer erudition;
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
-    public int pedagogical;
+    public Integer pedagogical;
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 10, message = "Max = 10")
-    public int star;
+    public Integer star;
 
     @NotNull
     @Column(name = "teacher_id")

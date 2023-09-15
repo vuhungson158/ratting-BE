@@ -1,6 +1,7 @@
 package kiis.ratingBE.features.teacher.rating;
 
 import kiis.ratingBE.common.crud.CrudController;
+import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingAverage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,13 +26,13 @@ public class TeacherRatingController
 
     @Override
     @GetMapping("/teacherId/{teacherId}")
-    public List<TeacherRatingEntity> findAverageByTeacherId(@PathVariable("teacherId") long teacherId) {
+    public TeacherRatingAverage findAverageByTeacherId(@PathVariable("teacherId") long teacherId) {
         return teacherRatingService.findAverageByTeacherId(teacherId);
     }
 
     @Override
     @GetMapping("/userId/{userId}")
-    public List<TeacherRatingEntity> findAverageByUserId(@PathVariable("userId") long userId) {
+    public TeacherRatingAverage findAverageByUserId(@PathVariable("userId") long userId) {
         return teacherRatingService.findAverageByUserId(userId);
     }
 

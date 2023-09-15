@@ -1,11 +1,11 @@
 package kiis.ratingBE.features.teacher.rating;
 
-import java.util.List;
+import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingAverage;
 
 public interface TeacherRatingEndpoint {
-    List<TeacherRatingEntity> findAverageByTeacherId(long teacherId);
+    TeacherRatingAverage findAverageByTeacherId(long teacherId);
 
-    List<TeacherRatingEntity> findAverageByUserId(long userId);
+    TeacherRatingAverage findAverageByUserId(long userId);
 
     TeacherRatingEntity findByTeacherIdAndUserId(long teacherId, long userId);
 }
