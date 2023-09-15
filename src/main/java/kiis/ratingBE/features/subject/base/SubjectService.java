@@ -15,9 +15,4 @@ public class SubjectService
                           TeacherRepository teacherRepository) {
         super(subjectRepository);
     }
-
-    @Override
-    protected SubjectEntity findSavedEntityJoin(long id) {
-        return null;
-    }
 }

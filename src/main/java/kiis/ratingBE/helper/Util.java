@@ -25,22 +25,4 @@ public class Util {
             return null;
         }
     }
-
-    /**
-     * @param field must be Entity's OneToMany or ManyToOne field
-     * @return DynamicEntityGraph
-     */
-    @Contract("_ -> new")
-    public static @NotNull EntityGraph join(String field) {
-        return join(new String[]{field});
-    }
-
-    /**
-     * @param fields must be Entity's OneToMany or ManyToOne fields
-     * @return DynamicEntityGraph
-     */
-    @Contract("_ -> new")
-    public static @NotNull EntityGraph join(String... fields) {
-        return DynamicEntityGraph.loading(List.of(fields));
-    }
 }

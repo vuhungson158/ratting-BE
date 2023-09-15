@@ -1,11 +1,6 @@
 package kiis.ratingBE.features.teacher.base;
 
-import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
-import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.common.join.JoinService;
-import kiis.ratingBE.exception.RecordNotFoundException;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +22,5 @@ public class TeacherService
     @Override
     public List<TeacherEntity> findAll() {
         return teacherRepository.findAll();
-    }
-
-    @Contract(" -> new")
-    private @NotNull EntityGraph joinSubjects() {
-        return DynamicEntityGraph.loading(List.of("subjectList"));
     }
 }

@@ -2,6 +2,7 @@ package kiis.ratingBE.common.join;
 
 import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
+import jakarta.persistence.ManyToOne;
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.common.CommonRepository;
 import kiis.ratingBE.common.crud.CrudService;
@@ -56,11 +57,41 @@ public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
         return results;
     }
 
+    @Override
+    public T create(T entity) {
+        final T result = super.create(entity);
+        final J[] joins = returnOfSaveJoins();
+        if (Objects.isNull(joins)) return result;
+        return findByIdJoin(result.id, joins);
+    }
 
+    @Override
+    public T update(T entity, long id) {
+        final T result = super.update(entity, id);
+        final J[] joins = returnOfSaveJoins();
+        if (Objects.isNull(joins)) return result;
+        return findByIdJoin(id, joins);
+    }
+
+    /**
+     * {@link Override} me to join {@link ManyToOne} fields for return of {@link JoinService#create(BaseEntity)}, {@link JoinService#update(BaseEntity, long)}
+     */
+    protected J[] returnOfSaveJoins() {
+        return null;
+    }
+
+    /**
+     * @param result     return of find one method
+     * @param joinFields fields use to join
+     */
     private void transferFields(T result, J[] joinFields) {
         transferFields(new PageImpl<>(List.of(result)), joinFields);
     }
 
+    /**
+     * @param results    return of find all methods
+     * @param joinFields fields use to join
+     */
     private void transferFields(@NotNull Page<T> results, J[] joinFields) {
         if (Objects.nonNull(joinFields)) {
             for (final J joinField : joinFields) {
