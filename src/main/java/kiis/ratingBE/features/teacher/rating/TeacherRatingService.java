@@ -2,8 +2,10 @@ package kiis.ratingBE.features.teacher.rating;
 
 import kiis.ratingBE.common.Projector;
 import kiis.ratingBE.common.crud.CrudService;
+import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingAverage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,11 +29,18 @@ public class TeacherRatingService
 
     @Override
     public TeacherRatingAverage findAverageByUserId(long userId) {
-        return null;
+        final Projector queryResult = teacherRatingRepository.findAverageByUserId(userId);
+        return queryResult.to(TeacherRatingAverage.class);
     }
 
     @Override
     public TeacherRatingEntity findByTeacherIdAndUserId(long teacherId, long userId) {
-        return null;
+        final TeacherRatingEntity exampleEntity = new TeacherRatingEntity();
+        exampleEntity.teacherId = teacherId;
+        exampleEntity.userId = userId;
+        final Example<TeacherRatingEntity> example = Example.of(exampleEntity);
+        return teacherRatingRepository
+                .findOne(example)
+                .orElseThrow(() -> new RecordNotFoundException("Teacher Rating"));
     }
 }

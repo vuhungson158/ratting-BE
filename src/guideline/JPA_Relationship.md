@@ -81,4 +81,7 @@ Expected: 5 records of teachers
 But was: 2 teacher, teacher1 with 3 student + teacher2 with 2 student
 </pre>
 
+But if you really want to join @OneToMany fields with pagination.
+You have to write a @Query, use Select sub-query
+
 ## Common Projection
