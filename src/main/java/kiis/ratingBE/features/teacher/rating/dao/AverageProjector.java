@@ -2,10 +2,6 @@ package kiis.ratingBE.features.teacher.rating.dao;
 
 @SuppressWarnings("unused")
 public interface AverageProjector {
-    /**
-     * @see TeacherRatingAverage#teacherId
-     */
-    Long getTeacherId();
 
     /**
      * @see TeacherRatingAverage#totalRecord

@@ -10,8 +10,7 @@ public interface TeacherRatingRepository
         extends CommonRepository<TeacherRatingEntity> {
 
     @Query(nativeQuery = true, value = """
-            SELECT teacher_id       as teacherId,
-                   COUNT(*)         as totalRecord,
+            SELECT COUNT(*)         as totalRecord,
                    AVG(enthusiasm)  as enthusiasmAverage,
                    AVG(erudition)   as eruditionAverage,
                    AVG(friendly)    as friendlyAverage,
@@ -24,8 +23,7 @@ public interface TeacherRatingRepository
     Projector findAverageByTeacherId(long teacherId);
 
     @Query(nativeQuery = true, value = """
-            SELECT user_id          as userId,
-                   COUNT(*)         as totalRecord,
+            SELECT COUNT(*)         as totalRecord,
                    AVG(enthusiasm)  as enthusiasmAverage,
                    AVG(erudition)   as eruditionAverage,
                    AVG(friendly)    as friendlyAverage,

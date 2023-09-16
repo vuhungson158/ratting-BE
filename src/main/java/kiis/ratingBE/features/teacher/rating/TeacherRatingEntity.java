@@ -46,6 +46,7 @@ public class TeacherRatingEntity extends BaseEntity {
     @Max(value = 10, message = "Max = 10")
     public Integer star;
 
+    // teacher----------------------------------------------------------------------------------------------------------
     @NotNull
     @Column(name = "teacher_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -54,27 +55,29 @@ public class TeacherRatingEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
     @JsonIgnore
+    public TeacherEntity joinTeacher;
 
     @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = TeacherEntity.class)
     public TeacherEntity teacher;
+    // teacher----------------------------------------------------------------------------------------------------------
 
-
-    /**
-     * @see TeacherRatingEntity#user
-     */
+    // user----------------------------------------------------------------------------------------------------------
     @NotNull
     @Column(name = "user_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Long userId;
 
-    /**
-     * @see TeacherRatingEntity#userId
-     */
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+    @JsonIgnore
+    public UserEntity joinUser;
+
+    @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = UserEntity.class)
     public UserEntity user;
+    // user----------------------------------------------------------------------------------------------------------
+
 }
