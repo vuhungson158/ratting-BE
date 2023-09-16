@@ -1,11 +1,11 @@
 package kiis.ratingBE.features.subject.rating;
 
-import java.util.List;
+import kiis.ratingBE.features.subject.rating.dao.SubjectRatingAverage;
 
 public interface SubjectRatingEndpoint {
-    List<SubjectRatingEntity> findAverageBySubjectId(long subjectId);
+    SubjectRatingAverage findAverageBySubjectId(long subjectId);
 
-    List<SubjectRatingEntity> findAverageByUserId(long userId);
+    SubjectRatingAverage findAverageByUserId(long userId);
 
     SubjectRatingEntity findBySubjectIdAndUserId(long subjectId, long userId);
 }

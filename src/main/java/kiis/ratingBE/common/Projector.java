@@ -3,7 +3,7 @@ package kiis.ratingBE.common;
 import kiis.ratingBE.features.comment.base.CommentProjector;
 import kiis.ratingBE.features.comment.react.ReactProjector;
 import kiis.ratingBE.features.subject.base.SubjectProjector;
-import kiis.ratingBE.features.subject.rating.SubjectRatingProjector;
+import kiis.ratingBE.features.subject.rating.dao.SubjectRatingProjector;
 import kiis.ratingBE.features.teacher.base.TeacherProjector;
 import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingProjector;
 import kiis.ratingBE.helper.Util;

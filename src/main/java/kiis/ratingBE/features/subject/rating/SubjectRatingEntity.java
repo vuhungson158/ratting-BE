@@ -27,15 +27,15 @@ public class SubjectRatingEntity extends BaseEntity {
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
-    public int practicality;
+    public Integer practicality;
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
-    public int easyToUnderstand;
+    public Integer easyToUnderstand;
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 10, message = "Max = 10")
-    public int star;
+    public Integer star;
 
     /**
      * @see SubjectRatingEntity#subject

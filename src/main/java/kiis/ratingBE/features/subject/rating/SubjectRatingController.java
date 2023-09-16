@@ -1,11 +1,12 @@
 package kiis.ratingBE.features.subject.rating;
 
 import kiis.ratingBE.common.crud.CrudController;
+import kiis.ratingBE.features.subject.rating.dao.SubjectRatingAverage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RequestMapping(path = "/subject-rating")
 @RestController
@@ -22,16 +23,19 @@ public class SubjectRatingController
     }
 
     @Override
-    public List<SubjectRatingEntity> findAverageBySubjectId(long subjectId) {
+    @GetMapping("/subjectId/{subjectId}")
+    public SubjectRatingAverage findAverageBySubjectId(@PathVariable long subjectId) {
         return subjectRatingService.findAverageBySubjectId(subjectId);
     }
 
     @Override
-    public List<SubjectRatingEntity> findAverageByUserId(long userId) {
+    @GetMapping("/userId/{userId}")
+    public SubjectRatingAverage findAverageByUserId(@PathVariable long userId) {
         return subjectRatingService.findAverageByUserId(userId);
     }
 
     @Override
+    @GetMapping("/findOne")
     public SubjectRatingEntity findBySubjectIdAndUserId(long subjectId, long userId) {
         return subjectRatingService.findBySubjectIdAndUserId(subjectId, userId);
     }
