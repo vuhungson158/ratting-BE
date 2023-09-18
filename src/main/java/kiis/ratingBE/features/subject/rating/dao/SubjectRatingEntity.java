@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.subject.rating;
+package kiis.ratingBE.features.subject.rating.dao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

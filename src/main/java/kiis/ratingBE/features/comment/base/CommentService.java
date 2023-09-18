@@ -1,6 +1,5 @@
 package kiis.ratingBE.features.comment.base;
 
-import kiis.ratingBE.common.Projector;
 import kiis.ratingBE.common.crud.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +24,7 @@ public class CommentService
 
     @Override
     public Page<CommentEntity> findAll(int page, int limit) {
-        final List<Projector> queryResult = commentRepository.findAll(page, limit);
+        final List<CommentProjector> queryResult = commentRepository.findAll(page, limit);
         final PageRequest pageRequest = PageRequest.of(page, limit);
         final long total = commentRepository.count();
         final List<CommentEntity> commentEntities = queryResult

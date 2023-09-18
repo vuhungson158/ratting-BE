@@ -1,7 +1,6 @@
 package kiis.ratingBE.features.comment.base;
 
 import kiis.ratingBE.common.BaseProjector;
-import kiis.ratingBE.common.Projector;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
 
 /**

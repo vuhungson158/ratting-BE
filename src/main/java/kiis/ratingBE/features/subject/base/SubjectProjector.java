@@ -1,7 +1,6 @@
 package kiis.ratingBE.features.subject.base;
 
 import kiis.ratingBE.common.BaseProjector;
-import kiis.ratingBE.common.Projector;
 
 /**
  * <pre>

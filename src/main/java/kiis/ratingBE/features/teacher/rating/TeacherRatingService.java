@@ -1,9 +1,9 @@
 package kiis.ratingBE.features.teacher.rating;
 
-import kiis.ratingBE.common.Projector;
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingAverage;
+import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -23,14 +23,12 @@ public class TeacherRatingService
 
     @Override
     public TeacherRatingAverage findAverageByTeacherId(long teacherId) {
-        final Projector queryResult = teacherRatingRepository.findAverageByTeacherId(teacherId);
-        return queryResult.to(TeacherRatingAverage.class);
+        return teacherRatingRepository.findAverageByTeacherId(teacherId).to(TeacherRatingAverage.class);
     }
 
     @Override
     public TeacherRatingAverage findAverageByUserId(long userId) {
-        final Projector queryResult = teacherRatingRepository.findAverageByUserId(userId);
-        return queryResult.to(TeacherRatingAverage.class);
+        return teacherRatingRepository.findAverageByUserId(userId).to(TeacherRatingAverage.class);
     }
 
     @Override

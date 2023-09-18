@@ -1,7 +1,8 @@
 package kiis.ratingBE.features.teacher.rating;
 
 import kiis.ratingBE.common.CommonRepository;
-import kiis.ratingBE.common.Projector;
+import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingAverageProjector;
+import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ public interface TeacherRatingRepository
             WHERE teacher_id = :teacherId
             GROUP BY teacher_id
             """)
-    Projector findAverageByTeacherId(long teacherId);
+    TeacherRatingAverageProjector findAverageByTeacherId(long teacherId);
 
     @Query(nativeQuery = true, value = """
             SELECT COUNT(*)         as totalRecord,
@@ -33,5 +34,5 @@ public interface TeacherRatingRepository
             WHERE user_id = :userId
             GROUP BY user_id
             """)
-    Projector findAverageByUserId(long userId);
+    TeacherRatingAverageProjector findAverageByUserId(long userId);
 }

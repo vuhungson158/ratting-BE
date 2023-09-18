@@ -1,7 +1,10 @@
 package kiis.ratingBE.features.teacher.rating.dao;
 
+import kiis.ratingBE.common.BaseProjector;
+
 @SuppressWarnings("unused")
-public interface AverageProjector {
+public interface TeacherRatingAverageProjector
+        extends BaseProjector {
 
     /**
      * @see TeacherRatingAverage#totalRecord

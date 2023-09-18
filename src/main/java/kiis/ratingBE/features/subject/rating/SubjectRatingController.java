@@ -2,6 +2,7 @@ package kiis.ratingBE.features.subject.rating;
 
 import kiis.ratingBE.common.crud.CrudController;
 import kiis.ratingBE.features.subject.rating.dao.SubjectRatingAverage;
+import kiis.ratingBE.features.subject.rating.dao.SubjectRatingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

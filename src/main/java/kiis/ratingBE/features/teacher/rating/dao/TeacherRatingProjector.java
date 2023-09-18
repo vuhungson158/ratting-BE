@@ -1,9 +1,7 @@
 package kiis.ratingBE.features.teacher.rating.dao;
 
 import kiis.ratingBE.common.BaseProjector;
-import kiis.ratingBE.common.Projector;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
-import kiis.ratingBE.features.teacher.rating.TeacherRatingEntity;
 
 /**
  * <pre>
@@ -20,7 +18,7 @@ import kiis.ratingBE.features.teacher.rating.TeacherRatingEntity;
  */
 @SuppressWarnings("unused")
 public interface TeacherRatingProjector
-        extends BaseProjector, AverageProjector {
+        extends BaseProjector, TeacherRatingAverageProjector {
 
     /**
      * @see TeacherRatingEntity#enthusiasm

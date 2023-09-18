@@ -1,7 +1,10 @@
 package kiis.ratingBE.features.subject.rating.dao;
 
+import kiis.ratingBE.common.BaseProjector;
+
 @SuppressWarnings("unused")
-public interface AverageProjector {
+public interface SubjectRatingAverageProjector
+        extends BaseProjector {
 
     /**
      * @see SubjectRatingAverage#totalRecord

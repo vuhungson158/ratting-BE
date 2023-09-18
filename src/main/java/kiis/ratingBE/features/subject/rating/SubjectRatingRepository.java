@@ -1,7 +1,8 @@
 package kiis.ratingBE.features.subject.rating;
 
 import kiis.ratingBE.common.CommonRepository;
-import kiis.ratingBE.common.Projector;
+import kiis.ratingBE.features.subject.rating.dao.SubjectRatingAverageProjector;
+import kiis.ratingBE.features.subject.rating.dao.SubjectRatingEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,7 @@ public interface SubjectRatingRepository extends
             WHERE subject_id = :subjectId
             GROUP BY subject_id
             """)
-    Projector findAverageBySubjectId(long subjectId);
+    SubjectRatingAverageProjector findAverageBySubjectId(long subjectId);
 
     @Query(nativeQuery = true, value = """
             SELECT COUNT(*)                as totalRecord,
@@ -29,5 +30,5 @@ public interface SubjectRatingRepository extends
             WHERE user_id = :userId
             GROUP BY user_id
             """)
-    Projector findAverageByUserId(long userId);
+    SubjectRatingAverageProjector findAverageByUserId(long userId);
 }

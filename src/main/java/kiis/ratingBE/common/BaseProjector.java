@@ -1,5 +1,7 @@
 package kiis.ratingBE.common;
 
+import kiis.ratingBE.helper.Util;
+
 import java.time.Instant;
 
 @SuppressWarnings("unused")
@@ -39,4 +41,8 @@ public interface BaseProjector {
      * @see BaseEntity#version
      */
     Integer getVersion();
+
+    default <T> T to(Class<T> type) {
+        return Util.mapping(this, type);
+    }
 }
