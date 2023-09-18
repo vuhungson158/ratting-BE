@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.subject.rating.dao;
+package kiis.ratingBE.features.subject.rating.model;
 
 public class SubjectRatingAverage {
     public Long totalRecord;

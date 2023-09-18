@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.subject.rating.dao;
+package kiis.ratingBE.features.subject.rating.model;
 
 import kiis.ratingBE.common.BaseProjector;
 import kiis.ratingBE.features.subject.base.SubjectEntity;

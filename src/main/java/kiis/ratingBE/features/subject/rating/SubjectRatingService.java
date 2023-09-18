@@ -2,8 +2,8 @@ package kiis.ratingBE.features.subject.rating;
 
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.exception.RecordNotFoundException;
-import kiis.ratingBE.features.subject.rating.dao.SubjectRatingAverage;
-import kiis.ratingBE.features.subject.rating.dao.SubjectRatingEntity;
+import kiis.ratingBE.features.subject.rating.model.SubjectRatingAverage;
+import kiis.ratingBE.features.subject.rating.model.SubjectRatingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;

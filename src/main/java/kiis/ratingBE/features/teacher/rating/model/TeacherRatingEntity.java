@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.teacher.rating.dao;
+package kiis.ratingBE.features.teacher.rating.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

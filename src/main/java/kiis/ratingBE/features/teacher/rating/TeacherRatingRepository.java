@@ -1,8 +1,8 @@
 package kiis.ratingBE.features.teacher.rating;
 
 import kiis.ratingBE.common.CommonRepository;
-import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingAverageProjector;
-import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingEntity;
+import kiis.ratingBE.features.teacher.rating.model.TeacherRatingAverageProjector;
+import kiis.ratingBE.features.teacher.rating.model.TeacherRatingEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 

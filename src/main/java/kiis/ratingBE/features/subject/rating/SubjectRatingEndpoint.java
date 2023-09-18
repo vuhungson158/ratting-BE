@@ -1,7 +1,7 @@
 package kiis.ratingBE.features.subject.rating;
 
-import kiis.ratingBE.features.subject.rating.dao.SubjectRatingAverage;
-import kiis.ratingBE.features.subject.rating.dao.SubjectRatingEntity;
+import kiis.ratingBE.features.subject.rating.model.SubjectRatingAverage;
+import kiis.ratingBE.features.subject.rating.model.SubjectRatingEntity;
 
 public interface SubjectRatingEndpoint {
     SubjectRatingAverage findAverageBySubjectId(long subjectId);

@@ -2,8 +2,8 @@ package kiis.ratingBE.features.teacher.rating;
 
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.exception.RecordNotFoundException;
-import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingAverage;
-import kiis.ratingBE.features.teacher.rating.dao.TeacherRatingEntity;
+import kiis.ratingBE.features.teacher.rating.model.TeacherRatingAverage;
+import kiis.ratingBE.features.teacher.rating.model.TeacherRatingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;

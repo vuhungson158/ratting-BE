@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.teacher.rating.dao;
+package kiis.ratingBE.features.teacher.rating.model;
 
 public class TeacherRatingAverage {
     public Long totalRecord;

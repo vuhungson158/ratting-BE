@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.teacher.rating.dao;
+package kiis.ratingBE.features.teacher.rating.model;
 
 import kiis.ratingBE.common.BaseProjector;
 import kiis.ratingBE.features.subject.base.SubjectEntity;

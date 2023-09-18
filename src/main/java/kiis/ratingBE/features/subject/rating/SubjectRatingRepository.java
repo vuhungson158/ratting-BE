@@ -1,8 +1,8 @@
 package kiis.ratingBE.features.subject.rating;
 
 import kiis.ratingBE.common.CommonRepository;
-import kiis.ratingBE.features.subject.rating.dao.SubjectRatingAverageProjector;
-import kiis.ratingBE.features.subject.rating.dao.SubjectRatingEntity;
+import kiis.ratingBE.features.subject.rating.model.SubjectRatingAverageProjector;
+import kiis.ratingBE.features.subject.rating.model.SubjectRatingEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
