@@ -1,26 +1,39 @@
 package kiis.ratingBE.features.user;
 
 import kiis.ratingBE.common.BaseProjector;
-import kiis.ratingBE.features.subject.base.SubjectEntity;
+import kiis.ratingBE.enums.Gender;
+import kiis.ratingBE.enums.UserRole;
 
 /**
- * <pre>
- * mapping all fields of {@link SubjectEntity}
- * do not use this interface directly
- * make {@link Projector} extend this interface
- * and use {@link Projector} as return type of complicate Query (what need virtual column)
- * </pre>
- *
  * @author vuhungson
  * @see BaseProjector
- * @see SubjectEntity
- * @see Projector
  */
 @SuppressWarnings("unused")
 public interface UserProjector extends BaseProjector {
 
     /**
-     * @see SubjectEntity#teacherId
+     * @see UserEntity#email
      */
-    Long getTeacherId();
+    String getEmail();
+
+    /**
+     * @see UserEntity#password
+     */
+    String getPassword();
+
+    /**
+     * @see UserEntity#displayName
+     */
+    String getDisplayName();
+
+    /**
+     * @see UserEntity#gender
+     */
+    Gender getGender();
+
+    /**
+     * @see UserEntity#role
+     */
+    UserRole getRole();
+
 }

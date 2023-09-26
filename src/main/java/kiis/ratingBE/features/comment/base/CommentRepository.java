@@ -13,5 +13,20 @@ public interface CommentRepository
     @Query("""
             SELECT 1
             """)
-    List<CommentProjector> findAll(int page, int limit);
+    List<CommentProjector> findPageByTeacher(long id, int page, int limit);
+
+    @Query("""
+            SELECT 1
+            """)
+    long countByTeacher(long id);
+
+    @Query("""
+            SELECT 1
+            """)
+    List<CommentProjector> findPageBySubject(long id, int page, int limit);
+
+    @Query("""
+            SELECT 1
+            """)
+    long countBySubject(long id);
 }
