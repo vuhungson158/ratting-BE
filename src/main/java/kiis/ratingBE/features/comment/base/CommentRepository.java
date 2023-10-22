@@ -10,9 +10,9 @@ import java.util.List;
 public interface CommentRepository
         extends CommonRepository<CommentEntity> {
 
-    @Query("""
-            SELECT 1
-            """)
+    @Query(value = """
+            SELECT * FROM comment;
+            """, nativeQuery = true)
     List<CommentProjector> findPageByTeacher(long id, int page, int limit);
 
     @Query("""
