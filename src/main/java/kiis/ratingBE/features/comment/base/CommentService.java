@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.comment.base.service;
+package kiis.ratingBE.features.comment.base.factory;
 
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.exception.UnimplementedException;
@@ -21,10 +21,10 @@ public class CommentService
         extends CrudService<CommentEntity>
         implements CommentEndpoint {
     private final CommentRepository commentRepository;
-    private final List<CommentStrategy> commentStrategies;
+    private final List<CommentFactory> commentStrategies;
 
     @Autowired
-    public CommentService(CommentRepository commentRepository, List<CommentStrategy> commentStrategies) {
+    public CommentService(CommentRepository commentRepository, List<CommentFactory> commentStrategies) {
         super(commentRepository);
         this.commentRepository = commentRepository;
         this.commentStrategies = commentStrategies;
@@ -40,8 +40,8 @@ public class CommentService
         return true;
     }
 
-    public Page<CommentEntity> findPageBy(CommentServiceImplementation implementation, long id, int page, int limit) {
-        final CommentStrategy commentStrategy = getCommentStrategy(implementation);
+    public Page<CommentEntity> findPageBy(CommentFactoryImplementation implementation, long id, int page, int limit) {
+        final CommentFactory commentStrategy = getCommentStrategy(implementation);
         final List<CommentProjector> queryResult = commentStrategy.findList(id, page, limit);
         final long total = commentStrategy.count(id);
         return createPageImpl(page, limit, total, queryResult);
@@ -61,8 +61,8 @@ public class CommentService
      * @param implementation name of implementation of CommentService
      * @return CommentService's implementation
      */
-    private @NotNull CommentStrategy getCommentStrategy(@NotNull CommentServiceImplementation implementation) {
-        for (final CommentStrategy commentStrategy : commentStrategies) {
+    private @NotNull CommentFactory getCommentStrategy(@NotNull CommentFactoryImplementation implementation) {
+        for (final CommentFactory commentStrategy : commentStrategies) {
             final boolean caseMatching = commentStrategy.useCase(implementation);
             if (caseMatching) return commentStrategy;
         }

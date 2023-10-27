@@ -7,19 +7,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static kiis.ratingBE.features.comment.base.service.CommentServiceImplementation.TEACHER;
+import static kiis.ratingBE.features.comment.base.service.CommentFactoryImplementation.TEACHER;
 
 @Component
-public class TeacherCommentStrategy
-        implements CommentStrategy {
+public class TeacherComment
+        implements CommentFactory {
     private final CommentRepository commentRepository;
 
-    public TeacherCommentStrategy(CommentRepository commentRepository) {
+    public TeacherComment(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 
     @Override
-    public boolean useCase(@NotNull CommentServiceImplementation implementation) {
+    public boolean useCase(@NotNull CommentFactoryImplementation implementation) {
         return TEACHER.equals(implementation);
     }
 

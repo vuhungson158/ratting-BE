@@ -6,19 +6,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static kiis.ratingBE.features.comment.base.service.CommentServiceImplementation.SUBJECT;
+import static kiis.ratingBE.features.comment.base.service.CommentFactoryImplementation.SUBJECT;
 
 @Component
-public class SubjectCommentStrategy
-        implements CommentStrategy {
+public class SubjectComment
+        implements CommentFactory {
     private final CommentRepository commentRepository;
 
-    public SubjectCommentStrategy(CommentRepository commentRepository) {
+    public SubjectComment(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 
     @Override
-    public boolean useCase(CommentServiceImplementation implementation) {
+    public boolean useCase(CommentFactoryImplementation implementation) {
         return SUBJECT.equals(implementation);
     }
 
