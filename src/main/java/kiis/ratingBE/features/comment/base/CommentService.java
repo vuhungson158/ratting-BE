@@ -1,11 +1,9 @@
-package kiis.ratingBE.features.comment.base.service;
+package kiis.ratingBE.features.comment.base;
 
 import kiis.ratingBE.common.crud.CrudService;
-import kiis.ratingBE.exception.UnimplementedException;
-import kiis.ratingBE.features.comment.base.CommentEndpoint;
-import kiis.ratingBE.features.comment.base.CommentEntity;
-import kiis.ratingBE.features.comment.base.CommentProjector;
-import kiis.ratingBE.features.comment.base.CommentRepository;
+import kiis.ratingBE.features.comment.base.factory.CommentFactory;
+import kiis.ratingBE.features.comment.base.factory.CommentType;
+import kiis.ratingBE.features.comment.base.factory.CommentFactoryImplementation;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,13 +19,13 @@ public class CommentService
         extends CrudService<CommentEntity>
         implements CommentEndpoint {
     private final CommentRepository commentRepository;
-    private final List<CommentStrategy> commentStrategies;
+    private final CommentFactory commentFactory;
 
     @Autowired
-    public CommentService(CommentRepository commentRepository, List<CommentStrategy> commentStrategies) {
+    public CommentService(CommentRepository commentRepository, CommentFactory commentFactory) {
         super(commentRepository);
         this.commentRepository = commentRepository;
-        this.commentStrategies = commentStrategies;
+        this.commentFactory = commentFactory;
     }
 
     // TODO
@@ -40,10 +38,10 @@ public class CommentService
         return true;
     }
 
-    public Page<CommentEntity> findPageBy(CommentServiceImplementation implementation, long id, int page, int limit) {
-        final CommentStrategy commentStrategy = getCommentStrategy(implementation);
-        final List<CommentProjector> queryResult = commentStrategy.findList(id, page, limit);
-        final long total = commentStrategy.count(id);
+    public Page<CommentEntity> findPageBy(CommentFactoryImplementation implementation, long id, int page, int limit) {
+        final CommentType commentType = commentFactory.getCommentType(implementation);
+        final List<CommentProjector> queryResult = commentType.findList(id, page, limit);
+        final long total = commentType.count(id);
         return createPageImpl(page, limit, total, queryResult);
     }
 
@@ -57,15 +55,4 @@ public class CommentService
         return new PageImpl<>(commentEntities, pageRequest, total);
     }
 
-    /**
-     * @param implementation name of implementation of CommentService
-     * @return CommentService's implementation
-     */
-    private @NotNull CommentStrategy getCommentStrategy(@NotNull CommentServiceImplementation implementation) {
-        for (final CommentStrategy commentStrategy : commentStrategies) {
-            final boolean caseMatching = commentStrategy.useCase(implementation);
-            if (caseMatching) return commentStrategy;
-        }
-        throw new UnimplementedException();
-    }
 }

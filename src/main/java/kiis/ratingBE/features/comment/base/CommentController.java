@@ -1,8 +1,7 @@
 package kiis.ratingBE.features.comment.base;
 
 import kiis.ratingBE.common.crud.CrudController;
-import kiis.ratingBE.features.comment.base.service.CommentService;
-import kiis.ratingBE.features.comment.base.service.CommentServiceImplementation;
+import kiis.ratingBE.features.comment.base.factory.CommentFactoryImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,7 @@ public class CommentController
     }
 
     @GetMapping("/of")
-    public Page<CommentEntity> findPageBy(CommentServiceImplementation implementation, long id, int page, int limit) {
+    public Page<CommentEntity> findPageBy(CommentFactoryImplementation implementation, long id, int page, int limit) {
         return commentService.findPageBy(implementation, id, page, limit);
     }
 
