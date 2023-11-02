@@ -1,26 +1,28 @@
-package kiis.ratingBE.features.comment.base.factory;
+package kiis.ratingBE.features.comment.base.strategy;
 
 import kiis.ratingBE.features.comment.base.CommentProjector;
 import kiis.ratingBE.features.comment.base.CommentRepository;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static kiis.ratingBE.features.comment.base.factory.CommentFactoryImplementation.TEACHER;
+import static kiis.ratingBE.features.comment.base.strategy.CommentStategyEnum.TEACHER;
 
 @Component
-public class TeacherComment
-        implements CommentType {
+class TeacherCommentStrategy
+        implements CommentStrategy {
     private final CommentRepository commentRepository;
 
-    public TeacherComment(CommentRepository commentRepository) {
+    @Autowired
+    public TeacherCommentStrategy(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 
     @Override
-    public boolean useCase(@NotNull CommentFactoryImplementation implementation) {
-        return TEACHER.equals(implementation);
+    public boolean useCase(@NotNull CommentStategyEnum strategy) {
+        return TEACHER.equals(strategy);
     }
 
     @Override

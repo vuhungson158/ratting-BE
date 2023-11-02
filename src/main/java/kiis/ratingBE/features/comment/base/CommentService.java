@@ -1,9 +1,9 @@
 package kiis.ratingBE.features.comment.base;
 
 import kiis.ratingBE.common.crud.CrudService;
-import kiis.ratingBE.features.comment.base.factory.CommentFactory;
-import kiis.ratingBE.features.comment.base.factory.CommentType;
-import kiis.ratingBE.features.comment.base.factory.CommentFactoryImplementation;
+import kiis.ratingBE.features.comment.base.strategy.CommentStrategyFactory;
+import kiis.ratingBE.features.comment.base.strategy.CommentStrategy;
+import kiis.ratingBE.features.comment.base.strategy.CommentStategyEnum;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,13 +18,11 @@ import java.util.List;
 public class CommentService
         extends CrudService<CommentEntity>
         implements CommentEndpoint {
-    private final CommentRepository commentRepository;
-    private final CommentFactory commentFactory;
+    private final CommentStrategyFactory commentFactory;
 
     @Autowired
-    public CommentService(CommentRepository commentRepository, CommentFactory commentFactory) {
+    public CommentService(CommentRepository commentRepository, CommentStrategyFactory commentFactory) {
         super(commentRepository);
-        this.commentRepository = commentRepository;
         this.commentFactory = commentFactory;
     }
 
@@ -38,8 +36,8 @@ public class CommentService
         return true;
     }
 
-    public Page<CommentEntity> findPageBy(CommentFactoryImplementation implementation, long id, int page, int limit) {
-        final CommentType commentType = commentFactory.getCommentType(implementation);
+    public Page<CommentEntity> findPageBy(CommentStategyEnum implementation, long id, int page, int limit) {
+        final CommentStrategy commentType = commentFactory.getCommentStrategy(implementation);
         final List<CommentProjector> queryResult = commentType.findList(id, page, limit);
         final long total = commentType.count(id);
         return createPageImpl(page, limit, total, queryResult);

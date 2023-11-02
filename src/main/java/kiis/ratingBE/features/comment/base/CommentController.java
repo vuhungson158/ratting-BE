@@ -1,7 +1,7 @@
 package kiis.ratingBE.features.comment.base;
 
 import kiis.ratingBE.common.crud.CrudController;
-import kiis.ratingBE.features.comment.base.factory.CommentFactoryImplementation;
+import kiis.ratingBE.features.comment.base.strategy.CommentStategyEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController
         extends CrudController<CommentEntity>
         implements CommentEndpoint {
-
     private final CommentService commentService;
 
     @Autowired
-    public CommentController(CommentService commentCommonService) {
-        super(commentCommonService);
-        this.commentService = commentCommonService;
+    public CommentController(CommentService commentService) {
+        super(commentService);
+        this.commentService = commentService;
     }
 
     @GetMapping("/of")
-    public Page<CommentEntity> findPageBy(CommentFactoryImplementation implementation, long id, int page, int limit) {
-        return commentService.findPageBy(implementation, id, page, limit);
+    public Page<CommentEntity> findPageBy(CommentStategyEnum strategy, long id, int page, int limit) {
+        return commentService.findPageBy(strategy, id, page, limit);
     }
 
     @GetMapping("/like/{id}")
