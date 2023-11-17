@@ -2,11 +2,10 @@ package kiis.ratingBE.common.join;
 
 import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
-import jakarta.persistence.ManyToOne;
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.common.CommonRepository;
-import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.exception.RecordNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -20,20 +19,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
-        extends CrudService<T>
         implements Join<T, J> {
-
-    private final CommonRepository<T> mainRepository;
-
-    public JoinService(CommonRepository<T> mainRepository) {
-        super(mainRepository);
-        this.mainRepository = mainRepository;
-    }
+    private final CommonRepository<T> joinRepository;
 
     @Override
     public T findByIdJoin(long id, J[] joinFields) {
-        final T result = mainRepository.findById(id, joins(joinFields))
+        final T result = joinRepository.findById(id, joins(joinFields))
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
         transferFields(result, joinFields);
         return result;
@@ -42,7 +35,7 @@ public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
     @Override
     public Page<T> findAllJoin(int page, int limit, J[] joinFields) {
         final Pageable pageable = PageRequest.of(page, limit);
-        final Page<T> results = mainRepository.findAllByIsDeletedIsFalse(pageable, joins(joinFields));
+        final Page<T> results = joinRepository.findAllByIsDeletedIsFalse(pageable, joins(joinFields));
         transferFields(results, joinFields);
         return results;
     }
@@ -52,32 +45,9 @@ public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
         final Example<T> example = Example.of(exampleEntity);
-        final Page<T> results = mainRepository.findAll(example, pageable, joins(joinFields));
+        final Page<T> results = joinRepository.findAll(example, pageable, joins(joinFields));
         transferFields(results, joinFields);
         return results;
-    }
-
-    @Override
-    public T create(T entity) {
-        final T result = super.create(entity);
-        final J[] joins = returnOfSaveJoins();
-        if (Objects.isNull(joins)) return result;
-        return findByIdJoin(result.id, joins);
-    }
-
-    @Override
-    public T update(T entity, long id) {
-        final T result = super.update(entity, id);
-        final J[] joins = returnOfSaveJoins();
-        if (Objects.isNull(joins)) return result;
-        return findByIdJoin(id, joins);
-    }
-
-    /**
-     * {@link Override} me to join {@link ManyToOne} fields for return of {@link JoinService#create(BaseEntity)}, {@link JoinService#update(BaseEntity, long)}
-     */
-    protected J[] returnOfSaveJoins() {
-        return null;
     }
 
     /**
@@ -107,7 +77,7 @@ public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
     @SafeVarargs
     @Contract("_ -> new")
     private @NotNull EntityGraph joins(@NotNull J... joinFields) {
-        if (ArrayUtils.isEmpty(joinFields) || Objects.isNull(joinFields)) {
+        if (ArrayUtils.isEmpty(joinFields)) {
             return EntityGraph.NOOP;
         }
         final List<String> fieldNames = Arrays.stream(joinFields)

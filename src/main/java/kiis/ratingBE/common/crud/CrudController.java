@@ -22,48 +22,47 @@ import static kiis.ratingBE.enums.UserRole.Method.UPDATE;
 @RequiredArgsConstructor
 public abstract class CrudController<T extends BaseEntity>
         implements Crud<T> {
-
-    private final CrudService<T> mainService;
+    private final CrudService<T> crudService;
 
     @Override
     @GetMapping("/{id}")
     @AllowMethod(FIND_BY_ID)
     public T findById(@PathVariable long id) {
-        return mainService.findById(id);
+        return crudService.findById(id);
     }
 
     @Override
     @GetMapping
     @AllowMethod(FIND_BY_PAGEABLE)
     public Page<T> findAll(@RequestParam int page, @RequestParam int limit) {
-        return mainService.findAll(page, limit);
+        return crudService.findAll(page, limit);
     }
 
     @Override
     @PostMapping("/filter")
     @AllowMethod(FIND_BY_FILTER)
     public Page<T> findAll(@RequestBody T exampleEntity, @RequestParam int page, @RequestParam int limit) {
-        return mainService.findAll(exampleEntity, page, limit);
+        return crudService.findAll(exampleEntity, page, limit);
     }
 
     @Override
     @PostMapping
     @AllowMethod(CREATE)
     public T create(@RequestBody T entity) {
-        return mainService.create(entity);
+        return crudService.create(entity);
     }
 
     @Override
     @PutMapping("/{id}")
     @AllowMethod(UPDATE)
     public T update(@RequestBody T entity, @PathVariable long id) {
-        return mainService.update(entity, id);
+        return crudService.update(entity, id);
     }
 
     @Override
     @DeleteMapping("/{id}")
     @AllowMethod(DELETE)
     public T delete(@PathVariable long id) {
-        return mainService.delete(id);
+        return crudService.delete(id);
     }
 }
