@@ -12,7 +12,7 @@ import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_FILTER;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_ID;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
 
-public class JoinController<T extends BaseEntity, J extends JoinField<T>>
+public abstract class JoinController<T extends BaseEntity, J extends JoinField<T>>
         extends CrudController<T>
         implements Join<T, J> {
 

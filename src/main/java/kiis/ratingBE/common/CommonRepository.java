@@ -15,8 +15,8 @@ import java.util.List;
  * @see BaseEntity#id
  */
 @NoRepositoryBean
-public interface CommonRepository<T extends BaseEntity> extends
-        EntityGraphJpaRepository<T, Long> {
+public interface CommonRepository<T extends BaseEntity>
+        extends EntityGraphJpaRepository<T, Long> {
 
     /**
      * same with findAll(), but where 'isDeleted' = false
