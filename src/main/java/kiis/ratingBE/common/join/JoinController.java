@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_FILTER;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_ID;
@@ -18,23 +20,23 @@ public abstract class JoinController<Entity extends BaseEntity, FieldEnum extend
     private final JoinService<Entity, FieldEnum> joinService;
 
     @Override
-    @GetMapping("/join/{id}")
+    @GetMapping("/{id}")
     @AllowMethod(FIND_BY_ID)
-    public Entity findByIdJoin(@PathVariable long id, FieldEnum[] joinFields) {
+    public Entity findByIdJoin(@PathVariable long id, @RequestParam FieldEnum[] joinFields) {
         return joinService.findByIdJoin(id, joinFields);
     }
 
     @Override
-    @GetMapping("/join")
+    @GetMapping("")
     @AllowMethod(FIND_BY_PAGEABLE)
-    public Page<Entity> findAllJoin(int page, int limit, FieldEnum[] joinFields) {
+    public Page<Entity> findAllJoin(@RequestParam int page, @RequestParam int limit, @RequestParam FieldEnum[] joinFields) {
         return joinService.findAllJoin(page, limit, joinFields);
     }
 
     @Override
-    @PostMapping("/join/filter")
+    @PostMapping("/filter")
     @AllowMethod(FIND_BY_FILTER)
-    public Page<Entity> findAllJoin(Entity exampleEntity, int page, int limit, FieldEnum[] joinFields) {
+    public Page<Entity> findAllJoin(@RequestBody Entity exampleEntity, @RequestParam int page, @RequestParam int limit, @RequestParam FieldEnum[] joinFields) {
         return joinService.findAllJoin(exampleEntity, page, limit, joinFields);
     }
 }
