@@ -20,49 +20,49 @@ import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
 import static kiis.ratingBE.enums.UserRole.Method.UPDATE;
 
 @RequiredArgsConstructor
-public abstract class CrudController<T extends BaseEntity>
-        implements Crud<T> {
-    private final CrudService<T> crudService;
+public abstract class CrudController<Entity extends BaseEntity>
+        implements Crud<Entity> {
+    private final CrudService<Entity> crudService;
 
     @Override
     @GetMapping("/{id}")
     @AllowMethod(FIND_BY_ID)
-    public T findById(@PathVariable long id) {
+    public Entity findById(@PathVariable long id) {
         return crudService.findById(id);
     }
 
     @Override
     @GetMapping
     @AllowMethod(FIND_BY_PAGEABLE)
-    public Page<T> findAll(@RequestParam int page, @RequestParam int limit) {
+    public Page<Entity> findAll(@RequestParam int page, @RequestParam int limit) {
         return crudService.findAll(page, limit);
     }
 
     @Override
     @PostMapping("/filter")
     @AllowMethod(FIND_BY_FILTER)
-    public Page<T> findAll(@RequestBody T exampleEntity, @RequestParam int page, @RequestParam int limit) {
+    public Page<Entity> findAll(@RequestBody Entity exampleEntity, @RequestParam int page, @RequestParam int limit) {
         return crudService.findAll(exampleEntity, page, limit);
     }
 
     @Override
     @PostMapping
     @AllowMethod(CREATE)
-    public T create(@RequestBody T entity) {
+    public Entity create(@RequestBody Entity entity) {
         return crudService.create(entity);
     }
 
     @Override
     @PutMapping("/{id}")
     @AllowMethod(UPDATE)
-    public T update(@RequestBody T entity, @PathVariable long id) {
+    public Entity update(@RequestBody Entity entity, @PathVariable long id) {
         return crudService.update(entity, id);
     }
 
     @Override
     @DeleteMapping("/{id}")
     @AllowMethod(DELETE)
-    public T delete(@PathVariable long id) {
+    public Entity delete(@PathVariable long id) {
         return crudService.delete(id);
     }
 }

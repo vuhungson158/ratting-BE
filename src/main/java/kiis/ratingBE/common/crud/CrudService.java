@@ -15,38 +15,38 @@ import org.springframework.data.domain.Pageable;
 import java.util.Objects;
 
 @RequiredArgsConstructor
-public abstract class CrudService<T extends BaseEntity>
-        implements Crud<T> {
-    private final CommonRepository<T> crudRepository;
+public abstract class CrudService<Entity extends BaseEntity>
+        implements Crud<Entity> {
+    private final CommonRepository<Entity> crudRepository;
 
     @Override
-    public T findById(long id) {
+    public Entity findById(long id) {
         return crudRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
     }
 
     @Override
-    public Page<T> findAll(int page, int limit) {
+    public Page<Entity> findAll(int page, int limit) {
         final Pageable pageable = PageRequest.of(page, limit);
         return crudRepository.findAllByIsDeletedIsFalse(pageable);
     }
 
     @Override
-    public Page<T> findAll(@NotNull T exampleEntity, int page, int limit) {
+    public Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
-        final Example<T> example = Example.of(exampleEntity);
+        final Example<Entity> example = Example.of(exampleEntity);
         return crudRepository.findAll(example, pageable);
     }
 
     @Override
-    public T create(T entity) {
+    public Entity create(Entity entity) {
         return crudRepository.save(entity);
     }
 
     @Override
-    public T update(@NotNull T entity, long id) {
-        final T old = findById(id);
+    public Entity update(@NotNull Entity entity, long id) {
+        final Entity old = findById(id);
         if (!Objects.equals(old.version, entity.version)) {
             throw new VersionException();
         }
@@ -55,8 +55,8 @@ public abstract class CrudService<T extends BaseEntity>
     }
 
     @Override
-    public T delete(long id) {
-        final T entity = findById(id);
+    public Entity delete(long id) {
+        final Entity entity = findById(id);
         entity.isDeleted = false;
         return crudRepository.save(entity);
     }

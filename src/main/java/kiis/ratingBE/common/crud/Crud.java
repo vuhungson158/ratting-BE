@@ -3,17 +3,17 @@ package kiis.ratingBE.common.crud;
 import kiis.ratingBE.common.BaseEntity;
 import org.springframework.data.domain.Page;
 
-public interface Crud<T extends BaseEntity> {
+public interface Crud<Entity extends BaseEntity> {
 
-    T findById(long id);
+    Entity findById(long id);
 
-    Page<T> findAll(int page, int limit);
+    Page<Entity> findAll(int page, int limit);
 
-    Page<T> findAll(T exampleEntity, int page, int limit);
+    Page<Entity> findAll(Entity exampleEntity, int page, int limit);
 
-    T create(T entity);
+    Entity create(Entity entity);
 
-    T update(T entity, long id);
+    Entity update(Entity entity, long id);
 
-    T delete(long id);
+    Entity delete(long id);
 }

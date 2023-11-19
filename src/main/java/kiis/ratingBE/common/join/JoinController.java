@@ -13,28 +13,28 @@ import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_ID;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
 
 @RequiredArgsConstructor
-public abstract class JoinController<T extends BaseEntity, J extends JoinField<T>>
-        implements Join<T, J> {
-    private final JoinService<T, J> joinService;
+public abstract class JoinController<Entity extends BaseEntity, FieldEnum extends JoinField<Entity>>
+        implements Join<Entity, FieldEnum> {
+    private final JoinService<Entity, FieldEnum> joinService;
 
     @Override
     @GetMapping("/join/{id}")
     @AllowMethod(FIND_BY_ID)
-    public T findByIdJoin(@PathVariable long id, J[] joinFields) {
+    public Entity findByIdJoin(@PathVariable long id, FieldEnum[] joinFields) {
         return joinService.findByIdJoin(id, joinFields);
     }
 
     @Override
     @GetMapping("/join")
     @AllowMethod(FIND_BY_PAGEABLE)
-    public Page<T> findAllJoin(int page, int limit, J[] joinFields) {
+    public Page<Entity> findAllJoin(int page, int limit, FieldEnum[] joinFields) {
         return joinService.findAllJoin(page, limit, joinFields);
     }
 
     @Override
     @PostMapping("/join/filter")
     @AllowMethod(FIND_BY_FILTER)
-    public Page<T> findAllJoin(T exampleEntity, int page, int limit, J[] joinFields) {
+    public Page<Entity> findAllJoin(Entity exampleEntity, int page, int limit, FieldEnum[] joinFields) {
         return joinService.findAllJoin(exampleEntity, page, limit, joinFields);
     }
 }

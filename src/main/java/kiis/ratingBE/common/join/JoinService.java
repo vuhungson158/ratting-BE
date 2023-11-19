@@ -20,32 +20,32 @@ import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
-public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
-        implements Join<T, J> {
-    private final CommonRepository<T> joinRepository;
+public abstract class JoinService<Entity extends BaseEntity, FieldEnum extends JoinField<Entity>>
+        implements Join<Entity, FieldEnum> {
+    private final CommonRepository<Entity> joinRepository;
 
     @Override
-    public T findByIdJoin(long id, J[] joinFields) {
-        final T result = joinRepository.findById(id, joins(joinFields))
+    public Entity findByIdJoin(long id, FieldEnum[] joinFields) {
+        final Entity result = joinRepository.findById(id, joins(joinFields))
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
         transferFields(result, joinFields);
         return result;
     }
 
     @Override
-    public Page<T> findAllJoin(int page, int limit, J[] joinFields) {
+    public Page<Entity> findAllJoin(int page, int limit, FieldEnum[] joinFields) {
         final Pageable pageable = PageRequest.of(page, limit);
-        final Page<T> results = joinRepository.findAllByIsDeletedIsFalse(pageable, joins(joinFields));
+        final Page<Entity> results = joinRepository.findAllByIsDeletedIsFalse(pageable, joins(joinFields));
         transferFields(results, joinFields);
         return results;
     }
 
     @Override
-    public Page<T> findAllJoin(@NotNull T exampleEntity, int page, int limit, J[] joinFields) {
+    public Page<Entity> findAllJoin(@NotNull Entity exampleEntity, int page, int limit, FieldEnum[] joinFields) {
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
-        final Example<T> example = Example.of(exampleEntity);
-        final Page<T> results = joinRepository.findAll(example, pageable, joins(joinFields));
+        final Example<Entity> example = Example.of(exampleEntity);
+        final Page<Entity> results = joinRepository.findAll(example, pageable, joins(joinFields));
         transferFields(results, joinFields);
         return results;
     }
@@ -54,7 +54,7 @@ public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
      * @param result     return of find one method
      * @param joinFields fields use to join
      */
-    private void transferFields(T result, J[] joinFields) {
+    private void transferFields(Entity result, FieldEnum[] joinFields) {
         transferFields(new PageImpl<>(List.of(result)), joinFields);
     }
 
@@ -62,9 +62,9 @@ public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
      * @param results    return of find all methods
      * @param joinFields fields use to join
      */
-    private void transferFields(@NotNull Page<T> results, J[] joinFields) {
+    private void transferFields(@NotNull Page<Entity> results, FieldEnum[] joinFields) {
         if (Objects.nonNull(joinFields)) {
-            for (final J joinField : joinFields) {
+            for (final FieldEnum joinField : joinFields) {
                 results.forEach(result -> joinField.transferCallback().accept(result));
             }
         }
@@ -76,7 +76,7 @@ public abstract class JoinService<T extends BaseEntity, J extends JoinField<T>>
      */
     @SafeVarargs
     @Contract("_ -> new")
-    private @NotNull EntityGraph joins(@NotNull J... joinFields) {
+    private @NotNull EntityGraph joins(@NotNull FieldEnum... joinFields) {
         if (ArrayUtils.isEmpty(joinFields)) {
             return EntityGraph.NOOP;
         }

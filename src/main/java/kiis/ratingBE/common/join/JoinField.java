@@ -7,9 +7,9 @@ import java.util.function.Consumer;
 /**
  * Only be extended by Enum
  *
- * @param <T> Entity
+ * @param <FieldEnum> Entity
  */
-public interface JoinField<T extends BaseEntity> {
+public interface JoinField<FieldEnum extends BaseEntity> {
 
     /**
      * @return name of field wants to join
@@ -20,5 +20,5 @@ public interface JoinField<T extends BaseEntity> {
      * @return a callback use to copy field data
      * @implNote to avoid n+1 query
      */
-    Consumer<T> transferCallback();
+    Consumer<FieldEnum> transferCallback();
 }
