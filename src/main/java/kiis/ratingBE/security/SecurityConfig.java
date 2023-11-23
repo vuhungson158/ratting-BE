@@ -19,13 +19,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 public class SecurityConfig {
     private final JwtTokenVerifier jwtTokenVerifier;
+    private final AuthorizeConfig authorizeConfig;
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.
-                csrf(AbstractHttpConfigurer::disable)
+        http
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtTokenVerifier, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtTokenVerifier, UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(authorizeConfig);
         return http.build();
     }
 
