@@ -1,22 +1,27 @@
 package kiis.ratingBE.security;
 
+import kiis.ratingBE.enums.UserRole;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.stereotype.Component;
 
-import static kiis.ratingBE.enums.UserRole.ADMIN;
+import static org.springframework.http.HttpMethod.GET;
 
 @Component
-public class AuthorizeConfig
+public class EndpointAuthorizeConfig
         implements Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> {
-
     @Override
     public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>
                                   .@NotNull AuthorizationManagerRequestMatcherRegistry authorizationManagerRequestMatcherRegistry) {
+        final String ADMIN = UserRole.ADMIN.name();
+        final String USER = UserRole.USER.name();
+        final String MANAGER = UserRole.MANAGER.name();
+
         authorizationManagerRequestMatcherRegistry
-                .requestMatchers(HttpMethod.GET, "/teacher/everyRecords").hasAnyRole(ADMIN.name());
+
+                // Teacher endpoints
+                .requestMatchers(GET, "/teacher/everyRecords").hasAnyRole(ADMIN, USER);
     }
 }

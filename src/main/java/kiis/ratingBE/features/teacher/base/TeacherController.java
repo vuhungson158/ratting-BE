@@ -26,7 +26,6 @@ public class TeacherController
 
     @Override
     @GetMapping("/everyRecords")
-    @AllowRoles(ADMIN)
     public List<TeacherEntity> findAll() {
         return teacherService.findAll();
     }
