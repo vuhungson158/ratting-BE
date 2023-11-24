@@ -14,6 +14,7 @@ import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_FILTER;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_ID;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
 
+@Deprecated
 @RequiredArgsConstructor
 public abstract class JoinController<Entity extends BaseEntity, FieldEnum extends JoinField<Entity>>
         implements Join<Entity, FieldEnum> {

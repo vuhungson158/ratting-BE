@@ -19,6 +19,7 @@ import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_ID;
 import static kiis.ratingBE.enums.UserRole.Method.FIND_BY_PAGEABLE;
 import static kiis.ratingBE.enums.UserRole.Method.UPDATE;
 
+@Deprecated
 @RequiredArgsConstructor
 public abstract class CrudController<Entity extends BaseEntity>
         implements Crud<Entity> {
