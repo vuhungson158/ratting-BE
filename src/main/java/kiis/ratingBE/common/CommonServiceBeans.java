@@ -6,6 +6,7 @@ import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.features.subject.base.SubjectJoinField;
 import kiis.ratingBE.features.teacher.base.TeacherEntity;
 import kiis.ratingBE.features.teacher.base.TeacherJoinField;
+import kiis.ratingBE.features.user.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,12 @@ public class CommonServiceBeans {
     @Bean
     public JoinService<TeacherEntity, TeacherJoinField> teacherJoinService(@Autowired CommonRepository<TeacherEntity> teacherRepository) {
         return new JoinService<>(teacherRepository) {
+        };
+    }
+
+    @Bean
+    public CrudService<UserEntity> userCrudService(@Autowired CommonRepository<UserEntity> userRepository) {
+        return new CrudService<>(userRepository) {
         };
     }
 }

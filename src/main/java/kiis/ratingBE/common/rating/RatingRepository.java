@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.rating;
+package kiis.ratingBE.common.rating;
 
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.common.CommonRepository;

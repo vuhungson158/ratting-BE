@@ -1,4 +1,4 @@
-package kiis.ratingBE.security;
+package kiis.ratingBE.features.auth;
 
 import io.jsonwebtoken.Jwts;
 import kiis.ratingBE.exception.LoginException;

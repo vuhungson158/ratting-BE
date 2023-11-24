@@ -32,7 +32,7 @@ public abstract class CrudService<Entity extends BaseEntity>
     }
 
     @Override
-    public final Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
+    public final @NotNull Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
         final Example<Entity> example = Example.of(exampleEntity);
@@ -40,12 +40,12 @@ public abstract class CrudService<Entity extends BaseEntity>
     }
 
     @Override
-    public final Entity create(Entity entity) {
+    public final @NotNull Entity create(@NotNull Entity entity) {
         return crudRepository.save(entity);
     }
 
     @Override
-    public final Entity update(@NotNull Entity entity, long id) {
+    public final @NotNull Entity update(@NotNull Entity entity, long id) {
         final Entity old = findById(id);
         if (!Objects.equals(old.version, entity.version)) {
             throw new VersionException();
@@ -55,7 +55,7 @@ public abstract class CrudService<Entity extends BaseEntity>
     }
 
     @Override
-    public final Entity delete(long id) {
+    public final @NotNull Entity delete(long id) {
         final Entity entity = findById(id);
         entity.isDeleted = false;
         return crudRepository.save(entity);

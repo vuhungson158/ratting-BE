@@ -1,4 +1,4 @@
-package kiis.ratingBE.security;
+package kiis.ratingBE.features.auth;
 
 import kiis.ratingBE.features.user.UserEntity;
 import lombok.RequiredArgsConstructor;
