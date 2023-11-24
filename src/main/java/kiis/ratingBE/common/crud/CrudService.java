@@ -20,19 +20,19 @@ public abstract class CrudService<Entity extends BaseEntity>
     private final CommonRepository<Entity> crudRepository;
 
     @Override
-    public Entity findById(long id) {
+    public final Entity findById(long id) {
         return crudRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
     }
 
     @Override
-    public Page<Entity> findAll(int page, int limit) {
+    public final Page<Entity> findAll(int page, int limit) {
         final Pageable pageable = PageRequest.of(page, limit);
         return crudRepository.findAllByIsDeletedIsFalse(pageable);
     }
 
     @Override
-    public Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
+    public final Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
         final Example<Entity> example = Example.of(exampleEntity);
@@ -40,12 +40,12 @@ public abstract class CrudService<Entity extends BaseEntity>
     }
 
     @Override
-    public Entity create(Entity entity) {
+    public final Entity create(Entity entity) {
         return crudRepository.save(entity);
     }
 
     @Override
-    public Entity update(@NotNull Entity entity, long id) {
+    public final Entity update(@NotNull Entity entity, long id) {
         final Entity old = findById(id);
         if (!Objects.equals(old.version, entity.version)) {
             throw new VersionException();
@@ -55,7 +55,7 @@ public abstract class CrudService<Entity extends BaseEntity>
     }
 
     @Override
-    public Entity delete(long id) {
+    public final Entity delete(long id) {
         final Entity entity = findById(id);
         entity.isDeleted = false;
         return crudRepository.save(entity);

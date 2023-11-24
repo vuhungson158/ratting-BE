@@ -24,24 +24,27 @@ public abstract class JoinService<Entity extends BaseEntity, FieldEnum extends J
         implements Join<Entity, FieldEnum> {
     private final CommonRepository<Entity> joinRepository;
 
+    @SafeVarargs
     @Override
-    public Entity findByIdJoin(long id, FieldEnum[] joinFields) {
+    public final Entity findByIdJoin(long id, FieldEnum... joinFields) {
         final Entity result = joinRepository.findById(id, joins(joinFields))
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
         transferFields(result, joinFields);
         return result;
     }
 
+    @SafeVarargs
     @Override
-    public Page<Entity> findAllJoin(int page, int limit, FieldEnum[] joinFields) {
+    public final Page<Entity> findAllJoin(int page, int limit, FieldEnum... joinFields) {
         final Pageable pageable = PageRequest.of(page, limit);
         final Page<Entity> results = joinRepository.findAllByIsDeletedIsFalse(pageable, joins(joinFields));
         transferFields(results, joinFields);
         return results;
     }
 
+    @SafeVarargs
     @Override
-    public Page<Entity> findAllJoin(@NotNull Entity exampleEntity, int page, int limit, FieldEnum[] joinFields) {
+    public final Page<Entity> findAllJoin(@NotNull Entity exampleEntity, int page, int limit, FieldEnum... joinFields) {
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
         final Example<Entity> example = Example.of(exampleEntity);
@@ -77,7 +80,7 @@ public abstract class JoinService<Entity extends BaseEntity, FieldEnum extends J
     @SafeVarargs
     @Contract("_ -> new")
     private @NotNull EntityGraph joins(@NotNull FieldEnum... joinFields) {
-        if (ArrayUtils.isEmpty(joinFields)) {
+        if (Objects.isNull(joinFields) || ArrayUtils.isEmpty(joinFields)) {
             return EntityGraph.NOOP;
         }
         final List<String> fieldNames = Arrays.stream(joinFields)

@@ -1,6 +1,7 @@
 package kiis.ratingBE.features.subject.base;
 
 import kiis.ratingBE.common.join.JoinField;
+import kiis.ratingBE.features.subject.base.SubjectEntity;
 import lombok.RequiredArgsConstructor;
 
 import java.util.function.Consumer;
@@ -8,7 +9,6 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public enum SubjectJoinField
         implements JoinField<SubjectEntity> {
-
     /**
      * @see SubjectEntity#joinTeacher
      */
