@@ -22,9 +22,8 @@ import static kiis.ratingBE.features.subject.base.SubjectJoinField.TEACHER;
 public class SubjectController {
     private final CrudService<SubjectEntity> subjectCrudService;
     private final JoinService<SubjectEntity, SubjectJoinField> subjectJoinService;
-    private final SubjectService subjectMainService;
 
-    @GetMapping("/{id}/join-teacher")
+    @GetMapping("/{id}")
     public SubjectEntity findByIdJoinTeacher(@PathVariable long id) {
         return subjectJoinService.findByIdJoin(id, TEACHER);
     }

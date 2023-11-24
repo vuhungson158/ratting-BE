@@ -1,22 +1,16 @@
 package kiis.ratingBE.features.teacher.base;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
-public class TeacherService
-        implements TeacherEndpoint {
+public class TeacherService {
     private final TeacherRepository teacherRepository;
 
-    @Autowired
-    public TeacherService(TeacherRepository teacherRepository) {
-        this.teacherRepository = teacherRepository;
-    }
-
-    @Override
     public List<TeacherEntity> findAll() {
-        return teacherRepository.findAll();
+        return teacherRepository.findAllByIsDeletedIsFalse();
     }
 }
