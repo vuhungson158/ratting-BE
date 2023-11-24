@@ -25,6 +25,8 @@ public class EndpointAuthorizeConfig
                 .requestMatchers(GET, "/teacher/everyRecords").hasAnyRole(ADMIN, USER)
 
                 // Subject
-                .requestMatchers(GET, "/subject/{id}/join-teacher").hasAnyRole(ADMIN, USER);
+                .requestMatchers(GET, "/subject/{id}/join-teacher").hasAnyRole(ADMIN, USER)
+
+                .anyRequest().permitAll();
     }
 }
