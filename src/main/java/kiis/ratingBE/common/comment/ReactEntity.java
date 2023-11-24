@@ -5,7 +5,7 @@ import kiis.ratingBE.common.UserActionBaseEntity;
 
 
 @MappedSuperclass
-public class ReactEntity extends UserActionBaseEntity {
+public abstract class ReactEntity extends UserActionBaseEntity {
 
     /**
      * True = like<br>

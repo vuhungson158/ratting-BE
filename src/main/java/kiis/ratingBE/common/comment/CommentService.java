@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
-public class CommentService {
+public abstract class CommentService {
     // TODO
     public boolean like(@PathVariable long id) {
         return true;
