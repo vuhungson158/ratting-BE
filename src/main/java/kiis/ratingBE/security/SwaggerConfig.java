@@ -1,4 +1,4 @@
-package kiis.ratingBE.helper;
+package kiis.ratingBE.security;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

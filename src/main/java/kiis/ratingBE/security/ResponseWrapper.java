@@ -1,4 +1,4 @@
-package kiis.ratingBE.helper;
+package kiis.ratingBE.security;
 
 import kiis.ratingBE.common.BaseResponse;
 import org.jetbrains.annotations.NotNull;
