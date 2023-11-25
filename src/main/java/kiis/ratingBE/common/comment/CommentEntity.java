@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
-import kiis.ratingBE.common.UserActionBaseEntity;
+import kiis.ratingBE.common.userAction.UserActionBaseEntity;
 
 @MappedSuperclass
 public abstract class CommentEntity extends UserActionBaseEntity {

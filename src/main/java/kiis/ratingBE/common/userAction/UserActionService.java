@@ -1,12 +1,12 @@
-package kiis.ratingBE.common.crud;
+package kiis.ratingBE.common.userAction;
 
-import kiis.ratingBE.common.UserActionBaseEntity;
+import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.features.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 @RequiredArgsConstructor
-public class UserActionCrudService<Entity extends UserActionBaseEntity> {
+public abstract class UserActionService<Entity extends UserActionBaseEntity> {
     private final CrudService<Entity> crudService;
     private final AuthService authService;
 

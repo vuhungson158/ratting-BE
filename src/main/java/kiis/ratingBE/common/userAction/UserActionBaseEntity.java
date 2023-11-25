@@ -1,4 +1,4 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.common.userAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,11 +10,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
+import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.features.user.UserEntity;
 
 @MappedSuperclass
-public class UserActionBaseEntity extends BaseEntity {
-
+public abstract class UserActionBaseEntity extends BaseEntity {
 
     /**
      * @see UserActionBaseEntity#joinUser
@@ -22,7 +22,7 @@ public class UserActionBaseEntity extends BaseEntity {
      */
     @NotNull
     @Column(name = "user_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     public Long userId;
 
     /**
