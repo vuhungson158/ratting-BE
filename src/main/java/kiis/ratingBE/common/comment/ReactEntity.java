@@ -1,11 +1,11 @@
 package kiis.ratingBE.common.comment;
 
 import jakarta.persistence.MappedSuperclass;
-import kiis.ratingBE.common.userAction.UserActionBaseEntity;
+import kiis.ratingBE.common.userAction.UserActionEntity;
 
 
 @MappedSuperclass
-public abstract class ReactEntity extends UserActionBaseEntity {
+public abstract class ReactEntity extends UserActionEntity {
 
     /**
      * True = like<br>

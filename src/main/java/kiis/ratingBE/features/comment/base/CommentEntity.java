@@ -55,22 +55,6 @@ public class CommentEntity extends BaseEntity {
     public TeacherEntity teacher;
 
     /**
-     * @see CommentEntity#subject
-     */
-    @Column(name = "subject_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Long subjectId;
-
-    /**
-     * @see CommentEntity#subjectId
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", nullable = false, insertable = false, updatable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Schema(allOf = SubjectEntity.class)
-    public SubjectEntity subject;
-
-    /**
      * @see CommentEntity#user
      */
     @NotNull
