@@ -1,6 +1,7 @@
 package kiis.ratingBE.security;
 
 import kiis.ratingBE.common.BaseResponse;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public BaseResponse<Object> exceptionHandle(Exception exception) {
+    public BaseResponse<Object> exceptionHandle(@NotNull Exception exception) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         String message = exception.getMessage();
 

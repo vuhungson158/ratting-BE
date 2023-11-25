@@ -17,15 +17,15 @@ public class EndpointAuthorizeConfig
                                   .@NotNull AuthorizationManagerRequestMatcherRegistry authorizationManagerRequestMatcherRegistry) {
         final String ADMIN = UserRole.ADMIN.name();
         final String USER = UserRole.USER.name();
-        final String MANAGER = UserRole.MANAGER.name();
+//        final String MANAGER = UserRole.MANAGER.name();
 
         authorizationManagerRequestMatcherRegistry
 
                 // Teacher endpoints
-                .requestMatchers(GET, "/teacher/everyRecords").hasAnyRole(ADMIN, USER)
+                .requestMatchers(GET, "/teacher/{id}").hasAnyRole(ADMIN, USER)
 
                 // Subject
-                .requestMatchers(GET, "/subject/{id}/join-teacher").hasAnyRole(ADMIN, USER)
+                .requestMatchers(GET, "/subject/{id}").hasAnyRole(ADMIN, USER)
 
                 .anyRequest().permitAll();
     }

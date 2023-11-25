@@ -3,6 +3,8 @@ package kiis.ratingBE.features.auth;
 import kiis.ratingBE.features.user.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +28,10 @@ public class AuthController {
     @PostMapping("/resign")
     public UserEntity resign(@RequestBody @NotNull UserEntity userEntity) {
         return authService.resign(userEntity);
+    }
+
+    @GetMapping("/access-denied")
+    public void accessDenied() {
+        throw new AccessDeniedException("Your Role doesn't have permission to call this api");
     }
 }
