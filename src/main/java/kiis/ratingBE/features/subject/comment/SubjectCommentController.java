@@ -27,7 +27,7 @@ public class SubjectCommentController {
         return subjectCrudService.findById(id);
     }
 
-    @PostMapping("/filter")
+    @PostMapping()
     public Page<SubjectCommentEntity> findAll(@RequestParam int page, @RequestParam int limit) {
         return null;
     }
