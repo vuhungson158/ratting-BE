@@ -7,13 +7,13 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.util.List;
 
 @NoRepositoryBean
-public interface CommentRepository
-        extends CommonRepository<CommentBaseEntity> {
+public interface CommentRepository<CommentEntity extends CommentBaseEntity>
+        extends CommonRepository<CommentEntity> {
 
     @Query(value = """
             SELECT * FROM comment;
             """, nativeQuery = true)
-    List<CommentBaseEntity> findPage(long parentId, int page, int limit);
+    List<CommentEntity> findPage(long parentId, int page, int limit);
 
     @Query("""
             SELECT 1

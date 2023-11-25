@@ -1,5 +1,6 @@
 package kiis.ratingBE.features.subject.comment;
 
+import kiis.ratingBE.common.comment.CommentService;
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.common.userAction.UserActionService;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +19,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/subject-comment")
 public class SubjectCommentController {
-    private final CrudService<SubjectCommentEntity> subjectCrudService;
-    private final UserActionService<SubjectCommentEntity> userActionService;
+    private final CrudService<SubjectCommentEntity> subjectCommentCrudService;
+    private final UserActionService<SubjectCommentEntity> subjectCommentUserActionService;
+    private final CommentService<SubjectCommentEntity, SubjectCommentReactEntity> subjectCommentService;
 
+    @GetMapping("/like/{commentId}")
+    public boolean like(@PathVariable long commentId) {
+        return subjectCommentService.like(commentId);
+    }
+
+    @GetMapping("/dislike/{commentId}")
+    public boolean dislike(@PathVariable long commentId) {
+        return subjectCommentService.dislike(commentId);
+    }
 
     @GetMapping("/{id}")
     public SubjectCommentEntity findById(@PathVariable long id) {
-        return subjectCrudService.findById(id);
+        return subjectCommentCrudService.findById(id);
     }
 
     @GetMapping
@@ -34,16 +45,16 @@ public class SubjectCommentController {
 
     @PostMapping
     public SubjectCommentEntity create(@RequestBody SubjectCommentEntity entity) {
-        return userActionService.create(entity);
+        return subjectCommentUserActionService.create(entity);
     }
 
     @PutMapping("/{id}")
     public SubjectCommentEntity update(@RequestBody SubjectCommentEntity entity, @PathVariable long id) {
-        return userActionService.update(entity, id);
+        return subjectCommentUserActionService.update(entity, id);
     }
 
     @DeleteMapping("/{id}")
     public SubjectCommentEntity delete(@PathVariable long id) {
-        return subjectCrudService.delete(id);
+        return subjectCommentCrudService.delete(id);
     }
 }

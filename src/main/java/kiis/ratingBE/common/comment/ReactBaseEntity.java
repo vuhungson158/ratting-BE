@@ -13,7 +13,7 @@ import kiis.ratingBE.common.userAction.UserActionBaseEntity;
 
 
 @MappedSuperclass
-public abstract class ReactBaseEntity<Entity extends CommentBaseEntity> extends UserActionBaseEntity {
+public abstract class ReactBaseEntity<CommentEntity extends CommentBaseEntity> extends UserActionBaseEntity {
 
     /**
      * True = like<br>
@@ -34,7 +34,7 @@ public abstract class ReactBaseEntity<Entity extends CommentBaseEntity> extends 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id", nullable = false, insertable = false, updatable = false)
     @JsonIgnore
-    public Entity joinComment;
+    public CommentEntity joinComment;
 
     /**
      * @see ReactBaseEntity#commentId
@@ -42,5 +42,5 @@ public abstract class ReactBaseEntity<Entity extends CommentBaseEntity> extends 
     @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = CommentBaseEntity.class)
-    public Entity comment;
+    public CommentEntity comment;
 }

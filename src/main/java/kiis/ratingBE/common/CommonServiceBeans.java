@@ -1,5 +1,8 @@
 package kiis.ratingBE.common;
 
+import kiis.ratingBE.common.comment.CommentReactRepository;
+import kiis.ratingBE.common.comment.CommentRepository;
+import kiis.ratingBE.common.comment.CommentService;
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.common.join.JoinService;
 import kiis.ratingBE.common.userAction.UserActionService;
@@ -7,6 +10,7 @@ import kiis.ratingBE.features.auth.AuthService;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.features.subject.base.SubjectJoinField;
 import kiis.ratingBE.features.subject.comment.SubjectCommentEntity;
+import kiis.ratingBE.features.subject.comment.SubjectCommentReactEntity;
 import kiis.ratingBE.features.teacher.base.TeacherEntity;
 import kiis.ratingBE.features.teacher.base.TeacherJoinField;
 import kiis.ratingBE.features.user.UserEntity;
@@ -34,16 +38,24 @@ public class CommonServiceBeans {
 
     @Bean
     public CrudService<SubjectCommentEntity> subjectCommentCrudService(
-            @Autowired CommonRepository<SubjectCommentEntity> subjectCommentRepository) {
-        return new CrudService<>(subjectCommentRepository) {
+            @Autowired CommonRepository<SubjectCommentEntity> subjectCommentCrudRepository) {
+        return new CrudService<>(subjectCommentCrudRepository) {
         };
     }
 
     @Bean
     public UserActionService<SubjectCommentEntity> subjectCommentUserActionService(
-            @Autowired CrudService<SubjectCommentEntity> subjectCommentCrudService,
+            @Autowired CrudService<SubjectCommentEntity> subjectCommentUserActionRepository,
             @Autowired AuthService authService) {
-        return new UserActionService<>(subjectCommentCrudService, authService) {
+        return new UserActionService<>(subjectCommentUserActionRepository, authService) {
+        };
+    }
+
+    @Bean
+    public CommentService<SubjectCommentEntity, SubjectCommentReactEntity> subjectCommentService(
+            @Autowired CommentRepository<SubjectCommentEntity> subjectCommentRepository,
+            @Autowired CommentReactRepository<SubjectCommentReactEntity> subjectCommentReactRepository) {
+        return new CommentService<>(subjectCommentRepository, subjectCommentReactRepository) {
         };
     }
 
