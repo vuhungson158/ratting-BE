@@ -1,9 +1,9 @@
 package kiis.ratingBE.common.comment;
 
 import kiis.ratingBE.common.CommonRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.NoRepositoryBean;
 
-@Repository
+@NoRepositoryBean
 public interface ReactRepository extends
         CommonRepository<ReactEntity> {
 }

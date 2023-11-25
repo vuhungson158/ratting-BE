@@ -1,6 +1,9 @@
 package kiis.ratingBE.security;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kiis.ratingBE.common.BaseResponse;
+import org.apache.tomcat.util.json.JSONParser;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -25,6 +28,14 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
                                   @NotNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   @NotNull ServerHttpRequest request,
                                   @NotNull ServerHttpResponse response) {
+        if (body instanceof String) {
+            final ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                return objectMapper.writeValueAsString(body);
+            } catch (final JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }
         return new BaseResponse<>(body);
     }
 }

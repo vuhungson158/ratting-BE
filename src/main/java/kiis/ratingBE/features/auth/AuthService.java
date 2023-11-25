@@ -2,10 +2,12 @@ package kiis.ratingBE.features.auth;
 
 import io.jsonwebtoken.Jwts;
 import kiis.ratingBE.exception.LoginException;
+import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.features.user.UserEntity;
 import kiis.ratingBE.features.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,6 +32,7 @@ public class AuthService {
             throw new LoginException("Password is not correct");
 
         final String token = Jwts.builder()
+                .setId(String.valueOf(userEntity.id))
                 .setSubject(userEntity.email)
                 .claim(CLAIM_AUTHORITY, userEntity.role)
                 .setIssuedAt(new Date())
@@ -41,5 +44,12 @@ public class AuthService {
 
     public UserEntity resign(UserEntity userEntity) {
         return userRepository.save(userEntity);
+    }
+
+    public Long getLongingUserId() {
+        final String userEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        final UserEntity userEntity = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RecordNotFoundException("user"));
+        return userEntity.id;
     }
 }
