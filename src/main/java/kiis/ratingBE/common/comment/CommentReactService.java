@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
-public abstract class CommentService {
+public abstract class CommentReactService<CommentEntityType extends CommentBaseEntity> {
     // TODO
     public boolean like(@PathVariable long id) {
         return true;

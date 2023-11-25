@@ -5,5 +5,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface ReactRepository extends
-        CommonRepository<ReactEntity> {
+        CommonRepository<ReactBaseEntity> {
 }

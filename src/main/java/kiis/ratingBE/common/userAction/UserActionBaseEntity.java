@@ -14,11 +14,11 @@ import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.features.user.UserEntity;
 
 @MappedSuperclass
-public abstract class UserActionEntity extends BaseEntity {
+public abstract class UserActionBaseEntity extends BaseEntity {
 
     /**
-     * @see UserActionEntity#joinUser
-     * @see UserActionEntity#user
+     * @see UserActionBaseEntity#joinUser
+     * @see UserActionBaseEntity#user
      */
     @NotNull
     @Column(name = "user_id")
@@ -26,8 +26,8 @@ public abstract class UserActionEntity extends BaseEntity {
     public Long userId;
 
     /**
-     * @see UserActionEntity#userId
-     * @see UserActionEntity#user
+     * @see UserActionBaseEntity#userId
+     * @see UserActionBaseEntity#user
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
@@ -35,8 +35,8 @@ public abstract class UserActionEntity extends BaseEntity {
     public UserEntity joinUser;
 
     /**
-     * @see UserActionEntity#userId
-     * @see UserActionEntity#joinUser
+     * @see UserActionBaseEntity#userId
+     * @see UserActionBaseEntity#joinUser
      */
     @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

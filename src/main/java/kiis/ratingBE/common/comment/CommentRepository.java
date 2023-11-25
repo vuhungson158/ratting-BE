@@ -8,12 +8,12 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface CommentRepository
-        extends CommonRepository<CommentEntity> {
+        extends CommonRepository<CommentBaseEntity> {
 
     @Query(value = """
             SELECT * FROM comment;
             """, nativeQuery = true)
-    List<CommentEntity> findPage(long parentId, int page, int limit);
+    List<CommentBaseEntity> findPage(long parentId, int page, int limit);
 
     @Query("""
             SELECT 1

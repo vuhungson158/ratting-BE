@@ -3,7 +3,7 @@ package kiis.ratingBE.features.subject.comment;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import kiis.ratingBE.common.comment.ReactEntity;
+import kiis.ratingBE.common.comment.ReactBaseEntity;
 
 @Entity
 @Table(
@@ -12,5 +12,5 @@ import kiis.ratingBE.common.comment.ReactEntity;
                 @UniqueConstraint(columnNames = {"comment_id", "user_id"})
         }
 )
-public class SubjectCommentReactEntity extends ReactEntity<SubjectCommentEntity> {
+public class SubjectCommentReactEntity extends ReactBaseEntity<SubjectCommentEntity> {
 }

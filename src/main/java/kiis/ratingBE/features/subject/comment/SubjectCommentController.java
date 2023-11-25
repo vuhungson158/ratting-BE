@@ -23,11 +23,11 @@ public class SubjectCommentController {
 
 
     @GetMapping("/{id}")
-    public SubjectCommentEntity findByIdJoinTeacher(@PathVariable long id) {
+    public SubjectCommentEntity findById(@PathVariable long id) {
         return subjectCrudService.findById(id);
     }
 
-    @PostMapping()
+    @GetMapping
     public Page<SubjectCommentEntity> findAll(@RequestParam int page, @RequestParam int limit) {
         return null;
     }

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 @RequiredArgsConstructor
-public abstract class UserActionService<Entity extends UserActionEntity> {
+public abstract class UserActionService<Entity extends UserActionBaseEntity> {
     private final CrudService<Entity> crudService;
     private final AuthService authService;
 

@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
-import kiis.ratingBE.common.comment.CommentEntity;
+import kiis.ratingBE.common.comment.CommentBaseEntity;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
 
 @Entity
@@ -21,7 +21,7 @@ import kiis.ratingBE.features.subject.base.SubjectEntity;
                 @UniqueConstraint(columnNames = {"subject_id", "user_id"}),
         }
 )
-public class SubjectCommentEntity extends CommentEntity {
+public class SubjectCommentEntity extends CommentBaseEntity {
 
     /**
      * @see SubjectCommentEntity#subject
