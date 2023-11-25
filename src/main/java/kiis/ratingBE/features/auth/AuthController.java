@@ -19,7 +19,7 @@ public class AuthController {
      * @return jwt Token
      */
     @PostMapping("/login")
-    public String login(@RequestBody @NotNull UserEntity.LoginForm loginRequest) {
+    public TokenBearer login(@RequestBody @NotNull UserEntity.LoginForm loginRequest) {
         return authService.login(loginRequest);
     }
 

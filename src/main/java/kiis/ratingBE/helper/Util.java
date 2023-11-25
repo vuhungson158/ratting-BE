@@ -43,6 +43,7 @@ public abstract class Util {
      * @param <U>       interface
      * @return bean
      */
+    @Deprecated
     public static <T extends U, U> @NotNull U chooseBeanFromList(@NotNull Class<T> beanClass,
                                                                  @NotNull List<U> beanList) {
         for (final U bean : beanList) {

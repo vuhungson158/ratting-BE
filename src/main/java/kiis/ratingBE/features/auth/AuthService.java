@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.time.LocalDate;
 import java.util.Date;
 
-import static kiis.ratingBE.helper.Constant.BEARER;
 import static kiis.ratingBE.helper.Constant.CLAIM_AUTHORITY;
 import static kiis.ratingBE.helper.Constant.ENCODED_SECRET_KEY;
 
@@ -23,7 +22,7 @@ import static kiis.ratingBE.helper.Constant.ENCODED_SECRET_KEY;
 public class AuthService {
     private final UserRepository userRepository;
 
-    public String login(@RequestBody @NotNull UserEntity.LoginForm loginRequest) {
+    public TokenBearer login(@RequestBody @NotNull UserEntity.LoginForm loginRequest) {
         final UserEntity userEntity = userRepository
                 .findByEmail(loginRequest.email())
                 .orElseThrow(() -> new LoginException("Email is not correct"));
@@ -39,7 +38,7 @@ public class AuthService {
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(1)))
                 .signWith(ENCODED_SECRET_KEY)
                 .compact();
-        return BEARER + token;
+        return new TokenBearer(token);
     }
 
     public UserEntity resign(UserEntity userEntity) {
