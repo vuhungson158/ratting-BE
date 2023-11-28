@@ -11,6 +11,7 @@ import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.features.subject.base.SubjectJoinField;
 import kiis.ratingBE.features.subject.comment.SubjectCommentEntity;
 import kiis.ratingBE.features.subject.comment.SubjectCommentReactEntity;
+import kiis.ratingBE.features.subject.rating.SubjectRatingEntity;
 import kiis.ratingBE.features.teacher.base.TeacherEntity;
 import kiis.ratingBE.features.teacher.base.TeacherJoinField;
 import kiis.ratingBE.features.user.UserEntity;
@@ -47,6 +48,21 @@ public class CommonServiceBeans {
             CrudService<SubjectCommentEntity> subjectCommentUserActionRepository,
             AuthService authService) {
         return new UserActionService<>(subjectCommentUserActionRepository, authService) {
+        };
+    }
+
+    @Bean
+    public CrudService<SubjectRatingEntity> subjectRatingCrudService(
+            CommonRepository<SubjectRatingEntity> subjectRatingCrudRepository) {
+        return new CrudService<>(subjectRatingCrudRepository) {
+        };
+    }
+
+    @Bean
+    public UserActionService<SubjectRatingEntity> subjectRatingUserActionService(
+            CrudService<SubjectRatingEntity> subjectRatingUserActionRepository,
+            AuthService authService) {
+        return new UserActionService<>(subjectRatingUserActionRepository, authService) {
         };
     }
 

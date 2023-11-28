@@ -1,5 +1,6 @@
-package kiis.ratingBE.features.subject.rating.model;
+package kiis.ratingBE.features.subject.rating;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -8,13 +9,13 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import kiis.ratingBE.common.BaseEntity;
+import kiis.ratingBE.common.rating.RatingBaseEntity;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
-import kiis.ratingBE.features.user.UserEntity;
 
 @Entity
 @Table(
@@ -23,7 +24,7 @@ import kiis.ratingBE.features.user.UserEntity;
                 @UniqueConstraint(columnNames = {"subject_id", "user_id"})
         }
 )
-public class SubjectRatingEntity extends BaseEntity {
+public class SubjectRatingEntity extends RatingBaseEntity {
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
@@ -32,10 +33,6 @@ public class SubjectRatingEntity extends BaseEntity {
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
     public Integer easyToUnderstand;
-
-    @Min(value = 0, message = "Min = 0")
-    @Max(value = 10, message = "Max = 10")
-    public Integer star;
 
     /**
      * @see SubjectRatingEntity#subject
@@ -47,27 +44,18 @@ public class SubjectRatingEntity extends BaseEntity {
 
     /**
      * @see SubjectRatingEntity#subjectId
+     * @see SubjectRatingEntity#subject
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", nullable = false, insertable = false, updatable = false)
+    @JsonIgnore
+    public SubjectEntity joinSubject;
+
+    /**
+     * @see SubjectRatingEntity#subjectId
+     */
+    @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = SubjectEntity.class)
     public SubjectEntity subject;
-
-    /**
-     * @see SubjectRatingEntity#user
-     */
-    @NotNull
-    @Column(name = "user_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Long userId;
-
-    /**
-     * @see SubjectRatingEntity#userId
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Schema(allOf = UserEntity.class)
-    public UserEntity user;
 }

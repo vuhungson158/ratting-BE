@@ -1,10 +1,9 @@
 package kiis.ratingBE.common.rating;
 
-import kiis.ratingBE.common.CommonRepository;
-import org.springframework.data.repository.NoRepositoryBean;
+public interface RatingRepository<RatingEntity extends RatingBaseEntity, RatingAverage extends RatingAverageBase> {
+    RatingEntity findByParentIdAndUserId(long parentId, long userId);
 
-@NoRepositoryBean
-public interface RatingRepository
-        extends CommonRepository<RatingEntity> {
+    RatingAverage findAverageByParentId(long parentId);
 
+    RatingAverage findAverageByUserId(long userId);
 }
