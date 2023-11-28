@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.teacher.rating.model;
+package kiis.ratingBE.features.teacher.rating;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,9 +13,8 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import kiis.ratingBE.common.BaseEntity;
+import kiis.ratingBE.common.rating.RatingBaseEntity;
 import kiis.ratingBE.features.teacher.base.TeacherEntity;
-import kiis.ratingBE.features.user.UserEntity;
 
 @Entity
 @Table(
@@ -24,7 +23,7 @@ import kiis.ratingBE.features.user.UserEntity;
                 @UniqueConstraint(columnNames = {"teacher_id", "user_id"})
         }
 )
-public class TeacherRatingEntity extends BaseEntity {
+public class TeacherRatingEntity extends RatingBaseEntity {
 
     @Min(value = 0, message = "Min = 0")
     @Max(value = 100, message = "Max = 100")
@@ -42,11 +41,6 @@ public class TeacherRatingEntity extends BaseEntity {
     @Max(value = 100, message = "Max = 100")
     public Integer pedagogical;
 
-    @Min(value = 0, message = "Min = 0")
-    @Max(value = 10, message = "Max = 10")
-    public Integer star;
-
-    // teacher----------------------------------------------------------------------------------------------------------
     @NotNull
     @Column(name = "teacher_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -61,23 +55,4 @@ public class TeacherRatingEntity extends BaseEntity {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(allOf = TeacherEntity.class)
     public TeacherEntity teacher;
-    // teacher----------------------------------------------------------------------------------------------------------
-
-    // user----------------------------------------------------------------------------------------------------------
-    @NotNull
-    @Column(name = "user_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Long userId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-    @JsonIgnore
-    public UserEntity joinUser;
-
-    @Transient
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Schema(allOf = UserEntity.class)
-    public UserEntity user;
-    // user----------------------------------------------------------------------------------------------------------
-
 }

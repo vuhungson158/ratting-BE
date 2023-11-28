@@ -13,16 +13,19 @@ public class SubjectRatingRepository implements
 
     @Override
     public SubjectRatingEntity findByParentIdAndUserId(long parentId, long userId) {
-        return (SubjectRatingEntity) entityManager.createQuery("SELECT SubjectCommentEntity FROM SubjectCommentEntity");
+        return entityManager.createQuery("SELECT SubjectRatingEntity FROM SubjectRatingEntity", SubjectRatingEntity.class)
+                .getSingleResult();
     }
 
     @Override
     public SubjectRatingAverage findAverageByParentId(long parentId) {
-        return (SubjectRatingAverage) entityManager.createQuery("SELECT SubjectCommentEntity FROM SubjectCommentEntity");
+        return entityManager.createQuery("SELECT SubjectRatingEntity FROM SubjectRatingEntity", SubjectRatingAverage.class)
+                .getSingleResult();
     }
 
     @Override
     public SubjectRatingAverage findAverageByUserId(long userId) {
-        return (SubjectRatingAverage) entityManager.createQuery("SELECT SubjectCommentEntity FROM SubjectCommentEntity");
+        return entityManager.createQuery("SELECT SubjectRatingEntity FROM SubjectRatingEntity", SubjectRatingAverage.class)
+                .getSingleResult();
     }
 }

@@ -1,38 +1,30 @@
 package kiis.ratingBE.features.teacher.rating;
 
-import kiis.ratingBE.common.CommonRepository;
-import kiis.ratingBE.features.teacher.rating.model.TeacherRatingAverageProjector;
-import kiis.ratingBE.features.teacher.rating.model.TeacherRatingEntity;
-import org.springframework.data.jpa.repository.Query;
+import jakarta.persistence.EntityManager;
+import kiis.ratingBE.common.rating.RatingRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TeacherRatingRepository
-        extends CommonRepository<TeacherRatingEntity> {
+@RequiredArgsConstructor
+public class TeacherRatingRepository implements
+        RatingRepository<TeacherRatingEntity, TeacherRatingAverage> {
+    private final EntityManager entityManager;
 
-    @Query(nativeQuery = true, value = """
-            SELECT COUNT(*)         as totalRecord,
-                   AVG(enthusiasm)  as enthusiasmAverage,
-                   AVG(erudition)   as eruditionAverage,
-                   AVG(friendly)    as friendlyAverage,
-                   AVG(pedagogical) as pedagogicalAverage,
-                   AVG(star)        as starAverage
-            FROM teacher_rating
-            WHERE teacher_id = :teacherId
-            GROUP BY teacher_id
-            """)
-    TeacherRatingAverageProjector findAverageByTeacherId(long teacherId);
+    @Override
+    public TeacherRatingEntity findByParentIdAndUserId(long parentId, long userId) {
+        return entityManager.createQuery("SELECT TeacherRatingEntity FROM TeacherRatingEntity", TeacherRatingEntity.class)
+                .getSingleResult();
+    }
 
-    @Query(nativeQuery = true, value = """
-            SELECT COUNT(*)         as totalRecord,
-                   AVG(enthusiasm)  as enthusiasmAverage,
-                   AVG(erudition)   as eruditionAverage,
-                   AVG(friendly)    as friendlyAverage,
-                   AVG(pedagogical) as pedagogicalAverage,
-                   AVG(star)        as starAverage
-            FROM teacher_rating
-            WHERE user_id = :userId
-            GROUP BY user_id
-            """)
-    TeacherRatingAverageProjector findAverageByUserId(long userId);
+    @Override
+    public TeacherRatingAverage findAverageByParentId(long parentId) {
+        return entityManager.createQuery("SELECT TeacherRatingEntity FROM TeacherRatingEntity", TeacherRatingAverage.class)
+                .getSingleResult();
+    }
+
+    @Override
+    public TeacherRatingAverage findAverageByUserId(long userId) {
+        return entityManager.createQuery("SELECT TeacherRatingEntity FROM TeacherRatingEntity", TeacherRatingAverage.class).getSingleResult();
+    }
 }

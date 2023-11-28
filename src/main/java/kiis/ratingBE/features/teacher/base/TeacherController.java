@@ -29,7 +29,7 @@ public class TeacherController {
         return teacherJoinService.findByIdJoin(id, SUBJECTS);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<TeacherEntity> findAll() {
         return teacherMainService.findAll();
     }

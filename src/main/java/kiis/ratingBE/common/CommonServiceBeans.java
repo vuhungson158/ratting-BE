@@ -14,6 +14,9 @@ import kiis.ratingBE.features.subject.comment.SubjectCommentReactEntity;
 import kiis.ratingBE.features.subject.rating.SubjectRatingEntity;
 import kiis.ratingBE.features.teacher.base.TeacherEntity;
 import kiis.ratingBE.features.teacher.base.TeacherJoinField;
+import kiis.ratingBE.features.teacher.comment.TeacherCommentEntity;
+import kiis.ratingBE.features.teacher.comment.TeacherCommentReactEntity;
+import kiis.ratingBE.features.teacher.rating.TeacherRatingEntity;
 import kiis.ratingBE.features.user.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -52,6 +55,21 @@ public class CommonServiceBeans {
     }
 
     @Bean
+    public CrudService<TeacherCommentEntity> teacherCommentCrudService(
+            CommonRepository<TeacherCommentEntity> teacherCommentCrudRepository) {
+        return new CrudService<>(teacherCommentCrudRepository) {
+        };
+    }
+
+    @Bean
+    public UserActionService<TeacherCommentEntity> teacherCommentUserActionService(
+            CrudService<TeacherCommentEntity> teacherCommentUserActionRepository,
+            AuthService authService) {
+        return new UserActionService<>(teacherCommentUserActionRepository, authService) {
+        };
+    }
+
+    @Bean
     public CrudService<SubjectRatingEntity> subjectRatingCrudService(
             CommonRepository<SubjectRatingEntity> subjectRatingCrudRepository) {
         return new CrudService<>(subjectRatingCrudRepository) {
@@ -67,6 +85,21 @@ public class CommonServiceBeans {
     }
 
     @Bean
+    public CrudService<TeacherRatingEntity> teacherRatingCrudService(
+            CommonRepository<TeacherRatingEntity> teacherRatingCrudRepository) {
+        return new CrudService<>(teacherRatingCrudRepository) {
+        };
+    }
+
+    @Bean
+    public UserActionService<TeacherRatingEntity> teacherRatingUserActionService(
+            CrudService<TeacherRatingEntity> teacherRatingUserActionRepository,
+            AuthService authService) {
+        return new UserActionService<>(teacherRatingUserActionRepository, authService) {
+        };
+    }
+
+    @Bean
     public CommentService<SubjectCommentEntity, SubjectCommentReactEntity> subjectCommentService(
             CommentRepository<SubjectCommentEntity> subjectCommentRepository,
             CommentReactRepository<SubjectCommentReactEntity> subjectCommentReactRepository,
@@ -75,6 +108,19 @@ public class CommonServiceBeans {
             @Override
             protected SubjectCommentReactEntity newEmptyEntity() {
                 return new SubjectCommentReactEntity();
+            }
+        };
+    }
+
+    @Bean
+    public CommentService<TeacherCommentEntity, TeacherCommentReactEntity> teacherCommentService(
+            CommentRepository<TeacherCommentEntity> teacherCommentRepository,
+            CommentReactRepository<TeacherCommentReactEntity> teacherCommentReactRepository,
+            AuthService authService) {
+        return new CommentService<>(teacherCommentRepository, teacherCommentReactRepository, authService) {
+            @Override
+            protected TeacherCommentReactEntity newEmptyEntity() {
+                return new TeacherCommentReactEntity();
             }
         };
     }
