@@ -2,11 +2,13 @@ package kiis.ratingBE.common.comment;
 
 import kiis.ratingBE.enums.ReactType;
 import kiis.ratingBE.features.auth.AuthService;
-import kiis.ratingBE.features.subject.comment.SubjectCommentEntity;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -48,7 +50,9 @@ public abstract class CommentService<
         return commentReactRepository.findByCommentIdAndUserId(commentId, longingUserId);
     }
 
-    public Page<SubjectCommentEntity> findPage(int page, int limit) {
-        return null;
+    public Page<CommentEntity> findPage(long parentId, int page, int limit) {
+        final List<CommentEntity> commentEntitieList = commentRepository.findPageBy(parentId, page, limit);
+        final long total = commentRepository.countBy(parentId);
+        return new PageImpl<>(commentEntitieList, PageRequest.of(page, limit), total);
     }
 }

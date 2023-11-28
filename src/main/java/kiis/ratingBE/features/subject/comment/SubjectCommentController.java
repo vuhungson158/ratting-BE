@@ -35,8 +35,8 @@ public class SubjectCommentController {
     }
 
     @GetMapping
-    public Page<SubjectCommentEntity> findPage(@RequestParam int page, @RequestParam int limit) {
-        return subjectCommentService.findPage(page, limit);
+    public Page<SubjectCommentEntity> findPage(@RequestParam long subjectId, @RequestParam int page, @RequestParam int limit) {
+        return subjectCommentService.findPage(subjectId, page, limit);
     }
 
     @PostMapping

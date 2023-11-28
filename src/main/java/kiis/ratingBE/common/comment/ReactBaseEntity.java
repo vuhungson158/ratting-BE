@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
@@ -15,6 +16,8 @@ import jakarta.validation.constraints.NotEmpty;
 import kiis.ratingBE.common.userAction.UserActionBaseEntity;
 import kiis.ratingBE.enums.ReactType;
 
+import java.util.Map;
+
 
 @MappedSuperclass
 public abstract class ReactBaseEntity<CommentEntity extends CommentBaseEntity> extends UserActionBaseEntity {
@@ -22,6 +25,10 @@ public abstract class ReactBaseEntity<CommentEntity extends CommentBaseEntity> e
     @Enumerated(EnumType.STRING)
     @NotEmpty
     public ReactType react;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ElementCollection
+    public Map<ReactType, Integer> reactMap = ReactType.defaultMap();
 
     /**
      * @see ReactBaseEntity#comment
