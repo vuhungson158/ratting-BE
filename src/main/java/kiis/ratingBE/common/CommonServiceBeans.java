@@ -56,6 +56,10 @@ public class CommonServiceBeans {
             CommentReactRepository<SubjectCommentReactEntity> subjectCommentReactRepository,
             AuthService authService) {
         return new CommentService<>(subjectCommentRepository, subjectCommentReactRepository, authService) {
+            @Override
+            protected SubjectCommentReactEntity newEmptyEntity() {
+                return new SubjectCommentReactEntity();
+            }
         };
     }
 

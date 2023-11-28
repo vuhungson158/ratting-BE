@@ -3,6 +3,7 @@ package kiis.ratingBE.features.subject.comment;
 import kiis.ratingBE.common.comment.CommentService;
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.common.userAction.UserActionService;
+import kiis.ratingBE.enums.ReactType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,14 +24,9 @@ public class SubjectCommentController {
     private final UserActionService<SubjectCommentEntity> subjectCommentUserActionService;
     private final CommentService<SubjectCommentEntity, SubjectCommentReactEntity> subjectCommentService;
 
-    @GetMapping("/like/{commentId}")
-    public boolean like(@PathVariable long commentId) {
-        return subjectCommentService.like(commentId);
-    }
-
-    @GetMapping("/dislike/{commentId}")
-    public boolean dislike(@PathVariable long commentId) {
-        return subjectCommentService.dislike(commentId);
+    @GetMapping("/react")
+    public void react(@RequestParam long commentId, @RequestParam ReactType reactType) {
+        subjectCommentService.react(commentId, reactType);
     }
 
     @GetMapping("/{id}")
@@ -39,8 +35,8 @@ public class SubjectCommentController {
     }
 
     @GetMapping
-    public Page<SubjectCommentEntity> findAll(@RequestParam int page, @RequestParam int limit) {
-        return null;
+    public Page<SubjectCommentEntity> findPage(@RequestParam int page, @RequestParam int limit) {
+        return subjectCommentService.findPage(page, limit);
     }
 
     @PostMapping

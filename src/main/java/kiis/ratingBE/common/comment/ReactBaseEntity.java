@@ -4,26 +4,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotEmpty;
 import kiis.ratingBE.common.userAction.UserActionBaseEntity;
+import kiis.ratingBE.enums.ReactType;
 
 
 @MappedSuperclass
 public abstract class ReactBaseEntity<CommentEntity extends CommentBaseEntity> extends UserActionBaseEntity {
 
-    /**
-     * True = like<br>
-     * False = dislike
-     */
-    public boolean react;
+    @Enumerated(EnumType.STRING)
+    @NotEmpty
+    public ReactType react;
 
     /**
      * @see ReactBaseEntity#comment
      */
+    @NotEmpty
     @Column(name = "comment_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Long commentId;
