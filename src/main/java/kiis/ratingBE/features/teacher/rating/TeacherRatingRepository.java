@@ -13,18 +13,34 @@ public class TeacherRatingRepository implements
 
     @Override
     public TeacherRatingEntity findByParentIdAndUserId(long parentId, long userId) {
-        return entityManager.createQuery("SELECT TeacherRatingEntity FROM TeacherRatingEntity", TeacherRatingEntity.class)
+        return entityManager
+                .createQuery(
+                        """
+                                SELECT TeacherRatingEntity FROM TeacherRatingEntity
+                                """
+                        , TeacherRatingEntity.class)
                 .getSingleResult();
     }
 
     @Override
     public TeacherRatingAverage findAverageByParentId(long parentId) {
-        return entityManager.createQuery("SELECT TeacherRatingEntity FROM TeacherRatingEntity", TeacherRatingAverage.class)
+        return entityManager
+                .createQuery(
+                        """
+                                SELECT TeacherRatingEntity FROM TeacherRatingEntity
+                                """
+                        , TeacherRatingAverage.class)
                 .getSingleResult();
     }
 
     @Override
     public TeacherRatingAverage findAverageByUserId(long userId) {
-        return entityManager.createQuery("SELECT TeacherRatingEntity FROM TeacherRatingEntity", TeacherRatingAverage.class).getSingleResult();
+        return entityManager
+                .createQuery(
+                        """
+                                SELECT TeacherRatingEntity FROM TeacherRatingEntity
+                                """
+                        , TeacherRatingAverage.class)
+                .getSingleResult();
     }
 }
