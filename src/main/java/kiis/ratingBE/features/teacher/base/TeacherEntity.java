@@ -13,6 +13,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.enums.Gender;
+import kiis.ratingBE.enums.Nationality;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
 import kiis.ratingBE.validate.Furigana;
 
@@ -31,8 +32,9 @@ public class TeacherEntity extends BaseEntity {
     @Furigana
     public String furigana;
 
+    @Enumerated(EnumType.STRING)
     @NotBlank
-    public String nationality;
+    public Nationality nationality;
 
     @Enumerated(EnumType.STRING)
     @NotNull
