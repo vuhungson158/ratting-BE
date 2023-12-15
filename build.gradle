@@ -24,7 +24,7 @@ repositories {
 dependencies {
 	//	Common
 	implementation 'org.jetbrains:annotations:24.0.0'
-	compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	//	JWT
