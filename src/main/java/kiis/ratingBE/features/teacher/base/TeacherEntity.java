@@ -15,6 +15,7 @@ import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.enums.Gender;
 import kiis.ratingBE.enums.Nationality;
 import kiis.ratingBE.features.subject.base.SubjectEntity;
+import kiis.ratingBE.helper.Util;
 import kiis.ratingBE.validate.Furigana;
 
 import java.util.ArrayList;
@@ -42,6 +43,12 @@ public class TeacherEntity extends BaseEntity {
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     public Date dob;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public Integer getAge() {
+        return Util.calculateAge(dob);
+    }
 
     /**
      * @see TeacherEntity#subjects

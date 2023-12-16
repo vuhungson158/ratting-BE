@@ -9,6 +9,10 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,5 +56,10 @@ public abstract class Util {
             }
         }
         throw new AbstractMethodError();
+    }
+
+    public static @NotNull Integer calculateAge(@NotNull Date dob) {
+        final LocalDate localDateDob = dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return Period.between(localDateDob, LocalDate.now()).getYears();
     }
 }
