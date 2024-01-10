@@ -17,6 +17,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
+
+/**
+ * This BaseEntity contains columns that every table must have.<br>
+ * {@link JsonProperty} mean: this column only visible on response, and hidden on request
+ */
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,29 +30,29 @@ import java.time.Instant;
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     public Long id;
 
     @CreatedDate
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     public Instant createdAt;
 
     @CreatedBy
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     public String createdBy;
 
     @LastModifiedDate
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     public Instant updatedAt;
 
     @LastModifiedBy
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     public String updatedBy;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     public Boolean isDeleted = false;
 
     @Version
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     public Integer version;
 }
