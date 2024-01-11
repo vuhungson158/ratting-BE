@@ -1,10 +1,11 @@
-package kiis.ratingBE.features.auth;
+package kiis.ratingBE.service.user;
 
 import io.jsonwebtoken.Jwts;
 import kiis.ratingBE.exception.LoginException;
 import kiis.ratingBE.exception.RecordNotFoundException;
-import kiis.ratingBE.features.user.UserEntity;
-import kiis.ratingBE.features.user.UserRepository;
+import kiis.ratingBE.model.user.UserEntity;
+import kiis.ratingBE.repository.user.UserRepository;
+import kiis.ratingBE.model.user.TokenBearer;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.context.SecurityContextHolder;

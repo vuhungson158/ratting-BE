@@ -1,7 +1,7 @@
 package kiis.ratingBE.common.comment;
 
 import kiis.ratingBE.enums.ReactType;
-import kiis.ratingBE.features.auth.AuthService;
+import kiis.ratingBE.service.user.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;

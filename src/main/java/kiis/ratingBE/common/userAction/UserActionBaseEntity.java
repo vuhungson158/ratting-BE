@@ -11,7 +11,7 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.common.BaseEntity;
-import kiis.ratingBE.features.user.UserEntity;
+import kiis.ratingBE.model.user.UserEntity;
 
 @MappedSuperclass
 public abstract class UserActionBaseEntity extends BaseEntity {

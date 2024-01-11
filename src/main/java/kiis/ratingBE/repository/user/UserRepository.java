@@ -1,6 +1,7 @@
-package kiis.ratingBE.features.user;
+package kiis.ratingBE.repository.user;
 
 import kiis.ratingBE.common.CommonRepository;
+import kiis.ratingBE.model.user.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

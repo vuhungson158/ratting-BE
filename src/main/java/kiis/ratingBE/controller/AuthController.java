@@ -1,6 +1,8 @@
-package kiis.ratingBE.features.auth;
+package kiis.ratingBE.controller;
 
-import kiis.ratingBE.features.user.UserEntity;
+import kiis.ratingBE.model.user.UserEntity;
+import kiis.ratingBE.model.user.TokenBearer;
+import kiis.ratingBE.service.user.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.access.AccessDeniedException;

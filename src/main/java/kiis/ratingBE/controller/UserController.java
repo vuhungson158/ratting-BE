@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.user;
+package kiis.ratingBE.controller;
 
 import kiis.ratingBE.common.crud.CrudService;
 import lombok.RequiredArgsConstructor;

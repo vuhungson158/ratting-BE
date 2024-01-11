@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.user;
+package kiis.ratingBE.model.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

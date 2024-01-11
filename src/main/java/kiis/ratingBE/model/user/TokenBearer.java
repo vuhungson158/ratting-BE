@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.auth;
+package kiis.ratingBE.model.user;
 
 import static kiis.ratingBE.helper.Constant.BEARER;
 
