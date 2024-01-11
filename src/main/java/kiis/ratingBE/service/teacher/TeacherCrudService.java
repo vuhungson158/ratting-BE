@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TeacherCrudService extends CrudService<TeacherEntity> {
-    private final CommonRepository<TeacherEntity> crudRepository;
+    private final CommonRepository<TeacherEntity> teacherCrudRepository;
 
     @Override
     protected CommonRepository<TeacherEntity> getCrudRepository() {
-        return crudRepository;
+        return teacherCrudRepository;
     }
 }

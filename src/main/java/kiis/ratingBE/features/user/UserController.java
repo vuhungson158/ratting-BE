@@ -15,26 +15,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
-    private final CrudService<UserEntity> userCrudService;
+//    private final CrudService<UserEntity> userCrudService;
 
 
-    @GetMapping("/{id}")
-    public UserEntity findById(@PathVariable long id) {
-        return userCrudService.findById(id);
-    }
-
-    @PostMapping
-    public UserEntity create(@RequestBody UserEntity entity) {
-        return userCrudService.create(entity);
-    }
-
-    @PutMapping("/{id}")
-    public UserEntity update(@RequestBody UserEntity entity, @PathVariable long id) {
-        return userCrudService.update(entity, id);
-    }
-
-    @DeleteMapping("/{id}")
-    public UserEntity delete(@PathVariable long id) {
-        return userCrudService.delete(id);
-    }
+//    @GetMapping("/{id}")
+//    public UserEntity findById(@PathVariable long id) {
+//        return userCrudService.findById(id);
+//    }
+//
+//    @PostMapping
+//    public UserEntity create(@RequestBody UserEntity entity) {
+//        return userCrudService.create(entity);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public UserEntity update(@RequestBody UserEntity entity, @PathVariable long id) {
+//        return userCrudService.update(entity, id);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public UserEntity delete(@PathVariable long id) {
+//        return userCrudService.delete(id);
+//    }
 }

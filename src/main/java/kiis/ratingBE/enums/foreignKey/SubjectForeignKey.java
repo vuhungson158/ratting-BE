@@ -3,8 +3,8 @@ package kiis.ratingBE.enums.foreignKey;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum TeacherForeignKey implements ForeignKey {
-    SUBJECTS("subjects");
+public enum SubjectForeignKey implements ForeignKey {
+    TEACHER("teacher");
 
     private final String fieldName;
 

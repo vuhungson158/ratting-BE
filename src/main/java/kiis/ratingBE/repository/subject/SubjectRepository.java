@@ -1,4 +1,4 @@
-package kiis.ratingBE.features.subject.base;
+package kiis.ratingBE.repository.subject;
 
 import kiis.ratingBE.common.CommonRepository;
 import kiis.ratingBE.model.subject.SubjectEntity;
