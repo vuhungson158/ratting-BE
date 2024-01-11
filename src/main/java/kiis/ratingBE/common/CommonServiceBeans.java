@@ -7,13 +7,13 @@ import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.common.join.JoinService;
 import kiis.ratingBE.common.userAction.UserActionService;
 import kiis.ratingBE.features.auth.AuthService;
-import kiis.ratingBE.features.subject.base.SubjectEntity;
+import kiis.ratingBE.model.subject.SubjectEntity;
 import kiis.ratingBE.features.subject.base.SubjectJoinField;
 import kiis.ratingBE.features.subject.comment.SubjectCommentEntity;
 import kiis.ratingBE.features.subject.comment.SubjectCommentReactEntity;
 import kiis.ratingBE.features.subject.rating.SubjectRatingEntity;
-import kiis.ratingBE.features.teacher.base.TeacherEntity;
-import kiis.ratingBE.features.teacher.base.TeacherJoinField;
+import kiis.ratingBE.model.teacher.TeacherEntity;
+import kiis.ratingBE.enums.foreignKey.TeacherForeignKey;
 import kiis.ratingBE.features.teacher.comment.TeacherCommentEntity;
 import kiis.ratingBE.features.teacher.comment.TeacherCommentReactEntity;
 import kiis.ratingBE.features.teacher.rating.TeacherRatingEntity;
@@ -125,19 +125,19 @@ public class CommonServiceBeans {
         };
     }
 
-    @Bean
-    public CrudService<TeacherEntity> teacherCrudService(
-            CommonRepository<TeacherEntity> teacherRepository) {
-        return new CrudService<>(teacherRepository) {
-        };
-    }
-
-    @Bean
-    public JoinService<TeacherEntity, TeacherJoinField> teacherJoinService(
-            CommonRepository<TeacherEntity> teacherRepository) {
-        return new JoinService<>(teacherRepository) {
-        };
-    }
+//    @Bean
+//    public CrudService<TeacherEntity> teacherCrudService(
+//            CommonRepository<TeacherEntity> teacherRepository) {
+//        return new CrudService<>(teacherRepository) {
+//        };
+//    }
+//
+//    @Bean
+//    public JoinService<TeacherEntity, TeacherForeignKey> teacherJoinService(
+//            CommonRepository<TeacherEntity> teacherRepository) {
+//        return new JoinService<>(teacherRepository) {
+//        };
+//    }
 
     @Bean
     public CrudService<UserEntity> userCrudService(

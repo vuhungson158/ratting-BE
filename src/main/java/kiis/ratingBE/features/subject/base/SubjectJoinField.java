@@ -1,7 +1,7 @@
 package kiis.ratingBE.features.subject.base;
 
 import kiis.ratingBE.common.join.JoinField;
-import kiis.ratingBE.features.subject.base.SubjectEntity;
+import kiis.ratingBE.model.subject.SubjectEntity;
 import lombok.RequiredArgsConstructor;
 
 import java.util.function.Consumer;

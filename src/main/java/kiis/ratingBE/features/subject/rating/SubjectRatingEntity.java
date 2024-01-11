@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.common.rating.RatingBaseEntity;
-import kiis.ratingBE.features.subject.base.SubjectEntity;
+import kiis.ratingBE.model.subject.SubjectEntity;
 
 @Entity
 @Table(

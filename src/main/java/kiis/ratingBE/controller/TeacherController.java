@@ -1,7 +1,10 @@
-package kiis.ratingBE.features.teacher.base;
+package kiis.ratingBE.controller;
 
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.common.join.JoinService;
+import kiis.ratingBE.model.teacher.TeacherEntity;
+import kiis.ratingBE.enums.foreignKey.TeacherForeignKey;
+import kiis.ratingBE.service.teacher.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static kiis.ratingBE.features.teacher.base.TeacherJoinField.SUBJECTS;
+import static kiis.ratingBE.enums.foreignKey.TeacherForeignKey.SUBJECTS;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/teacher")
 public class TeacherController {
     private final CrudService<TeacherEntity> teacherCrudService;
-    private final JoinService<TeacherEntity, TeacherJoinField> teacherJoinService;
+    private final JoinService<TeacherEntity, TeacherForeignKey> teacherJoinService;
     private final TeacherService teacherMainService;
 
     @GetMapping("/{id}")

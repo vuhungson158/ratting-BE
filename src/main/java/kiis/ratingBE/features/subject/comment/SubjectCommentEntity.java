@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import kiis.ratingBE.common.comment.CommentBaseEntity;
-import kiis.ratingBE.features.subject.base.SubjectEntity;
+import kiis.ratingBE.model.subject.SubjectEntity;
 
 @Entity
 @Table(

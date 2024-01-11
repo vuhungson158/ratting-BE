@@ -1,5 +1,7 @@
-package kiis.ratingBE.features.teacher.base;
+package kiis.ratingBE.service.teacher;
 
+import kiis.ratingBE.model.teacher.TeacherEntity;
+import kiis.ratingBE.repository.teacher.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

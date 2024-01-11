@@ -4,7 +4,6 @@ import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.common.CommonRepository;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
-import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
@@ -14,25 +13,27 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Objects;
 
-@RequiredArgsConstructor
 public abstract class CrudService<Entity extends BaseEntity>
         implements Crud<Entity> {
-    private final CommonRepository<Entity> crudRepository;
+    protected abstract CommonRepository<Entity> getCrudRepository();
 
     @Override
-    public final Entity findById(long id) {
+    public Entity findById(long id) {
+        final CommonRepository<Entity> crudRepository = getCrudRepository();
         return crudRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
     }
 
     @Override
-    public final Page<Entity> findAll(int page, int limit) {
+    public Page<Entity> findAll(int page, int limit) {
+        final CommonRepository<Entity> crudRepository = getCrudRepository();
         final Pageable pageable = PageRequest.of(page, limit);
         return crudRepository.findAllByIsDeletedIsFalse(pageable);
     }
 
     @Override
-    public final @NotNull Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
+    public @NotNull Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
+        final CommonRepository<Entity> crudRepository = getCrudRepository();
         exampleEntity.isDeleted = false;
         final Pageable pageable = PageRequest.of(page, limit);
         final Example<Entity> example = Example.of(exampleEntity);
@@ -40,12 +41,14 @@ public abstract class CrudService<Entity extends BaseEntity>
     }
 
     @Override
-    public final @NotNull Entity create(@NotNull Entity entity) {
+    public @NotNull Entity create(@NotNull Entity entity) {
+        final CommonRepository<Entity> crudRepository = getCrudRepository();
         return crudRepository.save(entity);
     }
 
     @Override
-    public final @NotNull Entity update(@NotNull Entity entity, long id) {
+    public @NotNull Entity update(@NotNull Entity entity, long id) {
+        final CommonRepository<Entity> crudRepository = getCrudRepository();
         final Entity old = findById(id);
         if (!Objects.equals(old.version, entity.version)) {
             throw new VersionException();
@@ -55,7 +58,8 @@ public abstract class CrudService<Entity extends BaseEntity>
     }
 
     @Override
-    public final @NotNull Entity delete(long id) {
+    public @NotNull Entity delete(long id) {
+        final CommonRepository<Entity> crudRepository = getCrudRepository();
         final Entity entity = findById(id);
         entity.isDeleted = false;
         return crudRepository.save(entity);

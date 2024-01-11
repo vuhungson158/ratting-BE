@@ -2,6 +2,7 @@ package kiis.ratingBE.features.subject.base;
 
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.common.join.JoinService;
+import kiis.ratingBE.model.subject.SubjectEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;

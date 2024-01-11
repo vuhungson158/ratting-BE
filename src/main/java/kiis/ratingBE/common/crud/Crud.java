@@ -4,7 +4,6 @@ import kiis.ratingBE.common.BaseEntity;
 import org.springframework.data.domain.Page;
 
 public interface Crud<Entity extends BaseEntity> {
-
     Entity findById(long id);
 
     Page<Entity> findAll(int page, int limit);
