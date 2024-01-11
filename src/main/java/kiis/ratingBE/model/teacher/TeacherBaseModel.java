@@ -26,7 +26,7 @@ public class TeacherBaseModel extends BaseEntity {
     public String furigana;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
+    @NotNull
     public Nationality nationality;
 
     @Enumerated(EnumType.STRING)
