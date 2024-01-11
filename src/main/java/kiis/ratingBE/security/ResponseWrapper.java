@@ -10,7 +10,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-@RestControllerAdvice(basePackages = "kiis.ratingBE.features")
+@RestControllerAdvice(basePackages = "kiis.ratingBE.controller")
 public class ResponseWrapper implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(@NotNull MethodParameter returnType,

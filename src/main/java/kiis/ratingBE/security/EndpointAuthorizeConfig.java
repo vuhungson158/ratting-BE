@@ -22,7 +22,7 @@ public class EndpointAuthorizeConfig
         authorizationManagerRequestMatcherRegistry
 
                 // Teacher endpoints
-                .requestMatchers(GET, "/teacher/{id}").hasAnyRole(ADMIN, USER)
+//                .requestMatchers(GET, "/teacher/{id}").hasAnyRole(ADMIN, USER)
 
                 // Subject
                 .requestMatchers(GET, "/subject/{id}").hasAnyRole(ADMIN, USER)
