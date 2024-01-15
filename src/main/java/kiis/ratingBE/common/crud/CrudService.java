@@ -61,7 +61,7 @@ public abstract class CrudService<Entity extends BaseEntity>
     public @NotNull Entity delete(long id) {
         final CommonRepository<Entity> crudRepository = getCrudRepository();
         final Entity entity = findById(id);
-        entity.isDeleted = false;
+        entity.isDeleted = true;
         return crudRepository.save(entity);
     }
 }
