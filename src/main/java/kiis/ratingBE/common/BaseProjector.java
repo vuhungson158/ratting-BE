@@ -1,6 +1,7 @@
 package kiis.ratingBE.common;
 
 import kiis.ratingBE.helper.Util;
+import kiis.ratingBE.model.BaseEntity;
 
 import java.time.Instant;
 

@@ -1,7 +1,7 @@
 package kiis.ratingBE.common.crud;
 
-import kiis.ratingBE.common.BaseEntity;
-import kiis.ratingBE.common.CommonRepository;
+import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.repository.CommonRepository;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import kiis.ratingBE.helper.Util;

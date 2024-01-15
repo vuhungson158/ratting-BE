@@ -1,6 +1,6 @@
 package kiis.ratingBE.repository.user;
 
-import kiis.ratingBE.common.CommonRepository;
+import kiis.ratingBE.repository.CommonRepository;
 import kiis.ratingBE.model.user.UserEntity;
 import org.springframework.stereotype.Repository;
 

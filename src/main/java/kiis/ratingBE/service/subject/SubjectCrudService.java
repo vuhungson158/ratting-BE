@@ -1,6 +1,6 @@
 package kiis.ratingBE.service.subject;
 
-import kiis.ratingBE.common.CommonRepository;
+import kiis.ratingBE.repository.CommonRepository;
 import kiis.ratingBE.common.crud.CrudService;
 import kiis.ratingBE.model.subject.SubjectEntity;
 import lombok.RequiredArgsConstructor;

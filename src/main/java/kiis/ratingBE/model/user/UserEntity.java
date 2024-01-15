@@ -7,7 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import kiis.ratingBE.common.BaseEntity;
+import kiis.ratingBE.model.BaseEntity;
 import kiis.ratingBE.enums.Gender;
 import kiis.ratingBE.enums.UserRole;
 

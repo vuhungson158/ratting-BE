@@ -2,10 +2,11 @@ package kiis.ratingBE.common.join;
 
 import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
-import kiis.ratingBE.common.BaseEntity;
-import kiis.ratingBE.common.CommonRepository;
+import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.repository.CommonRepository;
 import kiis.ratingBE.enums.foreignKey.ForeignKey;
 import kiis.ratingBE.exception.RecordNotFoundException;
+import kiis.ratingBE.repository.JoinRepository;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -20,13 +21,13 @@ import java.util.Objects;
 
 public abstract class JoinService<JoinEntity extends BaseEntity>
         implements Join<JoinEntity> {
-    protected abstract CommonRepository<JoinEntity> getJoinRepository();
+    protected abstract JoinRepository<JoinEntity> getJoinRepository();
 
     protected abstract ForeignKey[] getJoinFields();
 
     @Override
     public JoinEntity findByIdJoin(long id) {
-        final CommonRepository<JoinEntity> joinRepository = getJoinRepository();
+        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
         final ForeignKey[] foreignKeys = getJoinFields();
 
         return joinRepository.findById(id, joins(foreignKeys))
@@ -35,7 +36,7 @@ public abstract class JoinService<JoinEntity extends BaseEntity>
 
     @Override
     public Page<JoinEntity> findAllJoin(int page, int limit) {
-        final CommonRepository<JoinEntity> joinRepository = getJoinRepository();
+        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
         final ForeignKey[] foreignKeys = getJoinFields();
 
         final Pageable pageable = PageRequest.of(page, limit);
@@ -44,7 +45,7 @@ public abstract class JoinService<JoinEntity extends BaseEntity>
 
     @Override
     public Page<JoinEntity> findAllJoin(@NotNull JoinEntity exampleEntity, int page, int limit) {
-        final CommonRepository<JoinEntity> joinRepository = getJoinRepository();
+        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
         final ForeignKey[] foreignKeys = getJoinFields();
 
         exampleEntity.isDeleted = false;
