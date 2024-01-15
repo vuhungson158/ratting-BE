@@ -17,7 +17,7 @@ import kiis.ratingBE.validate.Furigana;
 import java.util.Date;
 
 @MappedSuperclass
-public class TeacherBaseModel extends BaseEntity {
+public abstract class TeacherBaseModel extends BaseEntity {
     @NotBlank
     public String name;
 

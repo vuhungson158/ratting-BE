@@ -14,7 +14,7 @@ import kiis.ratingBE.enums.Department;
 import kiis.ratingBE.enums.subjectClassification.Small;
 
 @MappedSuperclass
-public class SubjectBaseModel extends BaseEntity {
+public abstract class SubjectBaseModel extends BaseEntity {
     @Min(value = 1, message = "Min = 1")
     @Max(value = 6, message = "Max = 6")
     public Integer credit;

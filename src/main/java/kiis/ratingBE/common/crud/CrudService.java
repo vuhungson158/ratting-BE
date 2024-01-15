@@ -4,8 +4,8 @@ import kiis.ratingBE.common.BaseEntity;
 import kiis.ratingBE.common.CommonRepository;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
+import kiis.ratingBE.helper.Util;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,8 +53,8 @@ public abstract class CrudService<Entity extends BaseEntity>
         if (!Objects.equals(old.version, entity.version)) {
             throw new VersionException();
         }
-        BeanUtils.copyProperties(entity, old);
-        return crudRepository.save(old);
+        Util.copyProperties(old, entity);
+        return crudRepository.save(entity);
     }
 
     @Override

@@ -53,6 +53,6 @@ public abstract class BaseEntity {
     public Boolean isDeleted = false;
 
     @Version
-    @JsonProperty(access = READ_ONLY)
+    // @JsonProperty(access = READ_ONLY)
     public Integer version;
 }
