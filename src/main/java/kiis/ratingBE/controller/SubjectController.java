@@ -1,7 +1,7 @@
 package kiis.ratingBE.controller;
 
-import kiis.ratingBE.common.crud.CrudService;
-import kiis.ratingBE.common.join.JoinService;
+import kiis.ratingBE.service.CrudService;
+import kiis.ratingBE.service.JoinService;
 import kiis.ratingBE.model.subject.SubjectEntity;
 import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
 import lombok.RequiredArgsConstructor;

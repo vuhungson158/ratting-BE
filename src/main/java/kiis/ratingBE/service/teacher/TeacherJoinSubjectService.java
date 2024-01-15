@@ -1,6 +1,6 @@
 package kiis.ratingBE.service.teacher;
 
-import kiis.ratingBE.common.join.JoinService;
+import kiis.ratingBE.service.JoinService;
 import kiis.ratingBE.enums.foreignKey.ForeignKey;
 import kiis.ratingBE.enums.foreignKey.TeacherForeignKey;
 import kiis.ratingBE.model.teacher.TeacherJoinSubjectEntity;

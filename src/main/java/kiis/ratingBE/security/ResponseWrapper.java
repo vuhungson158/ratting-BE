@@ -1,6 +1,6 @@
 package kiis.ratingBE.security;
 
-import kiis.ratingBE.common.BaseResponse;
+import kiis.ratingBE.model.BaseResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

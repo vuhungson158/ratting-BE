@@ -1,6 +1,6 @@
 package kiis.ratingBE.common.userAction;
 
-import kiis.ratingBE.common.crud.CrudService;
+import kiis.ratingBE.service.CrudService;
 import kiis.ratingBE.service.user.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;

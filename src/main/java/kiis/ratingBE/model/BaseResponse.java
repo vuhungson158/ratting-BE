@@ -1,4 +1,4 @@
-package kiis.ratingBE.common;
+package kiis.ratingBE.model;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package kiis.ratingBE.common.join;
+package kiis.ratingBE.interfaces;
 
 import kiis.ratingBE.model.BaseEntity;
 import org.springframework.data.domain.Page;

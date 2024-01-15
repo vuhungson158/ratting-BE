@@ -1,7 +1,7 @@
 package kiis.ratingBE.service.teacher;
 
 import kiis.ratingBE.repository.CommonRepository;
-import kiis.ratingBE.common.crud.CrudService;
+import kiis.ratingBE.service.CrudService;
 import kiis.ratingBE.model.teacher.TeacherEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
