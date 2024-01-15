@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/subject-rating")
 @RestController
 public class SubjectRatingController {
-//    private final CrudService<SubjectRatingEntity> subjectRatingCrudService;
+//    private final CrudServiceTemplate<SubjectRatingEntity> subjectRatingCrudService;
 //    private final UserActionService<SubjectRatingEntity> subjectRatingUserActionService;
 //    private final RatingRepository<SubjectRatingEntity, SubjectRatingAverage> subjectRatingRepository;
 

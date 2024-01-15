@@ -1,10 +1,10 @@
 package kiis.ratingBE.controller;
 
-import kiis.ratingBE.service.CrudService;
-import kiis.ratingBE.service.JoinService;
 import kiis.ratingBE.model.teacher.TeacherEntity;
 import kiis.ratingBE.model.teacher.TeacherJoinSubjectEntity;
-import kiis.ratingBE.service.teacher.TeacherService;
+import kiis.ratingBE.service.CrudService;
+import kiis.ratingBE.service.JoinService;
+import kiis.ratingBE.service.teacher.TeacherMainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +23,11 @@ import java.util.List;
 public class TeacherController {
     private final CrudService<TeacherEntity> teacherCrudService;
     private final JoinService<TeacherJoinSubjectEntity> teacherJoinSubjectService;
-    private final TeacherService teacherMainService;
+    private final TeacherMainService teacherMainService;
 
     @GetMapping("/{id}")
     public TeacherJoinSubjectEntity findByIdJoinSubject(@PathVariable long id) {
-        return teacherJoinSubjectService.findByIdJoin(id);
+        return teacherJoinSubjectService.findById(id);
     }
 
     @GetMapping

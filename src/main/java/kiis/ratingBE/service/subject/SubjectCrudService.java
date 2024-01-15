@@ -1,14 +1,17 @@
 package kiis.ratingBE.service.subject;
 
+import kiis.ratingBE.model.subject.SubjectEntity;
 import kiis.ratingBE.repository.CommonRepository;
 import kiis.ratingBE.service.CrudService;
-import kiis.ratingBE.model.subject.SubjectEntity;
+import kiis.ratingBE.service.CrudServiceTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SubjectCrudService extends CrudService<SubjectEntity> {
+public class SubjectCrudService
+        extends CrudServiceTemplate<SubjectEntity>
+        implements CrudService<SubjectEntity> {
     private final CommonRepository<SubjectEntity> subjectCrudRepository;
 
     @Override

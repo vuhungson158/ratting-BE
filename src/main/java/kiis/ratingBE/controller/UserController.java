@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
-//    private final CrudService<UserEntity> userCrudService;
+//    private final CrudServiceTemplate<UserEntity> userCrudService;
 
 
 //    @GetMapping("/{id}")

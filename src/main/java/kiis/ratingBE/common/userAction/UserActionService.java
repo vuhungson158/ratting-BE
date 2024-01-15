@@ -1,13 +1,13 @@
 package kiis.ratingBE.common.userAction;
 
-import kiis.ratingBE.service.CrudService;
+import kiis.ratingBE.service.CrudServiceTemplate;
 import kiis.ratingBE.service.user.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 @RequiredArgsConstructor
 public abstract class UserActionService<Entity extends UserActionBaseEntity> {
-    private final CrudService<Entity> crudService;
+    private final CrudServiceTemplate<Entity> crudService;
     private final AuthService authService;
 
     public Entity create(@NotNull Entity entity) {

@@ -1,9 +1,9 @@
 package kiis.ratingBE.controller;
 
-import kiis.ratingBE.service.CrudService;
-import kiis.ratingBE.service.JoinService;
 import kiis.ratingBE.model.subject.SubjectEntity;
 import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
+import kiis.ratingBE.service.CrudService;
+import kiis.ratingBE.service.JoinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +25,7 @@ public class SubjectController {
 
     @GetMapping("/{id}")
     public SubjectJoinTeacherEntity findByIdJoinTeacher(@PathVariable long id) {
-        return subjectJoinTeacherService.findByIdJoin(id);
+        return subjectJoinTeacherService.findById(id);
     }
 
     @PostMapping("/filter")

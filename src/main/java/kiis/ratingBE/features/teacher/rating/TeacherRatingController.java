@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/teacher-rating")
 @RestController
 public class TeacherRatingController {
-//    private final CrudService<TeacherRatingEntity> teacherRatingCrudService;
+//    private final CrudServiceTemplate<TeacherRatingEntity> teacherRatingCrudService;
 //    private final UserActionService<TeacherRatingEntity> teacherRatingUserActionService;
 //    private final RatingRepository<TeacherRatingEntity, TeacherRatingAverage> teacherRatingRepository;
 

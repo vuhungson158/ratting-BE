@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/subject-comment")
 public class SubjectCommentController {
-//    private final CrudService<SubjectCommentEntity> subjectCommentCrudService;
+//    private final CrudServiceTemplate<SubjectCommentEntity> subjectCommentCrudService;
 //    private final UserActionService<SubjectCommentEntity> subjectCommentUserActionService;
 //    private final CommentService<SubjectCommentEntity, SubjectCommentReactEntity> subjectCommentService;
 
