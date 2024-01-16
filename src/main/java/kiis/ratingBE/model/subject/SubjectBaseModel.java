@@ -9,9 +9,9 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import kiis.ratingBE.model.BaseEntity;
 import kiis.ratingBE.enums.Department;
 import kiis.ratingBE.enums.subjectClassification.Small;
+import kiis.ratingBE.model.BaseEntity;
 
 @MappedSuperclass
 public abstract class SubjectBaseModel extends BaseEntity {
@@ -21,7 +21,7 @@ public abstract class SubjectBaseModel extends BaseEntity {
 
     @Min(value = 1, message = "Min = 1")
     @Max(value = 4, message = "Max = 4")
-    public Integer formYear;
+    public Integer registrableYear;
 
     @NotBlank
     public String name;

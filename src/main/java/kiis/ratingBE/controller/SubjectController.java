@@ -2,6 +2,7 @@ package kiis.ratingBE.controller;
 
 import kiis.ratingBE.model.subject.SubjectEntity;
 import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
+import kiis.ratingBE.model.subject.SubjectListFilter;
 import kiis.ratingBE.service.CrudService;
 import kiis.ratingBE.service.JoinService;
 import kiis.ratingBE.service.subject.SubjectMainService;
@@ -28,17 +29,17 @@ public class SubjectController {
     private final JoinService<SubjectJoinTeacherEntity> subjectJoinTeacherService;
 
     @GetMapping("/{id}")
-    public SubjectJoinTeacherEntity findByIdJoinTeacher(@PathVariable long id) {
+    public SubjectJoinTeacherEntity findById(@PathVariable long id) {
         return subjectJoinTeacherService.findById(id);
     }
 
     @PostMapping("/filter")
     public Page<SubjectJoinTeacherEntity> findAll(
-            @RequestBody SubjectJoinTeacherEntity exampleEntity,
+            @RequestBody SubjectListFilter subjectListFilter,
             @RequestParam int page,
             @RequestParam int limit
     ) {
-        final Specification<SubjectJoinTeacherEntity> filter = subjectMainService.getSpecification(exampleEntity);
+        final Specification<SubjectJoinTeacherEntity> filter = subjectMainService.getSpecification(subjectListFilter);
         final Pageable paging = subjectMainService.getPaging(page, limit);
         return subjectJoinTeacherService.findAll(filter, paging);
     }

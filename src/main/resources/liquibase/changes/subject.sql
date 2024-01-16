@@ -20,3 +20,7 @@ create table subject
     schedule       varchar(255),
     semester       varchar(255)
 );
+
+--changeset SonVH25:alter-table-subject-rename-form_year-to-registrable_year
+alter table subject
+    rename column form_year to registrable_year
