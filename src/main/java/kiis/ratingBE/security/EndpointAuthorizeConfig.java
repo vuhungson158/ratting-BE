@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.http.HttpMethod.GET;
-
 @Component
 public class EndpointAuthorizeConfig
         implements Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> {
@@ -25,7 +23,7 @@ public class EndpointAuthorizeConfig
 //                .requestMatchers(GET, "/teacher/{id}").hasAnyRole(ADMIN, USER)
 
                 // Subject
-                .requestMatchers(GET, "/subject/{id}").hasAnyRole(ADMIN, USER)
+//                .requestMatchers(GET, "/subject/{id}").hasAnyRole(ADMIN, USER)
 
                 .anyRequest().permitAll();
     }

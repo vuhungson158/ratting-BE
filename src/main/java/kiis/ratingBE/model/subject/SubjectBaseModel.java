@@ -15,6 +15,9 @@ import kiis.ratingBE.model.BaseEntity;
 
 @MappedSuperclass
 public abstract class SubjectBaseModel extends BaseEntity {
+    @NotBlank
+    public String name;
+
     @Min(value = 1, message = "Min = 1")
     @Max(value = 6, message = "Max = 6")
     public Integer credit;
@@ -22,9 +25,6 @@ public abstract class SubjectBaseModel extends BaseEntity {
     @Min(value = 1, message = "Min = 1")
     @Max(value = 4, message = "Max = 4")
     public Integer registrableYear;
-
-    @NotBlank
-    public String name;
 
     @NotNull
     @Enumerated(EnumType.STRING)

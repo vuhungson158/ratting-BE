@@ -21,7 +21,8 @@ public class SubjectMainService {
                 .and(column("name").include(filter.name))
                 .and(column("department").is(filter.department))
                 .and(column("classification").is(filter.classification))
-                .and(column("require").is(filter.require));
+                .and(column("require").is(filter.require))
+                .and(column("isDeleted").is(false));
     }
 
     @Contract("_ -> new")
