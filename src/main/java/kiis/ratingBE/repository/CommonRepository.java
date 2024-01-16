@@ -4,6 +4,7 @@ import kiis.ratingBE.model.BaseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @NoRepositoryBean
 public interface CommonRepository<T extends BaseEntity>
-        extends JpaRepository<T, Long> {
+        extends JpaRepository<T, Long>, JpaSpecificationExecutor<T> {
 
     /**
      * same with findAll(), but where 'isDeleted' = false

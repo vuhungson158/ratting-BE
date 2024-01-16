@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +47,14 @@ public abstract class JoinServiceTemplate<JoinEntity extends BaseEntity>
         final ForeignKey[] foreignKeys = getJoinFields();
 
         filter.getProbe().isDeleted = false;
+        return joinRepository.findAll(filter, paging, joins(foreignKeys));
+    }
+
+    @Override
+    public Page<JoinEntity> findAll(Specification<JoinEntity> filter, Pageable paging) {
+        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
+        final ForeignKey[] foreignKeys = getJoinFields();
+
         return joinRepository.findAll(filter, paging, joins(foreignKeys));
     }
 
