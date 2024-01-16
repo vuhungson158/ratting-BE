@@ -11,7 +11,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
@@ -34,23 +33,20 @@ public abstract class JoinServiceTemplate<JoinEntity extends BaseEntity>
     }
 
     @Override
-    public Page<JoinEntity> findAll(int page, int limit) {
+    public Page<JoinEntity> findAll(Pageable paging) {
         final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
         final ForeignKey[] foreignKeys = getJoinFields();
 
-        final Pageable pageable = PageRequest.of(page, limit);
-        return joinRepository.findAllByIsDeletedIsFalse(pageable, joins(foreignKeys));
+        return joinRepository.findAllByIsDeletedIsFalse(paging, joins(foreignKeys));
     }
 
     @Override
-    public Page<JoinEntity> findAll(@NotNull JoinEntity exampleEntity, int page, int limit) {
+    public Page<JoinEntity> findAll(@NotNull Example<JoinEntity> filter, Pageable paging) {
         final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
         final ForeignKey[] foreignKeys = getJoinFields();
 
-        exampleEntity.isDeleted = false;
-        final Pageable pageable = PageRequest.of(page, limit);
-        final Example<JoinEntity> example = Example.of(exampleEntity);
-        return joinRepository.findAll(example, pageable, joins(foreignKeys));
+        filter.getProbe().isDeleted = false;
+        return joinRepository.findAll(filter, paging, joins(foreignKeys));
     }
 
     /**

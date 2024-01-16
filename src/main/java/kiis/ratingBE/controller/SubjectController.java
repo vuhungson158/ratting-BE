@@ -5,7 +5,10 @@ import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
 import kiis.ratingBE.service.CrudService;
 import kiis.ratingBE.service.JoinService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +32,14 @@ public class SubjectController {
     }
 
     @PostMapping("/filter")
-    public Page<SubjectEntity> findAll(@RequestBody SubjectEntity exampleEntity, @RequestParam int page, @RequestParam int limit) {
-        return subjectCrudService.findAll(exampleEntity, page, limit);
+    public Page<SubjectJoinTeacherEntity> findAll(
+            @RequestBody SubjectJoinTeacherEntity exampleEntity,
+            @RequestParam int page,
+            @RequestParam int limit
+    ) {
+        final Example<SubjectJoinTeacherEntity> filter = Example.of(exampleEntity);
+        final Pageable paging = PageRequest.of(page, limit);
+        return subjectJoinTeacherService.findAll(filter, paging);
     }
 
     @PostMapping

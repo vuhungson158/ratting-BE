@@ -1,14 +1,13 @@
 package kiis.ratingBE.service;
 
-import kiis.ratingBE.model.BaseEntity;
-import kiis.ratingBE.repository.CommonRepository;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import kiis.ratingBE.helper.Util;
+import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.repository.CommonRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Objects;
@@ -25,19 +24,16 @@ public abstract class CrudServiceTemplate<Entity extends BaseEntity>
     }
 
     @Override
-    public Page<Entity> findAll(int page, int limit) {
+    public Page<Entity> findAll(Pageable paging) {
         final CommonRepository<Entity> crudRepository = getCrudRepository();
-        final Pageable pageable = PageRequest.of(page, limit);
-        return crudRepository.findAllByIsDeletedIsFalse(pageable);
+        return crudRepository.findAllByIsDeletedIsFalse(paging);
     }
 
     @Override
-    public @NotNull Page<Entity> findAll(@NotNull Entity exampleEntity, int page, int limit) {
+    public @NotNull Page<Entity> findAll(@NotNull Example<Entity> filter, Pageable paging) {
         final CommonRepository<Entity> crudRepository = getCrudRepository();
-        exampleEntity.isDeleted = false;
-        final Pageable pageable = PageRequest.of(page, limit);
-        final Example<Entity> example = Example.of(exampleEntity);
-        return crudRepository.findAll(example, pageable);
+        filter.getProbe().isDeleted = false;
+        return crudRepository.findAll(filter, paging);
     }
 
     @Override
