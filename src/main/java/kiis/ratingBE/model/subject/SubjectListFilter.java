@@ -12,6 +12,4 @@ public class SubjectListFilter {
     public Department department;
     public Small classification;
     public Boolean require;
-    public String semester;
-    public String schedule;
 }

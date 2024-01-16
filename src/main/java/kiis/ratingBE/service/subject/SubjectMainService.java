@@ -18,7 +18,10 @@ public class SubjectMainService {
         return Specification
                 .where(column("credit").between(filter.creditFrom, filter.creditTo))
                 .and(column("registrableYear").between(filter.registrableYearFrom, filter.registrableYearTo))
-                .and(column("name").include(filter.name));
+                .and(column("name").include(filter.name))
+                .and(column("department").is(filter.department))
+                .and(column("classification").is(filter.classification))
+                .and(column("require").is(filter.require));
     }
 
     @Contract("_ -> new")
