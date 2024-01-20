@@ -2,12 +2,11 @@ package kiis.ratingBE.model.subject;
 
 import kiis.ratingBE.enums.Department;
 import kiis.ratingBE.enums.subjectClassification.Small;
+import kiis.ratingBE.model.FromTo;
 
 public class SubjectListFilter {
-    public Integer creditFrom;
-    public Integer creditTo;
-    public Integer registrableYearFrom;
-    public Integer registrableYearTo;
+    public FromTo<Integer> credit;
+    public FromTo<Integer> registrableYear;
     public String name;
     public Department department;
     public Small classification;

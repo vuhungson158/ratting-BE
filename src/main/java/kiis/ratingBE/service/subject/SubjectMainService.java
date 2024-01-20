@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 public class SubjectMainService {
     public Specification<SubjectJoinTeacherEntity> getSpecification(@NotNull SubjectListFilter filter) {
         return Specification
-                .where(column("credit").between(filter.creditFrom, filter.creditTo))
-                .and(column("registrableYear").between(filter.registrableYearFrom, filter.registrableYearTo))
+                .where(column("credit").between(filter.credit.from, filter.credit.to))
+                .and(column("registrableYear").between(filter.registrableYear.from, filter.registrableYear.to))
                 .and(column("name").include(filter.name))
                 .and(column("department").is(filter.department))
                 .and(column("classification").is(filter.classification))
