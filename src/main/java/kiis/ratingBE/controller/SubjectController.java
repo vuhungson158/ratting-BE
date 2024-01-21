@@ -40,8 +40,8 @@ public class SubjectController {
             @RequestParam int limit
     ) {
         final Specification<SubjectJoinTeacherEntity> filter = subjectMainService.getSpecification(subjectListFilter);
-        final Pageable paging = subjectMainService.getPaging(page, limit);
-        return subjectJoinTeacherService.findAll(filter, paging);
+        final Pageable pagingAndSort = subjectMainService.getPagingAndSort(page, limit);
+        return subjectJoinTeacherService.findAll(filter, pagingAndSort);
     }
 
     @PostMapping

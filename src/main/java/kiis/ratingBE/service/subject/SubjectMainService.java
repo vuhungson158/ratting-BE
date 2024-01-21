@@ -31,7 +31,7 @@ public class SubjectMainService {
         };
     }
 
-    public Pageable getPaging(int page, int limit) {
+    public Pageable getPagingAndSort(int page, int limit) {
         return PageRequest.of(page, limit);
     }
 }
