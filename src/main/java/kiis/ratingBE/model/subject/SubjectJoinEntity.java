@@ -6,11 +6,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import kiis.ratingBE.model.common.JoinEntity;
 import kiis.ratingBE.model.teacher.TeacherEntity;
 
 @Entity
 @Table(name = "subject")
-public class SubjectJoinTeacherEntity extends SubjectBaseModel {
+public class SubjectJoinEntity extends SubjectBaseModel implements JoinEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false, insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

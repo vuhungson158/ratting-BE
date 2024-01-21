@@ -1,7 +1,7 @@
 package kiis.ratingBE.controller;
 
 import kiis.ratingBE.model.teacher.TeacherEntity;
-import kiis.ratingBE.model.teacher.TeacherJoinSubjectEntity;
+import kiis.ratingBE.model.teacher.TeacherJoinEntity;
 import kiis.ratingBE.service.common.CrudService;
 import kiis.ratingBE.service.common.JoinService;
 import kiis.ratingBE.service.teacher.TeacherMainService;
@@ -22,11 +22,11 @@ import java.util.List;
 @RequestMapping(path = "/teacher")
 public class TeacherController {
     private final CrudService<TeacherEntity> teacherCrudService;
-    private final JoinService<TeacherJoinSubjectEntity> teacherJoinSubjectService;
+    private final JoinService<TeacherJoinEntity> teacherJoinSubjectService;
     private final TeacherMainService teacherMainService;
 
     @GetMapping("/{id}")
-    public TeacherJoinSubjectEntity findByIdJoinSubject(@PathVariable long id) {
+    public TeacherJoinEntity findByIdJoinSubject(@PathVariable long id) {
         return teacherJoinSubjectService.findById(id);
     }
 

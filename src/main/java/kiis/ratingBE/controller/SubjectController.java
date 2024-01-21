@@ -1,7 +1,8 @@
 package kiis.ratingBE.controller;
 
 import kiis.ratingBE.model.subject.SubjectEntity;
-import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
+import kiis.ratingBE.model.subject.SubjectJoinEntity;
+import kiis.ratingBE.model.subject.SubjectJoinTeacherDTO;
 import kiis.ratingBE.model.subject.SubjectListFilter;
 import kiis.ratingBE.service.common.CrudService;
 import kiis.ratingBE.service.common.JoinService;
@@ -26,22 +27,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class SubjectController {
     private final SubjectMainService subjectMainService;
     private final CrudService<SubjectEntity> subjectCrudService;
-    private final JoinService<SubjectJoinTeacherEntity> subjectJoinTeacherService;
+    private final JoinService<SubjectJoinEntity> subjectJoinTeacherService;
 
     @GetMapping("/{id}")
-    public SubjectJoinTeacherEntity findById(@PathVariable long id) {
+    public SubjectJoinEntity findById(@PathVariable long id) {
         return subjectJoinTeacherService.findById(id);
     }
 
     @PostMapping("/filter")
-    public Page<SubjectJoinTeacherEntity> findAll(
+    public Page<SubjectJoinTeacherDTO> findAll(
             @RequestBody SubjectListFilter subjectListFilter,
             @RequestParam int page,
             @RequestParam int limit
     ) {
-        final Specification<SubjectJoinTeacherEntity> filter = subjectMainService.getSpecification(subjectListFilter);
+        final Specification<SubjectJoinEntity> filter = subjectMainService.getSpecification(subjectListFilter);
         final Pageable pagingAndSort = subjectMainService.getPagingAndSort(page, limit);
-        return subjectJoinTeacherService.findAll(filter, pagingAndSort);
+        final Page<SubjectJoinEntity> subjects = subjectJoinTeacherService.findAll(filter, pagingAndSort);
+        return SubjectJoinTeacherDTO.from(subjects);
     }
 
     @PostMapping

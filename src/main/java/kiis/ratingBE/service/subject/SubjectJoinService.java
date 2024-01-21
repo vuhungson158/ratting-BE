@@ -2,7 +2,7 @@ package kiis.ratingBE.service.subject;
 
 import kiis.ratingBE.enums.foreignKey.ForeignKey;
 import kiis.ratingBE.enums.foreignKey.SubjectForeignKey;
-import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
+import kiis.ratingBE.model.subject.SubjectJoinEntity;
 import kiis.ratingBE.repository.common.JoinRepository;
 import kiis.ratingBE.service.common.JoinService;
 import kiis.ratingBE.service.common.JoinServiceTemplate;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SubjectJoinTeacherService
-        extends JoinServiceTemplate<SubjectJoinTeacherEntity>
-        implements JoinService<SubjectJoinTeacherEntity> {
-    private final JoinRepository<SubjectJoinTeacherEntity> subjectJoinTeacherRepository;
+public class SubjectJoinService
+        extends JoinServiceTemplate<SubjectJoinEntity>
+        implements JoinService<SubjectJoinEntity> {
+    private final JoinRepository<SubjectJoinEntity> subjectJoinTeacherRepository;
 
     @Override
-    protected JoinRepository<SubjectJoinTeacherEntity> getJoinRepository() {
+    protected JoinRepository<SubjectJoinEntity> getJoinRepository() {
         return subjectJoinTeacherRepository;
     }
 

@@ -1,6 +1,6 @@
 package kiis.ratingBE.service.subject;
 
-import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
+import kiis.ratingBE.model.subject.SubjectJoinEntity;
 import kiis.ratingBE.model.subject.SubjectListFilter;
 import kiis.ratingBE.service.common.SpecificationUtil;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SubjectMainService {
-    public Specification<SubjectJoinTeacherEntity> getSpecification(@NotNull SubjectListFilter filter) {
+    public Specification<SubjectJoinEntity> getSpecification(@NotNull SubjectListFilter filter) {
         return Specification
                 .where(column("credit").between(filter.credit.from, filter.credit.to))
                 .and(column("registrableYear").between(filter.registrableYear.from, filter.registrableYear.to))
@@ -26,7 +26,7 @@ public class SubjectMainService {
     }
 
     @Contract("_ -> new")
-    private @NotNull SpecificationUtil<SubjectJoinTeacherEntity> column(String column) {
+    private @NotNull SpecificationUtil<SubjectJoinEntity> column(String column) {
         return new SpecificationUtil<>(column) {
         };
     }
