@@ -1,6 +1,6 @@
 package kiis.ratingBE.common.comment;
 
-import kiis.ratingBE.repository.CommonRepository;
+import kiis.ratingBE.repository.common.CommonRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.Optional;

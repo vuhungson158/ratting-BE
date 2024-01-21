@@ -2,8 +2,8 @@ package kiis.ratingBE.controller;
 
 import kiis.ratingBE.model.teacher.TeacherEntity;
 import kiis.ratingBE.model.teacher.TeacherJoinSubjectEntity;
-import kiis.ratingBE.service.CrudService;
-import kiis.ratingBE.service.JoinService;
+import kiis.ratingBE.service.common.CrudService;
+import kiis.ratingBE.service.common.JoinService;
 import kiis.ratingBE.service.teacher.TeacherMainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;

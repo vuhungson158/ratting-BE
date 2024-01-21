@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
-import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.model.common.BaseEntity;
 import kiis.ratingBE.model.user.UserEntity;
 
 @MappedSuperclass

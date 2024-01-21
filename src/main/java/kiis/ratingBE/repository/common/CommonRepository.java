@@ -1,6 +1,6 @@
-package kiis.ratingBE.repository;
+package kiis.ratingBE.repository.common;
 
-import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.model.common.BaseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

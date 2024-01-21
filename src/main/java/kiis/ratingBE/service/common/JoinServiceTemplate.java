@@ -1,11 +1,11 @@
-package kiis.ratingBE.service;
+package kiis.ratingBE.service.common;
 
 import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.enums.foreignKey.ForeignKey;
 import kiis.ratingBE.exception.RecordNotFoundException;
-import kiis.ratingBE.model.BaseEntity;
-import kiis.ratingBE.repository.JoinRepository;
+import kiis.ratingBE.model.common.BaseEntity;
+import kiis.ratingBE.repository.common.JoinRepository;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

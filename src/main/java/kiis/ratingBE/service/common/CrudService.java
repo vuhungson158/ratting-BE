@@ -1,6 +1,6 @@
-package kiis.ratingBE.service;
+package kiis.ratingBE.service.common;
 
-import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.model.common.BaseEntity;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

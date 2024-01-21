@@ -1,4 +1,4 @@
-package kiis.ratingBE.model;
+package kiis.ratingBE.model.common;
 
 public class FromTo<T> {
     public T from;

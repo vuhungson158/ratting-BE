@@ -1,9 +1,9 @@
-package kiis.ratingBE.repository;
+package kiis.ratingBE.repository.common;
 
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphJpaRepository;
 import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphJpaSpecificationExecutor;
-import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.model.common.BaseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.NoRepositoryBean;

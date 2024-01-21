@@ -1,10 +1,10 @@
-package kiis.ratingBE.service;
+package kiis.ratingBE.service.common;
 
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
 import kiis.ratingBE.helper.Util;
-import kiis.ratingBE.model.BaseEntity;
-import kiis.ratingBE.repository.CommonRepository;
+import kiis.ratingBE.model.common.BaseEntity;
+import kiis.ratingBE.repository.common.CommonRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;

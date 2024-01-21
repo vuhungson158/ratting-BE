@@ -1,4 +1,4 @@
-package kiis.ratingBE.service;
+package kiis.ratingBE.service.common;
 
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Contract;

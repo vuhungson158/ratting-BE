@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import kiis.ratingBE.enums.Department;
 import kiis.ratingBE.enums.subjectClassification.Small;
-import kiis.ratingBE.model.BaseEntity;
+import kiis.ratingBE.model.common.BaseEntity;
 
 @MappedSuperclass
 public abstract class SubjectBaseModel extends BaseEntity {

@@ -1,6 +1,6 @@
 package kiis.ratingBE.features.subject.rating;
 
-import kiis.ratingBE.repository.CommonRepository;
+import kiis.ratingBE.repository.common.CommonRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

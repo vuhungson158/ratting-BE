@@ -2,7 +2,7 @@ package kiis.ratingBE.service.subject;
 
 import kiis.ratingBE.model.subject.SubjectJoinTeacherEntity;
 import kiis.ratingBE.model.subject.SubjectListFilter;
-import kiis.ratingBE.service.SpecificationUtil;
+import kiis.ratingBE.service.common.SpecificationUtil;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

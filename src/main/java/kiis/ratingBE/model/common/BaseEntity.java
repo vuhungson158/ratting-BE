@@ -1,4 +1,4 @@
-package kiis.ratingBE.model;
+package kiis.ratingBE.model.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.EntityListeners;

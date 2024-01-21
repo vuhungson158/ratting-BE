@@ -2,7 +2,7 @@ package kiis.ratingBE.model.subject;
 
 import kiis.ratingBE.enums.Department;
 import kiis.ratingBE.enums.subjectClassification.Small;
-import kiis.ratingBE.model.FromTo;
+import kiis.ratingBE.model.common.FromTo;
 
 public class SubjectListFilter {
     public FromTo<Integer> credit;

@@ -1,9 +1,9 @@
 package kiis.ratingBE.service.subject;
 
 import kiis.ratingBE.model.subject.SubjectEntity;
-import kiis.ratingBE.repository.CommonRepository;
-import kiis.ratingBE.service.CrudService;
-import kiis.ratingBE.service.CrudServiceTemplate;
+import kiis.ratingBE.repository.common.CommonRepository;
+import kiis.ratingBE.service.common.CrudService;
+import kiis.ratingBE.service.common.CrudServiceTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
