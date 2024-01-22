@@ -36,17 +36,17 @@ public class TeacherController {
     }
 
     @PostMapping
-    public TeacherEntity create(@RequestBody TeacherEntity entity) {
-        return teacherCrudService.create(entity);
+    public void create(@RequestBody TeacherEntity entity) {
+        teacherCrudService.create(entity);
     }
 
     @PutMapping("/{id}")
-    public TeacherEntity update(@RequestBody TeacherEntity entity, @PathVariable long id) {
-        return teacherCrudService.update(entity, id);
+    public void update(@RequestBody TeacherEntity entity, @PathVariable long id) {
+        teacherCrudService.update(entity, id);
     }
 
     @DeleteMapping("/{id}")
-    public TeacherEntity delete(@PathVariable long id) {
-        return teacherCrudService.delete(id);
+    public void delete(@PathVariable long id) {
+        teacherCrudService.delete(id);
     }
 }

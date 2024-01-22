@@ -47,17 +47,17 @@ public class SubjectController {
     }
 
     @PostMapping
-    public SubjectEntity create(@RequestBody SubjectEntity entity) {
-        return subjectCrudService.create(entity);
+    public void create(@RequestBody SubjectEntity entity) {
+        subjectCrudService.create(entity);
     }
 
     @PutMapping("/{id}")
-    public SubjectEntity update(@RequestBody SubjectEntity entity, @PathVariable long id) {
-        return subjectCrudService.update(entity, id);
+    public void update(@RequestBody SubjectEntity entity, @PathVariable long id) {
+        subjectCrudService.update(entity, id);
     }
 
     @DeleteMapping("/{id}")
-    public SubjectEntity delete(@PathVariable long id) {
-        return subjectCrudService.delete(id);
+    public void delete(@PathVariable long id) {
+        subjectCrudService.delete(id);
     }
 }
