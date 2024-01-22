@@ -2,6 +2,7 @@ package kiis.ratingBE.controller;
 
 import kiis.ratingBE.model.teacher.TeacherEntity;
 import kiis.ratingBE.model.teacher.TeacherJoinEntity;
+import kiis.ratingBE.model.teacher.TeacherJoinSubjectsDTO;
 import kiis.ratingBE.service.common.CrudService;
 import kiis.ratingBE.service.common.JoinService;
 import kiis.ratingBE.service.teacher.TeacherMainService;
@@ -29,8 +30,9 @@ public class TeacherController {
     private final TeacherMainService teacherMainService;
 
     @GetMapping("/{id}")
-    public TeacherJoinEntity findByIdJoinSubject(@PathVariable long id) {
-        return teacherJoinSubjectService.findById(id, joins(SUBJECTS));
+    public TeacherJoinSubjectsDTO findByIdJoinSubject(@PathVariable long id) {
+        final TeacherJoinEntity entity = teacherJoinSubjectService.findById(id, joins(SUBJECTS));
+        return new TeacherJoinSubjectsDTO(entity);
     }
 
     @GetMapping

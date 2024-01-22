@@ -34,8 +34,9 @@ public class SubjectController {
     private final JoinService<SubjectJoinEntity> subjectJoinTeacherService;
 
     @GetMapping("/{id}")
-    public SubjectJoinEntity findById(@PathVariable long id) {
-        return subjectJoinTeacherService.findById(id, joins(TEACHER));
+    public SubjectJoinTeacherDTO findById(@PathVariable long id) {
+        final SubjectJoinEntity entity = subjectJoinTeacherService.findById(id, joins(TEACHER));
+        return new SubjectJoinTeacherDTO(entity);
     }
 
     @PostMapping("/filter")
