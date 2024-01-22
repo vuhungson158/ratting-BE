@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.springframework.data.jpa.domain.Specification;
 
 @RequiredArgsConstructor
-public abstract class SpecificationUtil<T> {
+public class SpecificationUtil<T> {
     private final String column;
 
     @Contract(pure = true)

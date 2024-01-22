@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SubjectMainService {
-    public Specification<SubjectJoinEntity> getSpecification(@NotNull SubjectListFilter filter) {
+    public Specification<SubjectJoinEntity> getFilter(@NotNull SubjectListFilter filter) {
         return Specification
                 .where(column("credit").between(filter.credit.from, filter.credit.to))
                 .and(column("registrableYear").between(filter.registrableYear.from, filter.registrableYear.to))
@@ -27,8 +27,7 @@ public class SubjectMainService {
 
     @Contract("_ -> new")
     private @NotNull SpecificationUtil<SubjectJoinEntity> column(String column) {
-        return new SpecificationUtil<>(column) {
-        };
+        return new SpecificationUtil<>(column);
     }
 
     public Pageable getPagingAndSort(int page, int limit) {

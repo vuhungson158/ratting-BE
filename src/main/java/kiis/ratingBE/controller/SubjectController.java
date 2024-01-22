@@ -45,7 +45,7 @@ public class SubjectController {
             @RequestParam int page,
             @RequestParam int limit
     ) {
-        final Specification<SubjectJoinEntity> filter = subjectMainService.getSpecification(subjectListFilter);
+        final Specification<SubjectJoinEntity> filter = subjectMainService.getFilter(subjectListFilter);
         final Pageable pagingAndSort = subjectMainService.getPagingAndSort(page, limit);
         final Page<SubjectJoinEntity> subjects = subjectJoinTeacherService.findAll(filter, pagingAndSort, joins(TEACHER));
         return MappingUtil.mappingPage(subjects, SubjectJoinTeacherDTO::new);
