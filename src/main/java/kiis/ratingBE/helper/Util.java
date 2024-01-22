@@ -1,12 +1,7 @@
 package kiis.ratingBE.helper;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kiis.ratingBE.model.common.BaseEntity;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,28 +17,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public abstract class Util {
-    final static ObjectMapper mapper = new ObjectMapper();
     final static Logger logger = LoggerFactory.getLogger(Util.class);
-
-    static {
-        mapper.registerModule(new JavaTimeModule());
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
-
-    /**
-     * @param object source
-     * @param type   target Class
-     * @param <T>    target Class Type
-     * @return target with source's properties
-     */
-    public static <T> @Nullable T mapping(Object object, Class<T> type) {
-        try {
-            return mapper.readValue(mapper.writeValueAsString(object), type);
-        } catch (final JsonProcessingException e) {
-            logger.error(e.getMessage(), e);
-            return null;
-        }
-    }
 
     /**
      * @param beanClass class want to use
@@ -53,8 +27,7 @@ public abstract class Util {
      * @return bean
      */
     @Deprecated
-    public static <T extends U, U> @NotNull U chooseBeanFromList(@NotNull Class<T> beanClass,
-                                                                 @NotNull List<U> beanList) {
+    public static <T extends U, U> @NotNull U chooseBeanFromList(@NotNull Class<T> beanClass, @NotNull List<U> beanList) {
         for (final U bean : beanList) {
             if (Objects.equals(bean.getClass(), beanClass)) {
                 return bean;
@@ -71,7 +44,6 @@ public abstract class Util {
     public static <T extends BaseEntity> void copyBaseEntityProperties(@NotNull T source, @NotNull T target) {
         copyProperties(source, target, BaseEntity.class);
     }
-
 
     /**
      * (S-source) and (T-target) must be inherited same (C-super)
