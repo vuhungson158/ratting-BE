@@ -1,6 +1,7 @@
 package kiis.ratingBE.model.subject;
 
 import kiis.ratingBE.helper.Util;
+import kiis.ratingBE.model.common.DTO;
 import kiis.ratingBE.model.teacher.TeacherEntity;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
@@ -8,7 +9,7 @@ import org.springframework.data.domain.PageImpl;
 
 import java.util.List;
 
-public class SubjectJoinTeacherDTO extends SubjectBaseModel {
+public class SubjectJoinTeacherDTO extends SubjectBaseModel implements DTO {
     public TeacherEntity teacher;
 
     private SubjectJoinTeacherDTO() {

@@ -1,7 +1,5 @@
 package kiis.ratingBE.model.subject;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
@@ -42,9 +40,4 @@ public abstract class SubjectBaseModel extends BaseEntity {
 
     @NotBlank
     public String schedule;
-
-    @NotNull
-    @Column(name = "teacher_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Long teacherId;
 }
