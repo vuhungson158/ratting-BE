@@ -2,7 +2,7 @@ package kiis.ratingBE.service.common;
 
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.exception.VersionException;
-import kiis.ratingBE.helper.Util;
+import kiis.ratingBE.helper.MappingUtil;
 import kiis.ratingBE.model.common.BaseEntity;
 import kiis.ratingBE.repository.common.CommonRepository;
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +56,7 @@ public abstract class CrudServiceTemplate<Entity extends BaseEntity>
         if (!Objects.equals(old.version, entity.version)) {
             throw new VersionException();
         }
-        Util.copyBaseEntityProperties(old, entity);
+        MappingUtil.copyBaseEntityProperties(old, entity);
         return crudRepository.save(entity);
     }
 

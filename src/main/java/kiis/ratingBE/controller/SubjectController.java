@@ -1,6 +1,6 @@
 package kiis.ratingBE.controller;
 
-import kiis.ratingBE.helper.Util;
+import kiis.ratingBE.helper.MappingUtil;
 import kiis.ratingBE.model.subject.SubjectEntity;
 import kiis.ratingBE.model.subject.SubjectJoinEntity;
 import kiis.ratingBE.model.subject.SubjectJoinTeacherDTO;
@@ -47,7 +47,7 @@ public class SubjectController {
         final Specification<SubjectJoinEntity> filter = subjectMainService.getSpecification(subjectListFilter);
         final Pageable pagingAndSort = subjectMainService.getPagingAndSort(page, limit);
         final Page<SubjectJoinEntity> subjects = subjectJoinTeacherService.findAll(filter, pagingAndSort, joins(TEACHER));
-        return Util.mappingPage(subjects, SubjectJoinTeacherDTO::new);
+        return MappingUtil.mappingPage(subjects, SubjectJoinTeacherDTO::new);
     }
 
     @PostMapping
