@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 public abstract class Util {
     final static ObjectMapper mapper = new ObjectMapper();
@@ -65,9 +68,21 @@ public abstract class Util {
         return Period.between(localDateDob, LocalDate.now()).getYears();
     }
 
-    public static <T extends BaseEntity> void copyProperties(@NotNull T source, @NotNull T target) {
-        final Class<BaseEntity> baseEntityClass = BaseEntity.class;
-        for (final Field field : baseEntityClass.getDeclaredFields()) {
+    public static <T extends BaseEntity> void copyBaseEntityProperties(@NotNull T source, @NotNull T target) {
+        copyProperties(source, target, BaseEntity.class);
+    }
+
+
+    /**
+     * (S-source) and (T-target) must be inherited same (C-super)
+     *
+     * @param baseModel only copy properties that declared in {@code Class<C>}
+     * @param <C>       super class
+     * @param <S>       source
+     * @param <T>       target
+     */
+    public static <C, S extends C, T extends C> void copyProperties(@NotNull S source, @NotNull T target, @NotNull Class<C> baseModel) {
+        for (final Field field : baseModel.getDeclaredFields()) {
             try {
                 final Object sourceValue = field.get(source);
                 field.set(target, sourceValue);
@@ -76,6 +91,15 @@ public abstract class Util {
                 return;
             }
         }
+    }
 
+    /**
+     * input page(P-param) and output page(R-return) must be inherited same (S-super)
+     */
+    public static <S, P extends S, R extends S> @NotNull Page<R> mappingPage(@NotNull Page<P> page, Function<P, R> mapper) {
+        final List<R> list = page.getContent().stream()
+                .map(mapper)
+                .toList();
+        return new PageImpl<>(list, page.getPageable(), page.getTotalElements());
     }
 }

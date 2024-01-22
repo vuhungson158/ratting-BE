@@ -56,7 +56,7 @@ public abstract class CrudServiceTemplate<Entity extends BaseEntity>
         if (!Objects.equals(old.version, entity.version)) {
             throw new VersionException();
         }
-        Util.copyProperties(old, entity);
+        Util.copyBaseEntityProperties(old, entity);
         return crudRepository.save(entity);
     }
 
