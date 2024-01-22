@@ -5,9 +5,9 @@ import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
 import kiis.ratingBE.enums.foreignKey.ForeignKey;
 import kiis.ratingBE.exception.RecordNotFoundException;
 import kiis.ratingBE.model.common.BaseEntity;
+import kiis.ratingBE.model.common.JoinEntity;
 import kiis.ratingBE.repository.common.JoinRepository;
 import org.apache.commons.lang3.ArrayUtils;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -18,52 +18,54 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class JoinServiceTemplate<JoinEntity extends BaseEntity>
-        implements JoinService<JoinEntity> {
-    protected abstract JoinRepository<JoinEntity> getJoinRepository();
+public abstract class JoinServiceTemplate<Entity extends BaseEntity & JoinEntity>
+        implements JoinService<Entity> {
+    protected abstract JoinRepository<Entity> getJoinRepository();
 
-    protected abstract ForeignKey[] getJoinFields();
-
+    /**
+     * @param joins recommend {@link JoinServiceTemplate#joins}
+     */
     @Override
-    public JoinEntity findById(long id) {
-        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
-        final ForeignKey[] foreignKeys = getJoinFields();
-
-        return joinRepository.findById(id, joins(foreignKeys))
+    public Entity findById(long id, EntityGraph joins) {
+        final JoinRepository<Entity> joinRepository = getJoinRepository();
+        return joinRepository.findById(id, joins)
                 .orElseThrow(() -> new RecordNotFoundException("Record", id));
     }
 
+    /**
+     * @param joins recommend {@link JoinServiceTemplate#joins}
+     */
     @Override
-    public Page<JoinEntity> findAll(Pageable paging) {
-        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
-        final ForeignKey[] foreignKeys = getJoinFields();
-
-        return joinRepository.findAllByIsDeletedIsFalse(paging, joins(foreignKeys));
-    }
-
-    @Override
-    public Page<JoinEntity> findAll(@NotNull Example<JoinEntity> filter, Pageable paging) {
-        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
-        final ForeignKey[] foreignKeys = getJoinFields();
-
-        filter.getProbe().isDeleted = false;
-        return joinRepository.findAll(filter, paging, joins(foreignKeys));
-    }
-
-    @Override
-    public Page<JoinEntity> findAll(Specification<JoinEntity> filter, Pageable paging) {
-        final JoinRepository<JoinEntity> joinRepository = getJoinRepository();
-        final ForeignKey[] foreignKeys = getJoinFields();
-
-        return joinRepository.findAll(filter, paging, joins(foreignKeys));
+    public Page<Entity> findAll(Pageable paging, EntityGraph joins) {
+        final JoinRepository<Entity> joinRepository = getJoinRepository();
+        return joinRepository.findAllByIsDeletedIsFalse(paging, joins);
     }
 
     /**
-     * @param foreignKeys must be JoinEntity's OneToMany or ManyToOne fields
-     * @return DynamicEntityGraph
+     * @param joins recommend {@link JoinServiceTemplate#joins}
      */
-    @Contract("_ -> new")
-    private @NotNull EntityGraph joins(@NotNull ForeignKey[] foreignKeys) {
+    @Override
+    public Page<Entity> findAll(@NotNull Example<Entity> filter, Pageable paging, EntityGraph joins) {
+        final JoinRepository<Entity> joinRepository = getJoinRepository();
+        filter.getProbe().isDeleted = false;
+        return joinRepository.findAll(filter, paging, joins);
+    }
+
+    /**
+     * @param joins recommend {@link JoinServiceTemplate#joins}
+     */
+    @Override
+    public Page<Entity> findAll(Specification<Entity> filter, Pageable paging, EntityGraph joins) {
+        final JoinRepository<Entity> joinRepository = getJoinRepository();
+        return joinRepository.findAll(filter, paging, joins);
+    }
+
+    /**
+     * @param foreignKeys must be Entity's OneToMany or ManyToOne fields
+     * @return {@link DynamicEntityGraph}
+     */
+    @SafeVarargs
+    public static <T extends Enum<T> & ForeignKey> EntityGraph joins(T... foreignKeys) {
         if (Objects.isNull(foreignKeys) || ArrayUtils.isEmpty(foreignKeys)) {
             return EntityGraph.NOOP;
         }

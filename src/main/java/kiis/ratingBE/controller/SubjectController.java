@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static kiis.ratingBE.enums.foreignKey.SubjectForeignKey.TEACHER;
+import static kiis.ratingBE.service.common.JoinServiceTemplate.joins;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/subject")
@@ -31,7 +34,7 @@ public class SubjectController {
 
     @GetMapping("/{id}")
     public SubjectJoinEntity findById(@PathVariable long id) {
-        return subjectJoinTeacherService.findById(id);
+        return subjectJoinTeacherService.findById(id, joins(TEACHER));
     }
 
     @PostMapping("/filter")
@@ -42,7 +45,7 @@ public class SubjectController {
     ) {
         final Specification<SubjectJoinEntity> filter = subjectMainService.getSpecification(subjectListFilter);
         final Pageable pagingAndSort = subjectMainService.getPagingAndSort(page, limit);
-        final Page<SubjectJoinEntity> subjects = subjectJoinTeacherService.findAll(filter, pagingAndSort);
+        final Page<SubjectJoinEntity> subjects = subjectJoinTeacherService.findAll(filter, pagingAndSort, joins(TEACHER));
         return SubjectJoinTeacherDTO.from(subjects);
     }
 

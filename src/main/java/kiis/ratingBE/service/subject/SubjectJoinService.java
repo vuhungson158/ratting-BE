@@ -1,7 +1,5 @@
 package kiis.ratingBE.service.subject;
 
-import kiis.ratingBE.enums.foreignKey.ForeignKey;
-import kiis.ratingBE.enums.foreignKey.SubjectForeignKey;
 import kiis.ratingBE.model.subject.SubjectJoinEntity;
 import kiis.ratingBE.repository.common.JoinRepository;
 import kiis.ratingBE.service.common.JoinService;
@@ -19,10 +17,5 @@ public class SubjectJoinService
     @Override
     protected JoinRepository<SubjectJoinEntity> getJoinRepository() {
         return subjectJoinTeacherRepository;
-    }
-
-    @Override
-    protected ForeignKey[] getJoinFields() {
-        return new ForeignKey[]{SubjectForeignKey.TEACHER};
     }
 }

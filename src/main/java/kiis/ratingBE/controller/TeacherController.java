@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static kiis.ratingBE.enums.foreignKey.TeacherForeignKey.SUBJECTS;
+import static kiis.ratingBE.service.common.JoinServiceTemplate.joins;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/teacher")
@@ -27,7 +30,7 @@ public class TeacherController {
 
     @GetMapping("/{id}")
     public TeacherJoinEntity findByIdJoinSubject(@PathVariable long id) {
-        return teacherJoinSubjectService.findById(id);
+        return teacherJoinSubjectService.findById(id, joins(SUBJECTS));
     }
 
     @GetMapping

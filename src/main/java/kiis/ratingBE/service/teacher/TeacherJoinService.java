@@ -1,7 +1,5 @@
 package kiis.ratingBE.service.teacher;
 
-import kiis.ratingBE.enums.foreignKey.ForeignKey;
-import kiis.ratingBE.enums.foreignKey.TeacherForeignKey;
 import kiis.ratingBE.model.teacher.TeacherJoinEntity;
 import kiis.ratingBE.repository.common.JoinRepository;
 import kiis.ratingBE.service.common.JoinService;
@@ -19,10 +17,5 @@ public class TeacherJoinService
     @Override
     protected JoinRepository<TeacherJoinEntity> getJoinRepository() {
         return teacherJoinSubjectRepository;
-    }
-
-    @Override
-    protected ForeignKey[] getJoinFields() {
-        return new ForeignKey[]{TeacherForeignKey.SUBJECTS};
     }
 }

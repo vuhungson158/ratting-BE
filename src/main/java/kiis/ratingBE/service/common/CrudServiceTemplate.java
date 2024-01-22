@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Objects;
 
@@ -33,6 +34,12 @@ public abstract class CrudServiceTemplate<Entity extends BaseEntity>
     public @NotNull Page<Entity> findAll(@NotNull Example<Entity> filter, Pageable paging) {
         final CommonRepository<Entity> crudRepository = getCrudRepository();
         filter.getProbe().isDeleted = false;
+        return crudRepository.findAll(filter, paging);
+    }
+
+    @Override
+    public Page<Entity> findAll(Specification<Entity> filter, Pageable paging) {
+        final CommonRepository<Entity> crudRepository = getCrudRepository();
         return crudRepository.findAll(filter, paging);
     }
 
