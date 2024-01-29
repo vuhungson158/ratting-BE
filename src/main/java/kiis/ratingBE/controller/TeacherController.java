@@ -41,13 +41,13 @@ public class TeacherController {
     }
 
     @PostMapping
-    public void create(@RequestBody TeacherEntity entity) {
-        teacherCrudService.create(entity);
+    public Long create(@RequestBody TeacherEntity entity) {
+        return teacherCrudService.create(entity).id;
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody TeacherEntity entity, @PathVariable long id) {
-        teacherCrudService.update(entity, id);
+    public Long update(@RequestBody TeacherEntity entity, @PathVariable long id) {
+        return teacherCrudService.update(entity, id).id;
     }
 
     @DeleteMapping("/{id}")

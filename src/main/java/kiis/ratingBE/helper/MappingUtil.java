@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public abstract class MappingUtil {
-    final static Logger logger = LoggerFactory.getLogger(Util.class);
+    final static Logger logger = LoggerFactory.getLogger(MappingUtil.class);
 
     public static <T extends BaseEntity> void copyBaseEntityProperties(@NotNull T source, @NotNull T target) {
         copyProperties(source, target, BaseEntity.class);
@@ -27,7 +27,7 @@ public abstract class MappingUtil {
      * @param <T>       target
      */
     public static <C, S extends C, T extends C> void copyProperties(@NotNull S source, @NotNull T target, @NotNull Class<C> baseModel) {
-        for (final Field field : baseModel.getDeclaredFields()) {
+        for (final Field field : baseModel.getFields()) {
             try {
                 final Object sourceValue = field.get(source);
                 field.set(target, sourceValue);
