@@ -39,7 +39,7 @@ public class SpecificationUtil<T> {
     @Contract(pure = true)
     public Specification<T> is(Enum<?> anEnum) {
         return anEnum == null ? null : (root, query, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get(column), anEnum.name());
+                criteriaBuilder.equal(root.get(column), anEnum);
     }
 
     @Contract(pure = true)
