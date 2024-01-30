@@ -2,6 +2,7 @@ package kiis.ratingBE.service.subject;
 
 import kiis.ratingBE.model.subject.SubjectJoinEntity;
 import kiis.ratingBE.model.subject.SubjectListFilter;
+import kiis.ratingBE.service.common.PageableUtil;
 import kiis.ratingBE.service.common.SpecificationUtil;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Contract;
@@ -31,6 +32,6 @@ public class SubjectMainService {
     }
 
     public Pageable getPagingAndSort(int page, int limit) {
-        return PageRequest.of(page, limit);
+        return PageRequest.of(PageableUtil.syncPage(page), limit);
     }
 }

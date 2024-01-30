@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum Department {
-    MANAGEMENT("経営"), NETWORK("ネットワーク"), ALL("基礎");
+    BASIC("基礎"), MANAGEMENT("経営"), NETWORK("ネットワーク");
 
     public final String label;
 
@@ -17,7 +17,7 @@ public enum Department {
 
     public static List<Department> getValues() {
         return Arrays.stream(Department.values())
-                .filter(value -> value != ALL)
+                .filter(value -> value != BASIC)
                 .collect(Collectors.toList());
     }
 
